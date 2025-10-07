@@ -1,9 +1,13 @@
 @import "tailwindcss";
 
 @theme inline {
+    /* fonts */
 	--font-title: "Playfair", serif;
 	--font-subtitle: "Poppins", sans-serif;
 	--font-body: "Roboto", sans-serif;
+
+    /* Font colors */
+    --text-secondary: #D5B370;
 }
 
 @font-face {
@@ -15,7 +19,11 @@
 
 @font-face {
     font-family: "Playfair";
-    src: url("/fonts/Playfair-144pt-Regular.woff2") format("woff2");
+    src: url("/fonts/Playfair_144pt-Regular.woff2") format("woff2");
     font-weight: 200;
     font-style: normal;
+}
+
+header {
+    background-color: rgba(0,0,0,0.5);
 }

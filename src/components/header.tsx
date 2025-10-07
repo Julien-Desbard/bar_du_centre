@@ -2,9 +2,9 @@ import Link from "next/link"
 
 export default function Header() {
     return(
-        <div className="flex items-center justify-between bg-transparent font-title">
-            <div><Link href="/">logo</Link></div>
-            <ul className="flex items-center gap-12 bg-transparent">
+        <div className="flex items-center justify-between bg-transparent font-title absolute top-0 left-0 w-full z-50 text-white text-2xl">
+            <div className="p-6"><Link href="/">logo</Link></div>
+            <ul className="flex items-center gap-6 p-6">
                 <li></li>
                 <li><Link href="/menu">LE BDC</Link></li>
                 <li><Link href="/private">PRIVATISATION</Link></li>
