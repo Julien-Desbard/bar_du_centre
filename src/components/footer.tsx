@@ -2,8 +2,8 @@ import Link from "next/link"
 
 export default function Footer() {
     return(
-        <div className="flex items-center justify-between font-subtitle">
-            <ul className="flex justifyzgap-12 ">
+        <div className="flex items-center justify-between font-subtitle  bg-transparent text-white text-base">
+            <ul className="flex gap-12 ">
                 <li></li>
                 <li><Link href="/menu">La cantine</Link></li>
                 <li><Link href="/events">Evénements</Link></li>
