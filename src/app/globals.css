@@ -5,12 +5,13 @@
 
 @theme inline {
     /* fonts */
-	--font-title: "Playfair", serif;
-	--font-subtitle: "Poppins", sans-serif;
-	--font-body: "Roboto", sans-serif;
+	--font-title: "playfair", serif;
+	--font-subtitle: "poppins-semibold", sans-serif;
+	--font-body: "poppins-regular", sans-serif;
 
     /* Font colors */
     --color-secondary: #D5B370;
+    --color-h2: #65361B;
 
     /* Button background color */
     --color-bg:#D5B370; 
@@ -53,18 +54,26 @@
 
 /* Font import */
 @font-face {
-    font-family: "Poppins";
+    font-family: "poppins-regular";
     src: url("/fonts/Poppins.regular.woff2") format("woff2");
     font-weight: normal;
     font-style: normal;
 }
 
 @font-face {
-    font-family: "Playfair";
+    font-family: "poppins-semibold";
+    src: url("/fonts/Poppins.SemiBold.woff2") format("woff2");
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "playfair";
     src: url("/fonts/Playfair_144pt-Light.woff2") format("woff2");
     font-weight: lighter;
     font-style: normal;
 }
+
 
 
 :root {
