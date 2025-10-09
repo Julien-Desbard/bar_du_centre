@@ -64,7 +64,7 @@ export default function Header() {
                 <Link
                   href={href}
                   onClick={() => setPath(href)}
-                  className={`hover:text-secondary transition-colors duration-300 ease-in-out lg:block hidden${
+                  className={`hover:text-secondary transition-colors duration-300 ease-in-out lg:block hidden ${
                     path === href
                       ? "underline underline-offset-8 decoration-secondary "
                       : ""
