@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import BurgerMenu from "./burgerMenu";
 
 // Creating Nav menu
 type NavItem = { href: string; label: string };
@@ -44,34 +45,39 @@ export default function Header() {
   }, []);
 
   return (
-    <nav
-      aria-label="navigation principale"
-      className="flex items-center justify-between font-title fixed top-0 left-0 w-full z-50 bg-transparent text-white text-2xl"
-    >
-      <div className="p-6">
-        <Link href="/#home">logo</Link>
-      </div>
-      <ul className="flex items-center gap-6 p-6">
-        {/* Mapping Nav to create the menu */}
-        {Nav.map(({ href, label }) => {
-          return (
-            <li key={href}>
-              <Link
-                href={href}
-                onClick={() => setPath(href)}
-                className={`hover:text-secondary transition-colors duration-300 ease-in-out ${
-                  path === href
-                    ? "underline underline-offset-8 decoration-secondary "
-                    : ""
-                }`}
-                aria-current={path === href ? "page" : undefined}
-              >
-                {label}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+    <header className="fixed top-0 left-0 w-full z-50 bg-transparent">
+      <nav
+        aria-label="navigation principale"
+        className="flex items-center justify-between font-title  text-white text-2xl"
+      >
+        <div className="p-6">
+          <Link href="/#home">logo</Link>
+        </div>
+        <div className="fixed top-0 right-0 z-50">
+          <BurgerMenu nav={Nav} />
+        </div>
+        <ul className="flex items-center gap-6 p-6">
+          {/* Mapping Nav to create the menu */}
+          {Nav.map(({ href, label }) => {
+            return (
+              <li key={href}>
+                <Link
+                  href={href}
+                  onClick={() => setPath(href)}
+                  className={`hover:text-secondary transition-colors duration-300 ease-in-out lg:block hidden${
+                    path === href
+                      ? "underline underline-offset-8 decoration-secondary "
+                      : ""
+                  }`}
+                  aria-current={path === href ? "page" : undefined}
+                >
+                  {label}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </header>
   );
 }

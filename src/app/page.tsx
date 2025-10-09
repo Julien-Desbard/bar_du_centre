@@ -1,6 +1,6 @@
 "use client";
 
-import Footer from "@/components/footer";
+import Footer from "@/components/footer/footer";
 import { Button } from "@/components/ui/button";
 
 export default function Home() {
