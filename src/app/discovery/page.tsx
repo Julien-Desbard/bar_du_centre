@@ -1,9 +1,9 @@
-import Footer from "@/components/footer";
+import Footer from "@/components/footer/footer";
 
 export default function Home() {
   return (
     <div className="bg-[url('/images/background.jpg')] text-white h-screen overflow-y-scroll snap-y snap-proximity">
-      <section id="gallery" className="bg-[url('/images/beer.jpg')] bg-cover bg-center h-screen text-center flex items-center">
+      <section id="gallery" className="text-center flex items-center">
         <div className="pt-24 pl-24">
           <p className="font-subtitle text-5xl text-h2 font-bold">notre</p>
           <p className="font-subtitle text-5xl font-bold">brasserie</p>
