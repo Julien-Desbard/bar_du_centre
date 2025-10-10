@@ -1,4 +1,5 @@
 import Footer from "../footer/footer";
+import { Button } from "../ui/button";
 
 export default function Contact() {
 	return (
@@ -31,6 +32,7 @@ export default function Contact() {
 					Tram C : Ralliement
 				</p>
 			</article>
+			<Button>Contactez-nous</Button>
 			<Footer />
 		</section>
 	);
