@@ -1,11 +1,22 @@
+import Image from "next/image";
 import Link from "next/link";
 
 export default function Footer() {
   return (
-    <div className="font-body  bg-transparent text-white text-base flex">
-      <div className="flex">
-        <ul className="flex justify-center gap-12 p-2 border-b border-b-secondary  border-secondary">
-          <li></li>
+    <div className="font-body bg-transparent text-white text-base grid grid-cols-[auto_1fr_auto] items-center px-4">
+      {/* Logo à gauche */}
+      <Link href="/#home">
+        <Image
+          src="/images/logo_bdc.webp"
+          alt="logo du Bar du Centre"
+          width={80}
+          height={80}
+        />
+      </Link>
+
+      {/* Contenu centré au milieu */}
+      <div className="grid grid-rows-2 justify-self-center">
+        <ul className="grid grid-cols-4 justify-items-center gap-12 p-2 border-b border-b-secondary border-secondary">
           <li>
             <Link href="/#menu" className="hover:text-secondary transition">
               La cantine
@@ -13,12 +24,14 @@ export default function Footer() {
           </li>
           <li>
             <Link href="/#events" className="hover:text-secondary transition">
-              {" "}
               Evénements
             </Link>
           </li>
           <li>
-            <Link href="/discovery" className="hover:text-secondary transition">
+            <Link
+              href="/discovery#gallery"
+              className="hover:text-secondary transition"
+            >
               Découvrez-nous
             </Link>
           </li>
@@ -31,10 +44,7 @@ export default function Footer() {
             </Link>
           </li>
         </ul>
-      </div>
-      <div className="flex">
-        <ul className="flex justify-center gap-12 p-2">
-          <li></li>
+        <ul className="grid grid-cols-3 justify-items-center gap-12 p-2">
           <li>
             <Link
               href="/legal#mentions"
@@ -48,7 +58,7 @@ export default function Footer() {
               href="/legal#policy"
               className="hover:text-secondary transition"
             >
-              Politique de confidentialité{" "}
+              Politique de confidentialité
             </Link>
           </li>
           <li>
@@ -56,11 +66,14 @@ export default function Footer() {
               href="/legal#accessibility"
               className="hover:text-secondary transition"
             >
-              Accesibilité
+              Accessibilité
             </Link>
           </li>
         </ul>
       </div>
+
+      {/* Espace vide symétrique à droite */}
+      <div className="w-20"></div>
     </div>
   );
 }
