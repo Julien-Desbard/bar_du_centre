@@ -8,7 +8,7 @@ import Privatize from "@/components/privatize/privatize";
 
 export default function Home() {
 	return (
-		<main className=" h-screen overflow-y-scroll snap-y snap-proximity">
+		<main className=" h-screen overflow-y-scroll snap-y snap-proximity scroll-smooth">
 			<HeroSection />
 			<MenuSection />
 			<Privatize />
