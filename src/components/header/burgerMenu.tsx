@@ -1,7 +1,10 @@
-import { Menu, X } from "lucide-react";
+
+import { MenuIcon } from "../ui/MenuIcon";
 import Link from "next/link";
 
+
 import { useEffect, useState } from "react";
+import { XIcon } from "../ui/XIcon";
 
 type NavItem = { href: string; label: string };
 
@@ -30,7 +33,7 @@ export default function BurgerMenu({ nav }: Props) {
 					onClick={() => setOpen(true)}
 					aria-label="Ouvrir le menu"
 				>
-					<Menu className="h-8 w-8 hover:text-secondary transition-colors duration-300 ease-in-out" />
+					<MenuIcon className="h-8 w-8 hover:text-secondary transition-colors duration-300 ease-in-out" />
 				</button>
 			</div>
 			{visible && (
@@ -39,9 +42,9 @@ export default function BurgerMenu({ nav }: Props) {
                     `}
 				>
 					<div className="flex justify-end">
-						<button type="button" aria-label="Fermer le menu">
-							<X
-								type="button"
+						<button type="button" aria-label="Fermer le menu" className=" hover:text-secondary transition-colors duration-300 ease-in-out">
+							<XIcon
+							
 								onClick={() => setOpen(false)}
 								className="w-6 h-6"
 							/>

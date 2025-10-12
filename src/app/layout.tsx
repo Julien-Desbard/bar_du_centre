@@ -5,7 +5,7 @@ import Header from "@/components/header/header";
 
 export const metadata: Metadata = {
   title: "le Bar du Centre",
-  description: "Brasserie le Bar du Centre - Angers",
+  description: "Brasserie le Bar du Centre à Angers",
 };
 
 export default function RootLayout({
