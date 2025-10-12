@@ -1,5 +1,3 @@
-"use client";
-
 import Events from "@/components/events/events";
 import HeroSection from "@/components/homepage/herosection";
 import MenuSection from "@/components/menu/menu";
