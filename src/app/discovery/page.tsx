@@ -1,4 +1,3 @@
-import Footer from "@/components/footer/footer";
 import Gallery from "@/components/gallery/gallery";
 import Bdc_history from "@/components/bdc_history/bdc_history";
 import Staff from "@/components/staff/staff";
@@ -13,7 +12,6 @@ export default function Home() {
 			<Bdc_history />
 			<Suppliers />
 			<Contact />
-			<Footer />
 		</main>
 	);
 }
