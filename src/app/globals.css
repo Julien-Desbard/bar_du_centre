@@ -74,7 +74,13 @@
 @font-face {
     font-family: "playfair";
     src: url("/fonts/Playfair_144pt-Light.woff2") format("woff2");
+<<<<<<< HEAD
 } */
+=======
+    font-weight: lighter;
+    font-style: normal;
+}
+>>>>>>> b1ffdb236cf88410334e24c1e22808047381f1af
 
 :root {
 	--radius: 0.625rem;

@@ -9,7 +9,7 @@ const poppins  = Poppins({ weight: ["300","400","500","600"], subsets: ["latin"]
 
 export const metadata: Metadata = {
   title: "le Bar du Centre",
-  description: "Brasserie le Bar du Centre - Angers",
+  description: "Brasserie le Bar du Centre à Angers",
 };
 
 export default function RootLayout({
