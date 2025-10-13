@@ -82,7 +82,7 @@ export default function Header() {
 		<header className="fixed top-0 left-0 w-full z-50 bg-transparent">
 			<nav
 				aria-label="navigation principale"
-				className="flex items-center justify-end font-title text-white text-2xl"
+				className="flex items-center justify-end font-title text-white text-xl"
 			>
 				<div className="fixed top-0 right-0 z-50">
 					<BurgerMenu nav={Nav} />
