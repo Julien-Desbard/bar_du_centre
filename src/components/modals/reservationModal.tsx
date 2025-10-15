@@ -10,17 +10,10 @@ dayjs.extend(utc);
 dayjs.extend(timezone);
 dayjs.locale("fr");
 
-const now = dayjs();
-console.log(now.format("dddd D MMMM YYYY"));
-
 interface Modalprops {
 	isOpen: boolean;
 	onClose: () => void;
 }
-
-type Horaire = {
-	time: string;
-};
 
 type Result = { ok: boolean; msg: string };
 
@@ -31,9 +24,12 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 	const [number, setNumber] = useState<string>("");
 	const [location, setLocation] = useState<string>("");
 	const [nature, setNature] = useState<string>("");
-	const [reservationTime, setReservationTime] = useState<Horaire>({ time: "" });
+	const [reservationTime, setReservationTime] = useState<string>("");
 	const [date, setDate] = useState<string>("");
+	const [message, setMessage] = useState<string>("");
 	const [error, setError] = useState<string>("");
+
+
 
 	// Focusing on the first input field of the form
 	const nameRef = useRef<HTMLInputElement>(null);
@@ -41,7 +37,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		if (isOpen && nameRef.current) {
 			nameRef.current.focus();
 		}
-	});
+	}, [isOpen]);
 
 	const resetFormState = () => {
 		setName("");
@@ -50,13 +46,13 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		setNumber("");
 		setLocation("");
 		setNature("");
-		setReservationTime({ time: "" });
+		setReservationTime("");
 		setDate("");
 		setError("");
 	};
 
-const checkAllFieldsAreFilled = () => {
-			if (
+	const checkAllFieldsAreFilled = () => {
+		if (
 			!date ||
 			!reservationTime ||
 			!name ||
@@ -72,27 +68,50 @@ const checkAllFieldsAreFilled = () => {
 			};
 
 		return {
-			ok:true,
-			msg:""
-		}
-}
+			ok: true,
+			msg: "",
+		};
+	};
 
-	const TZ = "Europe/Paris";
-
-
-	// Apply reservation rules
-	function acceptReservation(dateISO: string, timeHHMM: string): Result {
-		setError("");
-
-		const now = dayjs().tz(TZ);
-		const today = now.startOf("day");
-		const pickedDay = dayjs.tz(dateISO, TZ).startOf("day");
-
-		if (pickedDay.isBefore(today, "day"))
+	const validateNumber = (value: string) => {
+		if (parseInt(value) > 10)
 			return {
 				ok: false,
-				msg: "La date de réservation ne doit pas être dans le passé",
+				msg: "Vous ne pouvez pas réserver pour plus de 10 personnes",
 			};
+		return {
+			ok: true,
+			msg: "",
+		};
+	};
+
+	// Apply reservation rules
+	function acceptReservation(
+		dateISO: string,
+		timeHHMM: string,
+		number: string
+	): Result {
+		setError("");
+
+		const numberCheck = validateNumber(number);
+		if (!numberCheck.ok) {
+			setError(numberCheck.msg);
+			return {
+				ok: false,
+				msg: "Vous ne pouvez pas réserver pour plus de 10 personnes",
+			};
+		}
+
+		// Control date and time or the reservation
+		const TZ = "Europe/Paris";
+		const now = dayjs().tz(TZ);
+		const today = now.startOf("day");
+
+		const pickedDay = dayjs.tz(`${dateISO}T00:00:00`, TZ).startOf("day");
+
+		if (pickedDay.isBefore(today, "day")) {
+			return { ok: false, msg: "Vous avez saisi une date passée" };
+		}
 		if (!pickedDay.isSame(today, "day")) return { ok: true, msg: "" };
 
 		const picked = dayjs.tz(`${dateISO}T${timeHHMM}`, TZ);
@@ -121,29 +140,63 @@ const checkAllFieldsAreFilled = () => {
 		return { ok: true, msg: "" };
 	}
 
-	const handleSubmit = (e: React.FormEvent) => {
+	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
-		checkAllFieldsAreFilled()
-		const res = acceptReservation(date, reservationTime.time);
-		if (!res.ok) {
-			setError(res.msg);
+		const fieldCheck = checkAllFieldsAreFilled();
+		if (!fieldCheck.ok) {
+			setError(fieldCheck.msg);
 			return;
 		}
+
+		const reservation = acceptReservation(date, reservationTime, number);
+		if (!reservation.ok) {
+			setError(reservation.msg);
+			return;
+		}
+
+		const res = fetch("/api/reservation", {
+			method: "POST",
+			headers: { "Content-Type": "application/json" },
+			body: JSON.stringify({
+				name,
+				email,
+				phone,
+				number,
+				location,
+				nature,
+				reservationTime,
+				date,
+				message,
+			}),
+		});
+		const data = await (await res).json()
+		if (data.ok) {
+			console.log("mail de réservation envoyé")
+		} else {
+			console.log("erreur lors de l'envoir du mail de réservation")
+		}
+
 		setError("");
 		onClose();
 		resetFormState();
 		//TODO envoyer la réservation
-	};
+	}
 	if (!isOpen) return null;
 
 	return (
 		<div
 			className="fixed inset-0 bg-black/50 backdrop-blur z-50 flex flex-col items-center justify-center"
-			onClick={onClose}
+			onClick={() => {
+				onClose();
+				setError("");
+				resetFormState();
+			}}
 		>
 			<div
 				className="bg-[url('/images/background.jpg')] bg-cover bg-center p-2 w-full max-w-xl shadow-lg text-white font-body"
-				onClick={(e) => e.stopPropagation()}
+				onClick={(e) => {
+					e.stopPropagation();
+				}}
 			>
 				<div className="justify-self-end">
 					<button
@@ -154,6 +207,7 @@ const checkAllFieldsAreFilled = () => {
 						<XIcon
 							onClick={() => {
 								resetFormState();
+								setError("");
 								onClose();
 							}}
 							className="w-6 h-6"
@@ -164,7 +218,8 @@ const checkAllFieldsAreFilled = () => {
 					Reservation
 				</h3>
 
-				<div className="font-body mb-4 px-12">
+				<div className="font-body mb-4 px-12
+				max-sm:px-4">
 					<form className="grid grid-cols-2 grid-row-8 gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
 						<input
 							type="hidden"
@@ -201,9 +256,10 @@ const checkAllFieldsAreFilled = () => {
 						</label>
 						<input
 							type="tel"
-							inputMode="numeric"
+							inputMode="tel"
 							name="phone"
 							onChange={(e) => setPhone(e.target.value)}
+							pattern="^(?:(?:\+|00)33|0)[1-9](?:[0-9]{8})$"
 							required
 							placeholder="Votre numéro de téléphone"
 							className="border border-secondary p-1 pl-2 col-span-2"
@@ -218,7 +274,8 @@ const checkAllFieldsAreFilled = () => {
 							onChange={(e) => setDate(e.target.value)}
 							required
 							placeholder="Date"
-							className="border border-secondary p-1 pl-2"
+							className="border border-secondary p-1 pl-2 
+							max-sm:col-span-2"
 						/>
 						<label htmlFor="reservation_time" className="sr-only">
 							Heure de votre visite
@@ -229,25 +286,39 @@ const checkAllFieldsAreFilled = () => {
 							name="reservation_time"
 							onChange={(e) => {
 								const value = e.target.value; // "HH:mm"
-								setReservationTime({ time: value });
+								setReservationTime(value);
 								if (!value) return;
 							}}
 							required
 							placeholder="Heure"
-							className="border border-secondary p-1 pl-2"
+							className="border border-secondary p-1 pl-2
+							max-sm:col-span-2"
 						/>
 						<label htmlFor="number" className="sr-only">
 							Nombre de convives
 						</label>
-						<input
-							type="number"
-							inputMode="numeric"
+						<select
 							name="number"
+							inputMode="numeric"
 							onChange={(e) => setNumber(e.target.value)}
 							required
-							placeholder="# de personnes"
+							id="number"
 							className="border border-secondary p-1 pl-2 col-span-2"
-						/>
+						>
+							<option value="" hidden>
+								# de personnes (10 max)
+							</option>
+							<option value="1">1</option>
+							<option value="2">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+							<option value="7">7</option>
+							<option value="8">8</option>
+							<option value="9">9</option>
+							<option value="10">10</option>
+						</select>
 						<label htmlFor="location" className="sr-only">
 							Extérieur ou intérieur ?
 						</label>
@@ -258,11 +329,11 @@ const checkAllFieldsAreFilled = () => {
 							required
 							className="border border-secondary p-1 pl-2 col-span-2"
 						>
-							<option value="" disabled hidden>
-								Extérieur ou intérieur ?
+							<option value="" hidden>
+								Intérieur ou extérieur ?
 							</option>
-							<option value="Extérieur">Extérieur</option>
-							<option value="Intérieur">Intérieur</option>
+							<option value="Intérieur">En intérieur</option>
+							<option value="Extérieur">En extérieur</option>
 						</select>
 						<label htmlFor="location" className="sr-only">
 							Pour manger ou boire un verre ?
@@ -274,8 +345,8 @@ const checkAllFieldsAreFilled = () => {
 							id="nature"
 							className="border border-secondary p-1 pl-2 col-span-2"
 						>
-							<option value="" disabled hidden>
-								Pour manger ou boire un verre ?
+							<option value="" hidden>
+								Manger ou boire un verre ?
 							</option>
 							<option value="Pour manger">Pour manger</option>
 							<option value="Pour boire un verre">Pour boire un verre</option>
@@ -283,7 +354,7 @@ const checkAllFieldsAreFilled = () => {
 						<textarea
 							name="message"
 							inputMode="text"
-							required
+							onChange={(e) => setMessage(e.target.value)}
 							rows={5}
 							cols={50}
 							placeholder="Votre message"

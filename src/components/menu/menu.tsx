@@ -1,7 +1,12 @@
+"use client";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import ReservationModal from "../modals/reservationModal";
+import { useState } from "react";
 
 export default function MenuSection() {
+	const [isOpen, setIsOpen] = useState(false);
+	console.log("isOpen:", isOpen);
 	return (
 		<section
 			id="menu"
@@ -43,6 +48,7 @@ export default function MenuSection() {
 					<span className="text-white">boissons</span>{" "}
 				</h2>
 				<Button
+					onClick={() => setIsOpen(true)}
 					className=" max-w-45 justify-self-center
 					max-sm:mb-20
 					sm:col-span-2 sm:mt-8 sm:mb-18
@@ -115,6 +121,7 @@ export default function MenuSection() {
 				</ul>
 
 				<Button
+					onClick={() => setIsOpen(true)}
 					className="max-w-45 justify-self-center 
 				max-sm:mt-8 max-sm:mb-20
 				sm:mt-12 sm:mb-18 
@@ -124,6 +131,7 @@ export default function MenuSection() {
 				</Button>
 			</div>
 			<Button
+				onClick={() => setIsOpen(true)}
 				className="max-w-45 
 			max-lg:hidden
 			lg:row-start-2 lg:col-span-2 lg:justify-self-center lg:mb-6"
@@ -191,6 +199,7 @@ export default function MenuSection() {
 					</li>
 				</ul>
 			</div>
+			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>
 	);
 }

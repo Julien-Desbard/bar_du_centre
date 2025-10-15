@@ -6,6 +6,7 @@ import { useState } from "react";
 export default function HeroSection() {
 
 const [isOpen, setIsOpen]= useState(false)
+console.log("isOpen:", isOpen); // Ajoutez ça juste après le useState
 	return (
 		<section
 			id="home"
