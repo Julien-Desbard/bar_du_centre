@@ -1,6 +1,12 @@
+"use client"
 import { Button } from "@/components/ui/button";
+import ReservationModal from "../modals/reservationModal";
+import { useState } from "react";
 
 export default function HeroSection() {
+
+const [isOpen, setIsOpen]= useState(false)
+console.log("isOpen:", isOpen); // Ajoutez ça juste après le useState
 	return (
 		<section
 			id="home"
@@ -12,7 +18,11 @@ export default function HeroSection() {
 					En plein coeur d&apos;Angers, le{" "}
 					<span className="text-secondary">BDC</span> pour les intîmes
 				</h2>
-				<Button>Réserver une table</Button>
+				<Button
+				onClick={()=> setIsOpen(true)}>Réserver une table</Button>
+				<ReservationModal 
+				isOpen={isOpen}
+				onClose={()=> setIsOpen(false)}/>
 			</div>
 		</section>
 	);

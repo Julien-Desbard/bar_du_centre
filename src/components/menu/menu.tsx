@@ -1,7 +1,12 @@
+"use client";
 import Image from "next/image";
 import { Button } from "../ui/button";
+import ReservationModal from "../modals/reservationModal";
+import { useState } from "react";
 
 export default function MenuSection() {
+	const [isOpen, setIsOpen] = useState(false);
+	console.log("isOpen:", isOpen);
 	return (
 		<section
 			id="menu"
@@ -43,6 +48,7 @@ export default function MenuSection() {
 					<span className="text-white">boissons</span>{" "}
 				</h2>
 				<Button
+					onClick={() => setIsOpen(true)}
 					className=" max-w-45 justify-self-center
 					max-sm:mb-20
 					sm:col-span-2 sm:mt-8 sm:mb-18
@@ -115,6 +121,7 @@ export default function MenuSection() {
 				</ul>
 
 				<Button
+					onClick={() => setIsOpen(true)}
 					className="max-w-45 justify-self-center 
 				max-sm:mt-8 max-sm:mb-20
 				sm:mt-12 sm:mb-18 
@@ -124,6 +131,7 @@ export default function MenuSection() {
 				</Button>
 			</div>
 			<Button
+				onClick={() => setIsOpen(true)}
 				className="max-w-45 
 			max-lg:hidden
 			lg:row-start-2 lg:col-span-2 lg:justify-self-center lg:mb-6"
@@ -153,7 +161,7 @@ export default function MenuSection() {
 						className="block justify-self-center self-start text-xl
 					sm:justify-self-start sm:self-center"
 					>
-						Lundi | Mardi | Mercredi:{" "}
+						Lundi | Mardi | Mercredi:
 						<span className="text-secondary">
 							<br />
 							12h-14h15 19h-22h30
@@ -164,33 +172,34 @@ export default function MenuSection() {
 					sm:justify-self-start sm:self-center
 					2xl:self-center"
 					>
-						Jeudi: 12h-14h15 || <span className="text-secondary">19h-23h</span>
+						Jeudi: <span className="text-secondary">12h-14h15 || 19h-23h</span>
 					</li>
 					<li
 						className="block justify-self-center self-start text-xl
 					sm:justify-self-start sm:self-center
 					2xl:self-center"
 					>
-						Vendredi: 12h-14h30 ||{" "}
-						<span className="text-secondary">19h-23h</span>
+						Vendredi:{" "}
+						<span className="text-secondary">12h-14h30 || 19h-23h</span>
 					</li>
 					<li
 						className="block justify-self-center self-center text-xl
 					sm:justify-self-start sm:self-center
 					"
 					>
-						Samedi: 12h-15h30 || <span className="text-secondary">19h-23h</span>
+						Samedi: <span className="text-secondary">12h-15h30 || 19h-23h</span>
 					</li>
 					<li
 						className="block justify-self-center self-start text-xl
 					sm:justify-self-start sm:row-span-2 sm:self-center
 					lg:row-span-1"
 					>
-						Dimanche: 12h-15h ||{" "}
-						<span className="text-secondary">19h-22h30</span>
+						Dimanche:
+						<span className="text-secondary"> 12h-15h || 19h-22h30</span>
 					</li>
 				</ul>
 			</div>
+			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>
 	);
 }
