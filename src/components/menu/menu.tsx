@@ -153,7 +153,7 @@ export default function MenuSection() {
 						className="block justify-self-center self-start text-xl
 					sm:justify-self-start sm:self-center"
 					>
-						Lundi | Mardi | Mercredi:{" "}
+						Lundi | Mardi | Mercredi:
 						<span className="text-secondary">
 							<br />
 							12h-14h15 19h-22h30
@@ -164,30 +164,30 @@ export default function MenuSection() {
 					sm:justify-self-start sm:self-center
 					2xl:self-center"
 					>
-						Jeudi: 12h-14h15 || <span className="text-secondary">19h-23h</span>
+						Jeudi: <span className="text-secondary">12h-14h15 || 19h-23h</span>
 					</li>
 					<li
 						className="block justify-self-center self-start text-xl
 					sm:justify-self-start sm:self-center
 					2xl:self-center"
 					>
-						Vendredi: 12h-14h30 ||{" "}
-						<span className="text-secondary">19h-23h</span>
+						Vendredi:{" "}
+						<span className="text-secondary">12h-14h30 || 19h-23h</span>
 					</li>
 					<li
 						className="block justify-self-center self-center text-xl
 					sm:justify-self-start sm:self-center
 					"
 					>
-						Samedi: 12h-15h30 || <span className="text-secondary">19h-23h</span>
+						Samedi: <span className="text-secondary">12h-15h30 || 19h-23h</span>
 					</li>
 					<li
 						className="block justify-self-center self-start text-xl
 					sm:justify-self-start sm:row-span-2 sm:self-center
 					lg:row-span-1"
 					>
-						Dimanche: 12h-15h ||{" "}
-						<span className="text-secondary">19h-22h30</span>
+						Dimanche:
+						<span className="text-secondary"> 12h-15h || 19h-22h30</span>
 					</li>
 				</ul>
 			</div>
