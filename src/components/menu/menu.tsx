@@ -6,20 +6,20 @@ import { useState } from "react";
 
 export default function MenuSection() {
 	const [isOpen, setIsOpen] = useState(false);
-	console.log("isOpen:", isOpen);
 	return (
 		<section
 			id="menu"
-			className="snap-start relative bg-[url('/images/background.jpg')] bg-cover bg-center min-h-screen text-white overflow-x-hidden"
+			className="snap-start relative bg-[url('/images/background.jpg')] bg-cover bg-center min-h-screen text-white overflow-hidden"
 		>
 			<div
-				className="w-full max-w-[1060px] mx-auto p-4 flex flex-row flex-wrap justify-center gap-x-3
+				className="w-full max-w-[1060px] mx-auto p-4 flex flex-row flex-wrap justify-around gap-x-3
+				lg:flex-1 
 			xl:gap-x-12 "
 			>
 				{/* --------------------- Menu --------------------- */}
 				<div
-					className="flex flex-col items-center mt-12 
-				max-lg:px-6 lg:w-fit lg:py-6 lg:mt-24"
+					className="flex flex-col items-center justify-center mt-12 
+				max-lg:px-6 lg:w-fit lg:mt-24"
 				>
 					<div
 						className="flex flex-col items-center
@@ -52,7 +52,7 @@ export default function MenuSection() {
 
 					<Button
 						onClick={() => setIsOpen(true)}
-						className="max-w-45 mt-8 max-sm:mb-20 sm:mb-18 lg:hidden"
+						className="max-w-45 mt-4 mb-12 lg:hidden"
 					>
 						Réserver une table
 					</Button>
@@ -61,9 +61,9 @@ export default function MenuSection() {
 				{/* --------------------- Carte du jour --------------------- */}
 				<div
 					className="flex flex-col items-center gap-4 max-w-full w-fit justify-self-center
-				lg:mt-30 lg:py-6"
+				lg:mt-30"
 				>
-					<h2 className="font-subtitle text-5xl text-center pb-6">
+					<h2 className="font-subtitle text-5xl text-center ">
 						Carte du jour
 					</h2>
 
@@ -121,14 +121,14 @@ export default function MenuSection() {
 
 					<Button
 						onClick={() => setIsOpen(true)}
-						className="max-w-45 mt-4 max-sm:mb-14 sm:mt-12 sm:mb-18 lg:hidden"
+						className="max-w-45 mt-6 mb-12 lg:hidden"
 					>
 						Réserver une table
 					</Button>
 				</div>
 
 				{/* Button desktop */}
-				<div className="w-full flex justify-center max-lg:hidden lg:mb-12 lg:mt-6">
+				<div className="w-full flex justify-center max-lg:hidden lg:mt-6 lg:mb-24 xl:mb-12">
 					<Button onClick={() => setIsOpen(true)} className="max-w-45">
 						Réserver une table
 					</Button>
@@ -139,13 +139,13 @@ export default function MenuSection() {
 					className="grid gap-2 gap-x-4 text-center
 					max-sm:grid-cols-1
 					sm:grid-cols-2 sm:grid-rows-[auto_repeat(3,auto)] sm:grid-flow-col sm:text-left
-					lg:grid-cols-3 lg:grid-rows-[auto_repeat(2,auto)] lg:grid-flow-row lg:p-6 lg:place-self-center lg:justify-items-center lg:gap-y-6
+					lg:grid-cols-3 lg:grid-rows-[auto_repeat(2,auto)] lg:grid-flow-row lg:px-6 lg:place-self-center lg:justify-items-center
 					"
 				>
 					<h2
 						className="text-4xl font-body justify-self-center pb-4
 					sm:col-span-2 sm:row-start-1
-					lg:col-span-3 lg:mt-12
+					lg:col-span-3
 					"
 					>
 						Les horaires
@@ -156,7 +156,9 @@ export default function MenuSection() {
 						sm:justify-self-start sm:self-center
 						lg:self-start"
 						>
-							Lundi | Mardi | Mercredi:<br /><span className="text-secondary">12h-14h15 19h-22h30</span>
+							Lundi | Mardi | Mercredi:
+							<br />
+							<span className="text-secondary">12h-14h15 19h-22h30</span>
 						</li>
 						<li
 							className="block justify-self-center self-start
@@ -193,8 +195,10 @@ export default function MenuSection() {
 					</ul>
 				</div>
 			</div>
-
-			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+			<ReservationModal
+				isOpen={isOpen}
+				onClose={() => setIsOpen(false)}
+			/>
 		</section>
 	);
 }

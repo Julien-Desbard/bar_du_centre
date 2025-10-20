@@ -173,7 +173,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		if (data.ok) {
 			console.log("mail de réservation envoyé")
 		} else {
-			console.log("erreur lors de l'envoir du mail de réservation")
+			console.log("erreur lors de l'envoi du mail de réservation")
 		}
 
 		setError("");
@@ -214,7 +214,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						/>
 					</button>
 				</div>
-				<h3 className="text-2xl mb-8 text-white font-subtitle font-light">
+				<h3 className="text-2xl mb-8 text-white font-subtitle font-light justify-self-center">
 					Reservation
 				</h3>
 
@@ -362,7 +362,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						></textarea>
 					</form>
 				</div>
-				<Button type="submit" className="m-3" onClick={(e) => handleSubmit(e)}>
+				<Button type="submit" className="m-6 flex justify-self-center" onClick={(e) => handleSubmit(e)}>
 					Réservez votre table
 				</Button>
 				{error && error !== "" && (
