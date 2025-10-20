@@ -12,13 +12,15 @@ export default function MenuSection() {
 			id="menu"
 			className="snap-start relative bg-[url('/images/background.jpg')] bg-cover bg-center min-h-screen text-white overflow-x-hidden"
 		>
-			{/* Wrapper avec limite 1440px */}
-			<div className="w-full max-w-[1060px] mx-auto p-4 flex flex-row flex-wrap justify-center gap-x-3
-			xl:gap-x-12">
+			<div
+				className="w-full max-w-[1060px] mx-auto p-4 flex flex-row flex-wrap justify-center gap-x-3
+			xl:gap-x-12 "
+			>
 				{/* --------------------- Menu --------------------- */}
-				<div className="flex flex-col items-center mt-12 
-				max-lg:px-6 lg:w-fit lg:py-6 lg:mt-24">
-					{/* Grid 2x2 pour les icônes et titres */}
+				<div
+					className="flex flex-col items-center mt-12 
+				max-lg:px-6 lg:w-fit lg:py-6 lg:mt-24"
+				>
 					<div
 						className="flex flex-col items-center
 		max-sm:gap-y-6
@@ -136,56 +138,54 @@ export default function MenuSection() {
 				<div
 					className="grid gap-2 gap-x-4 text-center
 					max-sm:grid-cols-1
-					sm:grid-cols-2 sm:grid-rows-[auto_repeat(3,auto)] sm:grid-flow-col
-					lg:grid-cols-3 lg:grid-rows-[auto_repeat(2,auto)] lg:grid-flow-row lg:p-6 lg:place-self-center lg:justify-items-center
-					2xl:grid-cols-4"
+					sm:grid-cols-2 sm:grid-rows-[auto_repeat(3,auto)] sm:grid-flow-col sm:text-left
+					lg:grid-cols-3 lg:grid-rows-[auto_repeat(2,auto)] lg:grid-flow-row lg:p-6 lg:place-self-center lg:justify-items-center lg:gap-y-6
+					"
 				>
 					<h2
 						className="text-4xl font-body justify-self-center pb-4
 					sm:col-span-2 sm:row-start-1
-					lg:col-span-3
-					2xl:col-start-1 2xl:col-span-1 2xl:row-span-2 2xl:justify-self-center 2xl:self-center"
+					lg:col-span-3 lg:mt-12
+					"
 					>
 						Les horaires
 					</h2>
-					<ul className="contents">
+					<ul className="contents text-xl">
 						<li
-							className="block justify-self-center self-start text-xl
-						sm:justify-self-start sm:self-center"
+							className="block justify-self-center self-start
+						sm:justify-self-start sm:self-center
+						lg:self-start"
 						>
-							Lundi | Mardi | Mercredi:
-							<span className="text-secondary">
-								<br />
-								12h-14h15 19h-22h30
-							</span>
+							Lundi | Mardi | Mercredi:<br /><span className="text-secondary">12h-14h15 19h-22h30</span>
 						</li>
 						<li
-							className="block justify-self-center self-start text-xl
-						sm:justify-self-start sm:self-center
-						2xl:self-center"
+							className="block justify-self-center self-start
+						sm:justify-self-start sm:self-center lg:self-start
+						"
 						>
 							Jeudi:{" "}
 							<span className="text-secondary">12h-14h15 || 19h-23h</span>
 						</li>
 						<li
-							className="block justify-self-center self-start text-xl
+							className="block justify-self-center self-start
 			sm:justify-self-start sm:self-center
-			2xl:self-center"
+			lg:self-start
+			"
 						>
 							Vendredi:{" "}
 							<span className="text-secondary">12h-14h30 || 19h-23h</span>
 						</li>
 						<li
-							className="block justify-self-center self-center text-xl
-			sm:justify-self-start sm:self-center"
+							className="block justify-self-center self-center
+			sm:justify-self-start sm:self-center lg:self-start"
 						>
 							Samedi:{" "}
 							<span className="text-secondary">12h-15h30 || 19h-23h</span>
 						</li>
 						<li
-							className="block justify-self-center self-start text-xl
+							className="block justify-self-center self-start
 			sm:justify-self-start sm:row-span-2 sm:self-center
-			lg:row-span-1"
+			lg:row-span-1 lg:self-start"
 						>
 							Dimanche:
 							<span className="text-secondary"> 12h-15h || 19h-22h30</span>
