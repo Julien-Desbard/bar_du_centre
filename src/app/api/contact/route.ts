@@ -20,7 +20,7 @@ export async function POST(req: Request) {
 		from: email,
 		to: process.env.MAIL_USER,
 		subject: `Prise de contact de ${name}`,
-		text: `Bonjour, \n- ${name} vient de nous adresser le message suivant : \n\n Object : ${topic}\nMessage: ${message} \n Réponse atendue à l'adresse suivante : ${email}`,
+		text: `Bonjour, \n${name} vient de nous adresser le message suivant : \n\nObjet : ${topic}\nMessage: ${message} \nAdresse de réponse : ${email}`,
 	});
 
 	// Réponse automatique vers l’utilisateur
@@ -28,7 +28,7 @@ export async function POST(req: Request) {
 		from: process.env.MAIL_USER,
 		to: email,
 		subject: "Confirmation de réception",
-		text: `Bonjour ${name},\n\nNous avons bien reçu votre message ayant pour object ${topic}\n\nNous y répondrons dans les meilleurs délais\n\n— L’équipe du Bar du Centre`,
+		text: `Bonjour ${name},\n\nNous avons bien reçu votre message\n\nNous y répondrons dans les meilleurs délais\n\n— L’équipe du Bar du Centre \n\nPour mémoire, votre message est :\nObjet :${topic}\nMessage :${message}`,
 	});
 
 	return Response.json({ ok: true });

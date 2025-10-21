@@ -176,10 +176,9 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			console.log("erreur lors de l'envoi du mail de réservation")
 		}
 
-		setError("");
 		onClose();
+		setError("");
 		resetFormState();
-		//TODO envoyer la réservation
 	}
 	if (!isOpen) return null;
 

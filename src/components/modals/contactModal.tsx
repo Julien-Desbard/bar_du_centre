@@ -70,10 +70,9 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			console.log("erreur lors de l'envoi du mail de contact");
 		}
 
-		setError("");
 		onClose();
+		setError("");
 		resetFormState();
-		//TODO envoyer le mail de contact
 	}
 	if (!isOpen) return null;
 
