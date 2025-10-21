@@ -10,7 +10,7 @@ export default function Privatize() {
 	return (
 		<section
 			id="private"
-			className="snap-start bg-[url('/images/background.jpg')] bg-cover bg-center text-white h-screen overflow-hidden"
+			className="snap-start bg-bgbody bg-cover bg-center text-white h-screen overflow-hidden"
 		>
 			<div
 				className="w-full h-full flex flex-col max-w-[1350px] mx-auto

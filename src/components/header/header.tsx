@@ -79,7 +79,7 @@ export default function Header() {
 	}, [pathname]);
 
 	return (
-		<header className="fixed top-0 left-0 w-full z-50 bg-transparent">
+		<header className="sticky top-0 w-full z-50 bg-transparent backdrop-blur-md">
 			<nav
 				aria-label="navigation principale"
 				className="flex items-center justify-end font-title text-white text-xl"
@@ -87,7 +87,7 @@ export default function Header() {
 				<div className="fixed top-0 right-0 z-50">
 					<BurgerMenu nav={Nav} />
 				</div>
-				<ul className="flex items-center gap-6 p-6">
+				<ul className="flex items-center gap-6 p-6 pr-10">
 					{/* Mapping Nav to create the menu */}
 					{Nav.map(({ href, label }) => {
 						const isActive = href === activePath;
