@@ -1,19 +1,41 @@
+"use client";
+import React from 'react'
+import { EmblaOptionsType } from 'embla-carousel'
 import Footer from "../footer/footer";
+import Carousel from "../carousel/EmblaCarousel";
+import { Button } from "../ui/button";
+import ReservationModal from "../modals/reservationModal";
+import { useState } from "react";
+import '@/styles/embla.css'
 
 export default function Events() {
+	const [isOpen, setIsOpen] = useState(false);
+	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
+
 	return (
 		<section
 			id="events"
-			className="snap-start bg-[url('/images/background.jpg')] bg-cover bg-center h-screen text-white flex flex-col justify-between"
+			className="snap-start bg-[url('/images/background.jpg')] bg-cover bg-center h-screen text-white "
 		>
-			<div className="pt-24 pl-24">
-				<p className="font-subtitle text-5xl text-h2 font-bold">nos</p>
-				<p className="font-subtitle text-5xl font-bold">événements</p>
-				<div>
-					nos événements
+			<div className="w-full h-full flex flex-col justify-between items-center max-w-[1200px] mx-auto">
+				<div className='self-start'>
+					<h2 className="pt-24 px-6 font-subtitle text-5xl text-h2 font-semibold ">
+						nos
+						<br />
+						<span className="text-white">événements</span>
+					</h2>
 				</div>
+				<div className="w-full mt-18">
+					<Carousel options={OPTIONS}/>
+				</div>
+				<div>
+					<Button onClick={() => setIsOpen(true)} className="max-w-45 mb-12">
+						Réserver une table
+					</Button>
+				</div>
+				<Footer />
 			</div>
-			<Footer />
+			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>
 	);
 }

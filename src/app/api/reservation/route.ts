@@ -25,7 +25,7 @@ const transporter = nodemailer.createTransport({
     from: process.env.MAIL_USER,
     to: email,
     subject: "Confirmation de réception",
-    text: `Bonjour ${name},\n\nNous avons bien reçu votre demande de réservation pour ${number} personnes le ${date} à ${reservationTime}\n\nNous vous en remercions\n\n— L’équipe du Bar du Centre`,
+    text: `Bonjour ${name},\n\nNous avons bien reçu votre demande de réservation pour ${number} personne(s) le ${date} à ${reservationTime}\n\nNous vous en remercions\n\n— L’équipe du Bar du Centre`,
   });
 
   return Response.json({ ok: true });

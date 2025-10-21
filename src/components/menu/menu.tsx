@@ -12,7 +12,7 @@ export default function MenuSection() {
 			className="snap-start relative bg-[url('/images/background.jpg')] bg-cover bg-center min-h-screen text-white overflow-hidden"
 		>
 			<div
-				className="w-full max-w-[1060px] mx-auto p-4 flex flex-row flex-wrap justify-around gap-x-3
+				className="w-full max-w-[1200px] mx-auto p-4 flex flex-row flex-wrap justify-around gap-x-3
 				lg:flex-1 
 			xl:gap-x-12 "
 			>
