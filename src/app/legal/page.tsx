@@ -1,24 +1,26 @@
 import Footer from "@/components/footer/footer";
+import Privacy from "@/components/privacy/page";
+import Mentions from "@/components/mentions/page";
+import Accessibility from "@/components/accessibility/page";
 
 export default function Home() {
-  return (
-    <div className="bg-[url('/images/background.jpg')] text-white h-screen overflow-y-scroll snap-y snap-proximity">
-      <section id="mentions" className="bg-[url('/images/beer.jpg')] bg-cover bg-center h-screen text-center flex items-center">
-      <p>Mention légales</p>
-      </section>
-      <section
-        id="policy"
-        className="snap-start relative bg-[url('/images/background.jpg')] bg-cover bg-center h-screen text-white"
-      >
-        <p>politique de confidentialité</p>
-      </section>
-      <section
-        id="accessibility"
-        className="snap-start bg-[url('/images/background.jpg')] bg-cover bg-center h-screen text-white"
-      >
-        <p>Accessibilité</p>
-      </section>
-      <Footer />
-    </div>
-  );
+	return (
+		<div>
+			<section className="h-screen snap-start w-full">
+				<div className="max-w-[1200px] mx-auto px-4 h-full">
+					<Privacy />
+				</div>
+			</section>
+			<section className="h-screen snap-start w-full">
+				<div className="max-w-[1200px] mx-auto px-4 h-full">
+					<Mentions />
+				</div>
+			</section>
+			<section className="h-screen snap-start w-full">
+				<div className="max-w-[1200px] mx-auto px-4 h-full">
+					<Accessibility />
+				</div>
+			</section>
+		</div>
+	);
 }

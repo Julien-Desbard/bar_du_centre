@@ -15,7 +15,7 @@ export default function Events() {
 	return (
 		<section
 			id="events"
-			className="snap-start bg-[url('/images/background.jpg')] bg-cover bg-center h-screen text-white "
+			className="snap-start bg-bgbody bg-cover bg-center h-screen text-white "
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center max-w-[1200px] mx-auto">
 				<div className='self-start'>

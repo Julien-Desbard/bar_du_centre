@@ -37,13 +37,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 								className="object-contain"
 							/>
 							<div className="absolute bottom-25 w-full z-50 bg-transparent text-center">
-								<h3 className="font-title font-lighter text-5xl text-shadow-lg">
+								<h3 className="font-title text-5xl text-shadow-lg">
 									SOIRÉE
 								</h3>
 								<p className="font-title text-3xl text-shadow-lg">DJ</p>
 							</div>
 						</div>
-						<p className="font-body font-semibold text-center text-2xl mt-2">
+						<p className="font-body font-semibold text-center text-xl mt-2">
 							samedi 09.10.25 - ref
 						</p>
 					</div>
@@ -62,8 +62,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 								<p className="font-title text-3xl text-shadow-lg">JAZZ</p>
 							</div>
 						</div>
-						<p className="font-body font-semibold text-center text-2xl mt-2">
-							SAMEDI 16.10.25
+						<p className="font-body font-semibold text-center text-xl mt-2">
+							samedi 16.10.25
 						</p>
 					</div>
 					<div className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-2 flex-shrink-0">
@@ -81,8 +81,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 								<p className="font-title text-3xl text-shadow-lg">MUSICAL</p>
 							</div>
 						</div>
-						<p className="font-body font-semibold text-center text-2xl mt-2">
-							SAMEDI 23.10.25
+						<p className="font-body font-semibold text-center text-xl mt-2">
+							samedi 23.10.25
 						</p>
 					</div>
 					<div className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-2 flex-shrink-0">
@@ -100,7 +100,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 								<p className="font-title text-3xl text-shadow-lg">DEGUISEE</p>
 							</div>
 						</div>
-						<p className="font-body font-semibold text-center text-2xl mt-2">
+						<p className="font-body font-semibold text-center text-xl mt-2">
 							samedi 03.11.25
 						</p>
 					</div>
@@ -138,7 +138,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 								<p className="font-title text-3xl text-shadow-lg">JAZZ</p>
 							</div>
 						</div>
-						<p className="font-body font-semibold text-center text-2xl mt-2">
+						<p className="font-body font-semibold text-center text-xl mt-2">
 							SAMEDI 16.10.25
 						</p>
 					</div>
@@ -157,8 +157,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 								<p className="font-title text-3xl text-shadow-lg">MUSICAL</p>
 							</div>
 						</div>
-						<p className="font-body font-semibold text-center text-2xl mt-2">
-							SAMEDI 23.10.25
+						<p className="font-body font-semibold text-center text-xl mt-2">
+							samedi 23.10.25
 						</p>
 					</div>
 					<div className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-2 flex-shrink-0">
@@ -176,7 +176,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 								<p className="font-title text-3xl text-shadow-lg">DEGUISEE</p>
 							</div>
 						</div>
-						<p className="font-body font-semibold text-center text-2xl mt-2">
+						<p className="font-body font-semibold text-center text-xl mt-2">
 							samedi 03.11.25
 						</p>
 					</div>
