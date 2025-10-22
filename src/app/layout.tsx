@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/header/header";
 
 import { Playfair_Display, Poppins } from "next/font/google";
+import Footer from "@/components/footer/footer";
 
 const playfair = Playfair_Display({ weight: ["400","500","600","700"], subsets: ["latin"], variable: "--font-title" });
 const poppins  = Poppins({ weight: ["300","400","500","600"], subsets: ["latin"], variable: "--font-body" });
@@ -22,7 +23,7 @@ export default function RootLayout({
       <body className="bg-bgbody m-0 p-0 overflow-hidden">
         {/* Header fixe - pleine largeur */}
         <header className="w-full fixed top-0 z-50">
-          <div className="max-w-[1200px] mx-auto px-4">
+          <div className="max-w-[1280px] mx-auto px-4">
             <Header />
           </div>
         </header>

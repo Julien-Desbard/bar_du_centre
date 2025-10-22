@@ -17,7 +17,7 @@ export default function Events() {
 			id="events"
 			className="snap-start bg-bgbody bg-cover bg-center h-screen text-white "
 		>
-			<div className="w-full h-full flex flex-col justify-between items-center max-w-[1200px] mx-auto">
+			<div className="w-full h-full flex flex-col justify-between items-center max-w-[1280px] mx-auto">
 				<div className='self-start'>
 					<h2 className="pt-24 px-6 font-subtitle text-5xl text-h2 font-semibold ">
 						nos

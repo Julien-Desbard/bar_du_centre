@@ -15,7 +15,7 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
 
 export default function Footer() {
 	return (
-		<div className="font-body bg-transparent text-white text-base flex max-md:px-0 md:grid md:grid-cols-[auto_1fr_auto] md:items-center px-4 pb-6">
+		<footer className="font-body bg-transparent text-white text-base flex max-md:px-0 md:grid md:grid-cols-[auto_1fr_auto] md:items-center px-4 pb-6">
 			<Link href="/#home" className="max-md:flex max-md:items-center">
 				<Image
 					src="/images/logo_bdc.webp"
@@ -44,6 +44,6 @@ export default function Footer() {
 					<FooterLink href="/legal#accessibility">Accessibilité</FooterLink>
 				</ul>
 			</div>
-		</div>
+		</footer>
 	);
 }

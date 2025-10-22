@@ -10,25 +10,25 @@ export default function Home() {
 
 			<section className="h-screen snap-start w-full bg-cover bg-center bg-no-repeat"
 				style={{backgroundImage : "url('/images/beer.jpg')", backgroundSize: 'cover'}}>
-				<div className="max-w-[1200px] mx-auto px-4 h-full">
+				<div className="max-w-[1280px] mx-auto px-4 h-full">
 					<HeroSection />
 				</div>
 			</section>
 
 			<section className="h-screen snap-start w-full">
-				<div className="max-w-[1200px] mx-auto px-4 h-full">
+				<div className="max-w-[1280px] mx-auto px-4 h-full">
 					<MenuSection />
 				</div>
 			</section>
 
 			<section className="h-screen snap-start w-full">
-				<div className="max-w-[1200px] mx-auto px-4 h-full">
+				<div className="max-w-[1280px] mx-auto px-4 h-full">
 					<Privatize />
 				</div>
 			</section>
 
 			<section className="h-screen snap-start w-full">
-				<div className="max-w-[1200px] mx-auto px-4 h-full">
+				<div className="max-w-[1280px] mx-auto px-4 h-full">
 					<Events />
 				</div>
 			</section>

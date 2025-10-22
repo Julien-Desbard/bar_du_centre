@@ -15,7 +15,7 @@ export default function Privatize() {
 			<div
 				className="w-full h-full flex flex-col max-w-[1350px] mx-auto
 				xl:max-w-[90vw]
-				2xl:max-w-[1200px]"
+				2xl:max-w-[1280px]"
 			>
 				<h2 className="pt-24 px-6 font-subtitle text-5xl text-h2 font-semibold flex-shrink-0">
 					salle

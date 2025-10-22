@@ -79,7 +79,7 @@ export default function Header() {
 	}, [pathname]);
 
 	return (
-		<header className="sticky top-0 w-full z-50 bg-transparent backdrop-blur-md">
+		<div className="sticky top-0 w-full z-50 bg-transparent backdrop-blur-md">
 			<nav
 				aria-label="navigation principale"
 				className="flex items-center justify-end font-title text-white text-xl"
@@ -109,6 +109,6 @@ export default function Header() {
 					})}
 				</ul>
 			</nav>
-		</header>
+		</div>
 	);
 }
