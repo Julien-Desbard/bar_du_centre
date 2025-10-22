@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
-import BurgerMenu from "./burgerMenu";
+import BurgerMenu from "./BurgerMenu";
 
 // Creating Nav menu
 type NavItem = {
@@ -79,7 +79,7 @@ export default function Header() {
 	}, [pathname]);
 
 	return (
-		<header className="sticky top-0 w-full z-50 bg-transparent backdrop-blur-md">
+		<header className="sticky top-0 w-full z-50">
 			<nav
 				aria-label="navigation principale"
 				className="flex items-center justify-end font-title text-white text-xl"

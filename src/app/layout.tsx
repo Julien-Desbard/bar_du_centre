@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "@/components/header/header";
+import Header from "@/components/layout/Header";
 
 import { Playfair_Display, Poppins } from "next/font/google";
 
@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="fr" className={`${playfair.variable} ${poppins.variable}`}>
       <body className="bg-bgbody m-0 p-0 overflow-hidden">
         <header className="w-full fixed top-0 z-50">
-          <div className="max-w-[1200px] mx-auto px-4">
+          <div className="max-w-[1280px] mx-auto px-4 bg-transparent backdrop-blur-md">
             <Header />
           </div>
         </header>

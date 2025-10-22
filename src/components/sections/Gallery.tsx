@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import ReservationModal from "../modals/reservationModal";
 import { useState } from "react";
 import "@/styles/embla.css";
+import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 
 export type BrasserieContent = {
 	id: number;
@@ -26,30 +27,29 @@ export default function Gallery() {
 		{ id: 7, name: "" },
 		{ id: 8, name: "" },
 	];
+
+	const sectionTitle: SectionTitleProps = {
+		part1: "notre",
+		part2: "brasserie",
+	};
 	return (
-		<section
-			id="gallery"
-			className="snap-start h-screen text-white "
-		>
-			<div className="w-full h-full flex flex-col justify-between items-center max-w-[1200px] mx-auto">
+		<section id="gallery" className="snap-start h-screen text-white ">
+			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
+				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start">
-					<h2 className="pt-24 px-6 font-subtitle text-5xl text-h2 font-semibold ">
-						notre
-						<br />
-						<span className="text-white">brasserie</span>
-					</h2>
-				</div>
-				<div className="self-start">
-					<h2 className="font-body text-4xl mt-18 m-6 text-left">
+					<h2 className="font-body text-4xl m-6 text-left">
 						Le <span className="text-secondary">Bar Du Centre</span> sous toutes
 						ses coutures
 					</h2>
 				</div>
-				<div className="w-full p-6">
+				<div className="w-full px-6">
 					<Carousel options={OPTIONS} brasserieContent={brasserieContent} />
 				</div>
 				<div>
-					<Button onClick={() => setIsOpen(true)} className="max-w-45 mt-6 mb-30">
+					<Button
+						onClick={() => setIsOpen(true)}
+						className="max-w-45 mt-4 mb-40"
+					>
 						Réserver une table
 					</Button>
 				</div>
@@ -58,4 +58,3 @@ export default function Gallery() {
 		</section>
 	);
 }
-

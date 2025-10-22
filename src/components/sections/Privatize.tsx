@@ -4,22 +4,21 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import ContactModal from "../modals/contactModal";
 import { useState } from "react";
+import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 
 export default function Privatize() {
 	const [isOpen, setIsOpen] = useState(false);
+	const sectionTitle: SectionTitleProps = {
+		part1: "salle",
+		part2: "privatisable",
+	};
 	return (
 		<section
 			id="private"
 			className="snap-start text-white h-screen overflow-hidden"
 		>
-			<div
-				className="w-full h-full flex flex-col mx-auto"
-			>
-				<h2 className="pt-24 px-6 font-subtitle text-5xl text-h2 font-semibold flex-shrink-0">
-					salle
-					<br />
-					<span className="text-white">privatisable</span>
-				</h2>
+			<div className="w-full h-full flex flex-col mx-auto">
+				<SectionTitle sectionTitle={sectionTitle} />
 
 				<p className="text-4xl px-6 mt-12 mb-12 font-body text-left flex-shrink-0">
 					Reservez notre <span className="text-secondary ">seconde salle</span>
@@ -67,8 +66,10 @@ export default function Privatize() {
 							Vous pouvez réserver notre seconde salle d&apos;une capacité de 40
 							personnes
 						</p>
-						<div className="flex pt-12 self-center
-						md:pb-12">
+						<div
+							className="flex pt-12 self-center
+						md:pb-12"
+						>
 							<Button onClick={() => setIsOpen(true)} className="max-w-45 ">
 								Contactez-nous
 							</Button>
@@ -82,7 +83,7 @@ export default function Privatize() {
 					</Button>
 				</div> */}
 			</div>
-				<ContactModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+			<ContactModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>
 	);
 }
