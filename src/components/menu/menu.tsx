@@ -9,10 +9,10 @@ export default function MenuSection() {
 	return (
 		<section
 			id="menu"
-			className="snap-start relative bg-bgbody bg-cover bg-center min-h-screen text-white overflow-hidden"
+			className="snap-start relative text-white overflow-hidden"
 		>
 			<div
-				className="w-full max-w-[1200px] mx-auto p-4 flex flex-row flex-wrap justify-around gap-x-3
+				className="w-full h-full mx-auto p-4 flex flex-row flex-wrap justify-around gap-x-3
 				lg:flex-1 
 			xl:gap-x-12 "
 			>
@@ -63,9 +63,7 @@ export default function MenuSection() {
 					className="flex flex-col items-center gap-4 max-w-full w-fit justify-self-center
 				lg:mt-30"
 				>
-					<h2 className="font-subtitle text-5xl text-center ">
-						Carte du jour
-					</h2>
+					<h2 className="font-subtitle text-5xl text-center ">Carte du jour</h2>
 
 					<h3 className="text-2xl font-light text-center text-secondary">
 						Entrées
@@ -195,10 +193,7 @@ export default function MenuSection() {
 					</ul>
 				</div>
 			</div>
-			<ReservationModal
-				isOpen={isOpen}
-				onClose={() => setIsOpen(false)}
-			/>
+			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>
 	);
 }

@@ -29,7 +29,7 @@ export default function Gallery() {
 	return (
 		<section
 			id="gallery"
-			className="snap-start bg-[url('/images/background.jpg')] bg-cover bg-center h-screen text-white "
+			className="snap-start h-screen text-white "
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center max-w-[1200px] mx-auto">
 				<div className="self-start">

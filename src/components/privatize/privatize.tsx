@@ -10,10 +10,10 @@ export default function Privatize() {
 	return (
 		<section
 			id="private"
-			className="snap-start bg-bgbody bg-cover bg-center text-white h-screen overflow-hidden"
+			className="snap-start text-white h-screen overflow-hidden"
 		>
 			<div
-				className="w-full h-full flex flex-col max-w-[1280px] mx-auto"
+				className="w-full h-full flex flex-col mx-auto"
 			>
 				<h2 className="pt-24 px-6 font-subtitle text-5xl text-h2 font-semibold flex-shrink-0">
 					salle
