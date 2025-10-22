@@ -9,7 +9,7 @@ export default function MenuSection() {
 	return (
 		<section
 			id="menu"
-			className="snap-start relative bg-[url('/images/background.jpg')] bg-cover bg-center min-h-screen text-white overflow-hidden"
+			className="snap-start relative bg-bgbody bg-cover bg-center min-h-screen text-white overflow-hidden"
 		>
 			<div
 				className="w-full max-w-[1200px] mx-auto p-4 flex flex-row flex-wrap justify-around gap-x-3

@@ -15,28 +15,29 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
 
 export default function Footer() {
 	return (
-		<div className="font-body bg-transparent text-white text-base flex justify-between max-md:px-0 md:grid md:grid-cols-[auto_1fr_auto] md:items-center px-4">
+		<div className="font-body bg-transparent text-white text-base flex max-md:px-0 md:grid md:grid-cols-[auto_1fr_auto] md:items-center px-4 pb-6">
 			<Link href="/#home" className="max-md:flex max-md:items-center">
 				<Image
 					src="/images/logo_bdc.webp"
 					alt="logo du Bar du Centre"
 					width={80}
 					height={40}
+					className="max-md:hidden"
 				/>
 			</Link>
 			
-			<div className="grid grid-rows-2 justify-self-center max-md:pr-3 max-md:pl-2">
-				<ul className="grid max-sm:grid-cols-2 grid-cols-4 justify-items-center items-center border-b border-secondary max-w-2xl p-1">
+			<div className="grid grid-rows-2 justify-self-center  max-md:pr-3 pl-12">
+				<ul className="grid max-sm:grid-cols-2 grid-cols-4 border-b border-secondary max-w-2xl pb-1">
 					<FooterLink href="/#menu">La cantine</FooterLink>
 					<FooterLink href="/#events">Evénements</FooterLink>
 					<FooterLink href="/discovery#gallery">Découvrez-nous</FooterLink>
 					<FooterLink href="/discovery#contact">Contact</FooterLink>
 				</ul>
 				
-				<ul className="grid max-sm:grid-cols-2 grid-cols-3 justify-items-center items-center max-w-2xl">
+				<ul className="grid max-sm:grid-cols-2 grid-cols-3 max-w-2xl pt-1">
 					<FooterLink href="/legal#mentions">Mentions légales</FooterLink>
 					<li className="w-full max-md:row-span-2">
-						<Link href="/legal#policy" className="hover:text-secondary transition block text-center w-full">
+						<Link href="/legal#policy" className="hover:text-secondary block text-center w-full">
 							Politique de confidentialité
 						</Link>
 					</li>
