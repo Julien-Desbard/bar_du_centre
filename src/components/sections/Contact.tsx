@@ -1,16 +1,18 @@
-import Footer from "../footer/footer";
+import Footer from "../layout/Footer";
+import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 import { Button } from "../ui/button";
 
 export default function Contact() {
+	const sectionTitle: SectionTitleProps = {
+		part1: "nous",
+		part2: "contacter",
+	};
 	return (
 		<section
 			id="contact"
 			className="snap-start h-screen text-white flex flex-col justify-between"
 		>
-			<h2 className="pt-24 pl-24">
-				<p className="font-subtitle text-5xl text-h2 font-bold">nous</p>
-				<p className="font-subtitle text-5xl font-bold">trouver</p>
-			</h2>
+			<SectionTitle sectionTitle={sectionTitle} />
 			<article className="pl-6 font-body text-2xl flex flex-col">
 				<p>
 					Le Bar Du Centre <br />
