@@ -20,14 +20,11 @@ export default function RootLayout({
   return (
     <html lang="fr" className={`${playfair.variable} ${poppins.variable}`}>
       <body className="bg-bgbody m-0 p-0 overflow-hidden">
-        {/* Header fixe - pleine largeur */}
         <header className="w-full fixed top-0 z-50">
           <div className="max-w-[1200px] mx-auto px-4">
             <Header />
           </div>
         </header>
-        
-        {/* Conteneur de scroll - EN DEHORS de toute contrainte */}
         {children}
       </body>
     </html>

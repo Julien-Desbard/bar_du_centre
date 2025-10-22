@@ -13,9 +13,7 @@ export default function Privatize() {
 			className="snap-start bg-bgbody bg-cover bg-center text-white h-screen overflow-hidden"
 		>
 			<div
-				className="w-full h-full flex flex-col max-w-[1350px] mx-auto
-				xl:max-w-[90vw]
-				2xl:max-w-[1200px]"
+				className="w-full h-full flex flex-col max-w-[1280px] mx-auto"
 			>
 				<h2 className="pt-24 px-6 font-subtitle text-5xl text-h2 font-semibold flex-shrink-0">
 					salle
@@ -23,8 +21,8 @@ export default function Privatize() {
 					<span className="text-white">privatisable</span>
 				</h2>
 
-				<p className="text-4xl px-6 mt-12 text-secondary font-bold text-left flex-shrink-0">
-					Reservez notre seconde salle
+				<p className="text-4xl px-6 mt-12 mb-12 font-body text-left flex-shrink-0">
+					Reservez notre <span className="text-secondary ">seconde salle</span>
 				</p>
 
 				<div className="flex flex-col mt-12 min-h-0 max-sm:mt-6 lg:flex-row lg:gap-x-6 lg:items-center lg:justify-center xl:gap-x-18">
