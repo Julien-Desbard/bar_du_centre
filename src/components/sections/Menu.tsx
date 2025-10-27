@@ -9,7 +9,7 @@ export default function MenuSection() {
 	return (
 		<section
 			id="menu"
-			className="snap-start relative text-white overflow-hidden"
+			className="snap-start relative text-white overflow-hidden min-h-screen"
 		>
 			<div
 				className="w-full h-full mx-auto p-4 flex flex-row flex-wrap justify-around gap-x-3
@@ -52,7 +52,7 @@ export default function MenuSection() {
 
 					<Button
 						onClick={() => setIsOpen(true)}
-						className="max-w-45 mt-4 mb-12 lg:hidden"
+						className="max-w-45 mt-10 mb-12 lg:hidden"
 					>
 						Réserver une table
 					</Button>
@@ -63,7 +63,7 @@ export default function MenuSection() {
 					className="flex flex-col items-center gap-4 max-w-full w-fit justify-self-center
 				lg:mt-30"
 				>
-					<h2 className="font-subtitle text-5xl text-center ">Carte du jour</h2>
+					<h2 className="font-subtitle text-4xl text-center ">Carte du jour</h2>
 
 					<h3 className="text-2xl font-light text-center text-secondary">
 						Entrées
@@ -132,7 +132,7 @@ export default function MenuSection() {
 					</Button>
 				</div>
 
-				{/* --------------------- Horaires --------------------- */}
+				{/* --------------------- Horaires ---------------------
 				<div
 					className="grid gap-2 gap-x-4 text-center
 					max-sm:grid-cols-1
@@ -141,14 +141,14 @@ export default function MenuSection() {
 					"
 				>
 					<h2
-						className="text-4xl font-body justify-self-center pb-4
+						className="text-2xl font-body justify-self-center pb-4
 					sm:col-span-2 sm:row-start-1
 					lg:col-span-3
 					"
 					>
 						Les horaires
 					</h2>
-					<ul className="contents text-xl">
+					<ul className="contents text-base">
 						<li
 							className="block justify-self-center self-start
 						sm:justify-self-start sm:self-center
@@ -191,7 +191,7 @@ export default function MenuSection() {
 							<span className="text-secondary"> 12h-15h || 19h-22h30</span>
 						</li>
 					</ul>
-				</div>
+				</div> */}
 			</div>
 			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>

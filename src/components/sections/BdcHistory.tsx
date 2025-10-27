@@ -19,12 +19,12 @@ export default function BdcHistory() {
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start">
-					<h2 className="font-body text-4xl m-6 text-left">
+					<h2 className="font-body text-3xl m-6 text-left">
 						Un lieu à
 						<span className="text-secondary"> l&apos;histoire riche</span>
 					</h2>
 				</div>
-				<div className="flex">
+				<div className="flex justify-between">
 					<section className="text-white font-bod flex flex-col lg:max-w-5/10 p-6 lg:pl-6 lg:pr-3 gap-6 text-justify">
 						<p>
 							On me surnomme couramment le BDC. Mais savez-vous que les Angevins
@@ -112,7 +112,7 @@ export default function BdcHistory() {
 				</div>
 				<Button
 					onClick={() => setIsOpen(true)}
-					className="max-w-45 max-xl:hidden self-center mb-6"
+					className="max-w-45 max-xl:hidden self-center mb-12"
 				>
 					Réserver une table
 				</Button>

@@ -6,7 +6,7 @@ import Contact from "@/components/sections/Contact";
 
 export default function Discovery() {
 	return (
-		<main className="scroll-smooth overflow-y-scroll snap-y snap-proximity h-screen">
+		<main className="scroll-smooth overflow-y-scroll snap-y snap-proximity w-screen h-screen">
 			<section className="min-h-screen snap-start w-full">
 				<div className="max-w-[1280px] mx-auto">
 					<Gallery />
