@@ -5,7 +5,7 @@ import Privatize from "@/components/sections/Privatize";
 
 export default function Home() {
 	return (
-		<div className="h-screen overflow-y-scroll snap-y snap-proximity w-screen">
+		<div className="h-screen overflow-y-scroll snap-y snap-proximity w-screen scroll-smooth">
 			{/* w-screen force la pleine largeur de l'écran */}
 
 			<section className="min-h-screen snap-start w-full bg-cover bg-center bg-no-repeat"

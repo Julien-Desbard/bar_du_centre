@@ -87,7 +87,7 @@ export default function Header() {
 				<div className="fixed top-0 right-0 z-50">
 					<BurgerMenu nav={Nav} />
 				</div>
-				<ul className="flex items-center gap-6 p-6 pr-10">
+				<ul className="flex items-center gap-6 p-6 pr-10 tracking-wide">
 					{/* Mapping Nav to create the menu */}
 					{Nav.map(({ href, label }) => {
 						const isActive = href === activePath;

@@ -108,7 +108,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 					</button>
 				</div>
 				<h3 className="text-2xl mb-8 text-white font-subtitle font-light justify-self-center">
-					Reservation
+					Nous contacter
 				</h3>
 
 				<div

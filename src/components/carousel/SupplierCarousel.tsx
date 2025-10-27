@@ -33,11 +33,11 @@ const EmblaCarousel: React.FC<PropType> = ({ options, supplierContent }) => {
 					{supplierContent.map((item) => (
 						<div
 							key={item.id}
-							className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] flex-shrink-0 hover:bg-secondary/70 transition delay-150 duration-300 ease-in-out hover:-translate-y-1"
+							className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] px-2 flex-shrink-0 hover:bg-secondary/70 transition delay-100 duration-300 ease-in-out hover:-translate-y-1"
 						>
 								<Link
                                 href={item.url}>
-							<div className="relative w-full aspect-square max-w-sm mx-auto ">
+							<div className="relative w-full aspect-square max-w-sm max-sm:max-w-3xs xl:max-w-xs mx-auto">
 								<Image
 									alt={`${item.name}`}
 									src={`/images/suppliers/${item.slug}.png`}
@@ -45,16 +45,16 @@ const EmblaCarousel: React.FC<PropType> = ({ options, supplierContent }) => {
 									className="object-cover"
                                     />
 							</div>
-							<p className="font-body text-center text-2xl mt-2">
+							{/* <p className="font-body text-center text-xl mt-2">
                                     {item.name.toUpperCase()}
-							</p>
+							</p> */}
                                 </Link>
 						</div>
 					))}
 				</div>
 			</div>
 
-			<div className="flex items-center justify-center md:mt-16 px-4">
+			<div className="flex items-center justify-center mt-6 px-4">
 				<div className="flex gap-2">
 					<PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
 					<NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />

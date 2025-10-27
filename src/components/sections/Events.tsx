@@ -55,6 +55,22 @@ export default function Events() {
 			jour: "samedi",
 			date: "02.11.2025",
 		},
+				{
+			id: 5,
+			name: "dj",
+			title: "SOIREE",
+			subtitle: "DJ",
+			jour: "samedi",
+			date: "25.10.2025",
+		},
+		{
+			id: 6,
+			name: "micro",
+			title: "BLINDTEST",
+			subtitle: "MUSICAL",
+			jour: "samedi",
+			date: "02.11.2025",
+		},
 	];
 
 	const sectionTitle: SectionTitleProps = {
@@ -62,24 +78,24 @@ export default function Events() {
 		part2: "événements",
 	};
 	return (
-		<section id="events" className="snap-start h-screen text-white ">
-			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
+		<section id="events" className="snap-start min-h-screen text-white overflow-hidden">
 				<SectionTitle sectionTitle={sectionTitle} />
+			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<div className="self-start">
-					<h2 className="font-body text-4xl mx-6 mt-6 text-left">
+					<h2 className="font-body text-3xl m-6 text-left">
 						Venez participer à{" "}
 						<span className="text-secondary">nos événements</span>
 					</h2>
 				</div>
-				<div className="w-full mt-12">
+				<div className="w-full px-6 ">
 					<Carousel options={OPTIONS} imageContent={imageContent} />
 				</div>
 				<div>
-					<Button onClick={() => setIsOpen(true)} className="max-w-45 mb-12">
+					<Button onClick={() => setIsOpen(true)} className="max-w-45 mt-4 mb-12">
 						Réserver une table
 					</Button>
 				</div>
-				<Footer />
+				{/* <Footer /> */}
 			</div>
 			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>

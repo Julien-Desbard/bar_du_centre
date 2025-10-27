@@ -17,6 +17,10 @@
 	/* Button background color */
 	--color-bg: #d5b370;
 	--color-bgbody: #1D0B01;
+
+/* Icon color */
+--color-icon:#d5b370;
+
 	/* --color-hover: #d39926; */
 	--color-sidebar-ring: var(--sidebar-ring);
 	--color-sidebar-border: var(--sidebar-border);
@@ -53,31 +57,6 @@
 	--radius-lg: var(--radius);
 	--radius-xl: calc(var(--radius) + 4px);
 }
-
-/* Font import */
-/* @font-face {
-    font-family: "poppins-light";
-    src: url("/fonts/Poppins.light.woff2") format("woff2");
-}
-
-@font-face {
-    font-family: "poppins-regular";
-    src: url("/fonts/Poppins.regular.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "poppins-semibold";
-    src: url("/fonts/Poppins-SemiBold.woff2") format("woff2");
-    font-weight: normal;
-    font-style: normal;
-}
-
-@font-face {
-    font-family: "playfair";
-    src: url("/fonts/Playfair_144pt-Light.woff2") format("woff2");
-} */
 
 :root {
 	--radius: 0.625rem;
