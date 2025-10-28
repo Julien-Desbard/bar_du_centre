@@ -2,10 +2,12 @@
 import Image from "next/image";
 import { Button } from "../ui/button";
 import ReservationModal from "../modals/reservationModal";
+import MenuModal from "../modals/menuModal";
 import { useState } from "react";
 
 export default function MenuSection() {
 	const [isOpen, setIsOpen] = useState(false);
+	const [openMenu, setOpenMenu] = useState(false);
 	return (
 		<section
 			id="menu"
@@ -26,7 +28,10 @@ export default function MenuSection() {
 		max-sm:gap-y-6
 		sm:grid sm:grid-cols-2 sm:grid-rows-2"
 					>
-						<h2 className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-1 sm:row-start-1 sm:self-center">
+						<h2
+							onClick={()=>setOpenMenu(true)}
+							className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-1 sm:row-start-1 sm:self-center"
+						>
 							menu de <br />
 							<span className="text-white">la cantine</span>
 						</h2>
@@ -36,6 +41,7 @@ export default function MenuSection() {
 							alt="icone burger pour accéder au menu des plats"
 							width={250}
 							height={250}
+							onClick={()=>setOpenMenu(true)}
 						/>
 						<Image
 							className="max-sm:hidden sm:col-start-1 sm:row-start-2 sm:justify-self-center"
@@ -43,8 +49,12 @@ export default function MenuSection() {
 							alt="icone bière pour accéder au menu des boissons"
 							width={250}
 							height={250}
+							onClick={()=>setOpenMenu(true)}
 						/>
-						<h2 className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-2 sm:row-start-2 sm:self-center">
+						<h2
+							onClick={()=>setOpenMenu(true)}
+							className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-2 sm:row-start-2 sm:self-center"
+						>
 							carte des <br />
 							<span className="text-white">boissons</span>
 						</h2>
@@ -132,68 +142,73 @@ export default function MenuSection() {
 					</Button>
 				</div>
 
-				{/* --------------------- Horaires ---------------------
-				<div
-					className="grid gap-2 gap-x-4 text-center
-					max-sm:grid-cols-1
-					sm:grid-cols-2 sm:grid-rows-[auto_repeat(3,auto)] sm:grid-flow-col sm:text-left
-					lg:grid-cols-3 lg:grid-rows-[auto_repeat(2,auto)] lg:grid-flow-row lg:px-6 lg:place-self-center lg:justify-items-center
-					"
-				>
-					<h2
-						className="text-2xl font-body justify-self-center pb-4
-					sm:col-span-2 sm:row-start-1
-					lg:col-span-3
-					"
-					>
-						Les horaires
-					</h2>
-					<ul className="contents text-base">
-						<li
-							className="block justify-self-center self-start
-						sm:justify-self-start sm:self-center
-						lg:self-start"
-						>
-							Lundi | Mardi | Mercredi:
-							<br />
-							<span className="text-secondary">12h-14h15 19h-22h30</span>
-						</li>
-						<li
-							className="block justify-self-center self-start
-						sm:justify-self-start sm:self-center lg:self-start
-						"
-						>
-							Jeudi:{" "}
-							<span className="text-secondary">12h-14h15 || 19h-23h</span>
-						</li>
-						<li
-							className="block justify-self-center self-start
-			sm:justify-self-start sm:self-center
-			lg:self-start
-			"
-						>
-							Vendredi:{" "}
-							<span className="text-secondary">12h-14h30 || 19h-23h</span>
-						</li>
-						<li
-							className="block justify-self-center self-center
-			sm:justify-self-start sm:self-center lg:self-start"
-						>
-							Samedi:{" "}
-							<span className="text-secondary">12h-15h30 || 19h-23h</span>
-						</li>
-						<li
-							className="block justify-self-center self-start
-			sm:justify-self-start sm:row-span-2 sm:self-center
-			lg:row-span-1 lg:self-start"
-						>
-							Dimanche:
-							<span className="text-secondary"> 12h-15h || 19h-22h30</span>
-						</li>
-					</ul>
-				</div> */}
+				{/* emplacment des horaires */}
 			</div>
 			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+			<MenuModal openMenu={openMenu} onClose={() => setOpenMenu(false)} />
 		</section>
 	);
+}
+
+{
+	/* --------------------- Horaires ---------------------
+<div
+	className="grid gap-2 gap-x-4 text-center
+	max-sm:grid-cols-1
+	sm:grid-cols-2 sm:grid-rows-[auto_repeat(3,auto)] sm:grid-flow-col sm:text-left
+	lg:grid-cols-3 lg:grid-rows-[auto_repeat(2,auto)] lg:grid-flow-row lg:px-6 lg:place-self-center lg:justify-items-center
+	"
+>
+	<h2
+		className="text-2xl font-body justify-self-center pb-4
+	sm:col-span-2 sm:row-start-1
+	lg:col-span-3
+	"
+	>
+		Les horaires
+	</h2>
+	<ul className="contents text-base">
+		<li
+			className="block justify-self-center self-start
+		sm:justify-self-start sm:self-center
+		lg:self-start"
+		>
+			Lundi | Mardi | Mercredi:
+			<br />
+			<span className="text-secondary">12h-14h15 19h-22h30</span>
+		</li>
+		<li
+			className="block justify-self-center self-start
+		sm:justify-self-start sm:self-center lg:self-start
+		"
+		>
+			Jeudi:{" "}
+			<span className="text-secondary">12h-14h15 || 19h-23h</span>
+		</li>
+		<li
+			className="block justify-self-center self-start
+sm:justify-self-start sm:self-center
+lg:self-start
+"
+		>
+			Vendredi:{" "}
+			<span className="text-secondary">12h-14h30 || 19h-23h</span>
+		</li>
+		<li
+			className="block justify-self-center self-center
+sm:justify-self-start sm:self-center lg:self-start"
+		>
+			Samedi:{" "}
+			<span className="text-secondary">12h-15h30 || 19h-23h</span>
+		</li>
+		<li
+			className="block justify-self-center self-start
+sm:justify-self-start sm:row-span-2 sm:self-center
+lg:row-span-1 lg:self-start"
+		>
+			Dimanche:
+			<span className="text-secondary"> 12h-15h || 19h-22h30</span>
+		</li>
+	</ul>
+</div> */
 }
