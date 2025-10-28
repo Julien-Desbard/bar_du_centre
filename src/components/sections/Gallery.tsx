@@ -1,12 +1,10 @@
-"use client";
-import React from "react";
-import { EmblaOptionsType } from "embla-carousel";
-import Carousel from "../carousel/GalleryCarousel";
-import { Button } from "../ui/button";
-import ReservationModal from "../modals/reservationModal";
-import { useState } from "react";
-import "@/styles/embla.css";
+
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
+import ReservationTrigger from "../modals/reservationTrigger";
+import Carousel from "../carousel/GalleryCarousel";
+import { EmblaOptionsType } from "embla-carousel";
+import React from "react";
+import "@/styles/embla.css";
 
 export type BrasserieContent = {
 	id: number;
@@ -14,7 +12,6 @@ export type BrasserieContent = {
 };
 
 export default function Gallery() {
-	const [isOpen, setIsOpen] = useState(false);
 	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
 
 	const brasserieContent: BrasserieContent[] = [
@@ -33,7 +30,10 @@ export default function Gallery() {
 		part2: "brasserie",
 	};
 	return (
-		<section id="gallery" className="snap-start min-h-screen text-white overflow-hidden ">
+		<section
+			id="gallery"
+			className="snap-start min-h-screen text-white overflow-hidden "
+		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start">
@@ -42,19 +42,11 @@ export default function Gallery() {
 						ses coutures
 					</h2>
 				</div>
-				<div className="w-full px-6">
+				<div className="w-full px-6 pb-6">
 					<Carousel options={OPTIONS} brasserieContent={brasserieContent} />
 				</div>
-				<div>
-					<Button
-						onClick={() => setIsOpen(true)}
-						className="max-w-45 mt-4 mb-12"
-					>
-						Réserver une table
-					</Button>
-				</div>
+				<ReservationTrigger />
 			</div>
-			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>
 	);
 }

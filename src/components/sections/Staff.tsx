@@ -1,12 +1,9 @@
-"use client";
-import React from "react";
-import { EmblaOptionsType } from "embla-carousel";
-import Carousel from "../carousel/StaffCarousel";
-import { Button } from "../ui/button";
-import ReservationModal from "../modals/reservationModal";
-import { useState } from "react";
-import "@/styles/embla.css";
+
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
+import ReservationTrigger from "../modals/reservationTrigger";
+import Carousel from "../carousel/StaffCarousel";
+import { EmblaOptionsType } from "embla-carousel";
+import "@/styles/embla.css";
 
 export type StaffContent = {
 	id: number;
@@ -14,7 +11,6 @@ export type StaffContent = {
 };
 
 export default function Staff() {
-	const [isOpen, setIsOpen] = useState(false);
 	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
 
 	const staffContent: StaffContent[] = [
@@ -40,19 +36,12 @@ export default function Staff() {
 						<span className="text-secondary">passionés</span>
 					</h2>
 				</div>
-				<div className="w-full px-6">
+				<div className="w-full px-6 mb-6">
 					<Carousel options={OPTIONS} staffContent={staffContent} />
 				</div>
-				<div>
-					<Button
-						onClick={() => setIsOpen(true)}
-						className="max-w-45 mt-4 mb-12"
-					>
-						Réserver une table
-					</Button>
-				</div>
+<ReservationTrigger/>
 			</div>
-			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+
 		</section>
 	);
 }

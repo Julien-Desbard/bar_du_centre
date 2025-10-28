@@ -1,14 +1,12 @@
-"use client";
 import React from "react";
-import { Button } from "../ui/button";
-import ReservationModal from "../modals/reservationModal";
-import { useState } from "react";
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 import Link from "next/link";
 import Image from "next/image";
 
+import ReservationTrigger from "../modals/reservationTrigger";
+
 export default function BdcHistory() {
-	const [isOpen, setIsOpen] = useState(false);
+
 	const sectionTitle: SectionTitleProps = {
 		part1: "notre",
 		part2: "histoire",
@@ -88,12 +86,9 @@ export default function BdcHistory() {
 						>
 							Pour plus d&apos;infos, cliquer ici{" "}
 						</Link>
-						<Button
-							onClick={() => setIsOpen(true)}
-							className="max-w-45 lg:hidden self-center mt-6"
-						>
-							Réserver une table
-						</Button>
+						<div className="lg:hidden self-center mt-6">
+							<ReservationTrigger />
+						</div>
 					</section>
 					<div className="pr-6 pl-3 flex max-lg:hidden lg:flex-col lg:items-center lg:justify-center gap-18">
 						<Image
@@ -102,22 +97,15 @@ export default function BdcHistory() {
 							width={500}
 							height={500}
 						/>
-						<Button
-							onClick={() => setIsOpen(true)}
-							className="max-w-45 xl:hidden"
-						>
-							Réserver une table
-						</Button>
+						<div className="xl:hidden">
+							<ReservationTrigger />
+						</div>
 					</div>
 				</div>
-				<Button
-					onClick={() => setIsOpen(true)}
-					className="max-w-45 max-xl:hidden self-center mb-12"
-				>
-					Réserver une table
-				</Button>
+				<div className="max-xl:hidden self-center mb-12">
+					<ReservationTrigger />
+				</div>
 			</div>
-			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>
 	);
 }

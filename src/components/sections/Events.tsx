@@ -1,13 +1,8 @@
-"use client";
-import React from "react";
-import { EmblaOptionsType } from "embla-carousel";
-import Footer from "../layout/Footer";
-import Carousel from "../carousel/EventCarousel";
-import { Button } from "../ui/button";
-import ReservationModal from "../modals/reservationModal";
-import { useState } from "react";
-import "@/styles/embla.css";
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
+import EventCarousel from "../carousel/EventCarousel"; 
+import type { EmblaOptionsType } from "embla-carousel"; 
+  import "@/styles/embla.css";  
+import ReservationTrigger from "../modals/reservationTrigger";
 
 export type Content = {
 	id: number;
@@ -17,9 +12,11 @@ export type Content = {
 	jour: string;
 	date: string;
 };
-
+// lg:hidden self-center mt-6
+// xl:hidden
+// max-xl:hidden self-center mb-12
 export default function Events() {
-	const [isOpen, setIsOpen] = useState(false);
+
 	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
 
 	const imageContent: Content[] = [
@@ -55,7 +52,7 @@ export default function Events() {
 			jour: "samedi",
 			date: "02.11.2025",
 		},
-				{
+		{
 			id: 5,
 			name: "dj",
 			title: "SOIREE",
@@ -73,13 +70,14 @@ export default function Events() {
 		},
 	];
 
-	const sectionTitle: SectionTitleProps = {
-		part1: "nos",
-		part2: "événements",
-	};
+	const sectionTitle: SectionTitleProps = { part1: "nos", part2: "événements" };
+
 	return (
-		<section id="events" className="snap-start min-h-screen text-white overflow-hidden">
-				<SectionTitle sectionTitle={sectionTitle} />
+		<section
+			id="events"
+			className="snap-start min-h-screen text-white overflow-hidden"
+		>
+			<SectionTitle sectionTitle={sectionTitle} />
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<div className="self-start">
 					<h2 className="font-body text-3xl m-6 text-left">
@@ -87,17 +85,11 @@ export default function Events() {
 						<span className="text-secondary">nos événements</span>
 					</h2>
 				</div>
-				<div className="w-full px-6 ">
-					<Carousel options={OPTIONS} imageContent={imageContent} />
+				<div className="w-full px-6 pb-6">
+					<EventCarousel options={OPTIONS} imageContent={imageContent} />
 				</div>
-				<div>
-					<Button onClick={() => setIsOpen(true)} className="max-w-45 mt-4 mb-12">
-						Réserver une table
-					</Button>
-				</div>
-				{/* <Footer /> */}
+				<ReservationTrigger />
 			</div>
-			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>
 	);
 }

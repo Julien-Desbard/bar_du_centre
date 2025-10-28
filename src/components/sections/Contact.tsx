@@ -1,73 +1,13 @@
-"use client";
-import { useState } from "react";
-import ContactModal from "../modals/contactModal";
-
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
-import { Button } from "../ui/button";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
+import ContacTrigger from "../modals/contactTrigger";
+import ContactForm from "../forms/contacForm";
 
 export default function Contact() {
 	const sectionTitle: SectionTitleProps = {
 		part1: "nous",
 		part2: "contacter",
 	};
-
-	const [name, setName] = useState<string>("");
-	const [email, setEmail] = useState<string>("");
-	const [message, setMessage] = useState<string>("");
-	const [topic, setTopic] = useState<string>("");
-	const [error, setError] = useState<string>("");
-	const [isOpen, setIsOpen] = useState(false);
-
-	const resetFormState = () => {
-		setName("");
-		setEmail("");
-		setMessage("");
-		setTopic("");
-		setError("");
-	};
-
-	const checkAllFieldsAreFilled = () => {
-		if (!name || !email || !topic || !message)
-			return {
-				ok: false,
-				msg: "Pour nous contacter, vous devez renseigner tous les champs",
-			};
-
-		return {
-			ok: true,
-			msg: "",
-		};
-	};
-
-	async function handleSubmit(e: React.FormEvent) {
-		e.preventDefault();
-		const fieldCheck = checkAllFieldsAreFilled();
-		if (!fieldCheck.ok) {
-			setError(fieldCheck.msg);
-			return;
-		}
-
-		const res = fetch("/api/contact", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				name,
-				email,
-				topic,
-				message,
-			}),
-		});
-		const data = await (await res).json();
-		if (data.ok) {
-			console.log("mail de contact envoyé");
-		} else {
-			console.log("erreur lors de l'envoi du mail de contact");
-		}
-
-		setError("");
-		resetFormState();
-	}
 
 	return (
 		<section id="contact" className="snap-start min-h-screen text-white">
@@ -111,85 +51,14 @@ export default function Contact() {
 								</p>
 							</div>
 						</div>
-						<div className="flex-1 lg:flex-2 p-2">
-							<div className="font-body max-md:hidden">
-								<form className="flex flex-col gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark] text-base">
-									<div className="flex flex-col xl:flex-row gap-2">
-										<div className="flex flex-col xl:flex-1">
-											<label htmlFor="name" className="sr-only">
-												Votre nom
-											</label>
-											<input
-												type="text"
-												name="name"
-												onChange={(e) => setName(e.target.value)}
-												required
-												placeholder="Votre nom"
-												className="border border-secondary p-1 pl-2"
-											/>
-										</div>
-										<div className="flex flex-col xl:flex-1">
-											<label htmlFor="email" className="sr-only">
-												Votre email
-											</label>
-											<input
-												type="email"
-												name="email"
-												onChange={(e) => setEmail(e.target.value)}
-												inputMode="email"
-												required
-												placeholder="Votre email"
-												className="border border-secondary p-1 pl-2"
-											/>
-										</div>
-									</div>
-
-									<label htmlFor="topic" className="sr-only">
-										Objet de votre demande
-									</label>
-									<input
-										type="text"
-										name="topic"
-										onChange={(e) => setTopic(e.target.value)}
-										required
-										placeholder="Objet de votre demande"
-										className="border border-secondary p-1 pl-2"
-									/>
-									<textarea
-										name="message"
-										inputMode="text"
-										onChange={(e) => setMessage(e.target.value)}
-										rows={2}
-										cols={50}
-										placeholder="Votre message"
-										className="border border-secondary p-1 pl-2"
-									></textarea>
-								</form>
-							</div>
-							<Button
-								type="submit"
-								className="m-6 flex justify-self-center max-md:hidden"
-								onClick={(e) => handleSubmit(e)}
-							>
-								Envoyer le message
-							</Button>
-							{error && error !== "" && (
-								<p className="font-body font-light italic text-red-500">
-									{" "}
-									{error}
-								</p>
-							)}
-						</div>
+						<ContactForm/>
 					</article>
 				</div>
-				<Button
-					className="max-w-45 self-center mb-12 md:hidden"
-					onClick={() => setIsOpen(true)}
-				>
-					Contactez-nous
-				</Button>
+				<div className="self-center mb-12 md:hidden">
+					<ContacTrigger/>
+				</div>
 			</div>
-			<ContactModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+
 		</section>
 	);
 }

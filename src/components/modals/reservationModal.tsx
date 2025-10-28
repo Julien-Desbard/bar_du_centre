@@ -1,3 +1,4 @@
+"use client";
 import { Button } from "../ui/button";
 import { XIcon } from "../ui/XIcon";
 import { useState, useRef, useEffect } from "react";
@@ -5,6 +6,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/fr";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { Loader } from "lucide-react";
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -27,9 +29,23 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 	const [reservationTime, setReservationTime] = useState<string>("");
 	const [date, setDate] = useState<string>("");
 	const [message, setMessage] = useState<string>("");
-	const [error, setError] = useState<string>("");
+	const [errors, setErrors] = useState<string>("");
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [messageSuccess, setMessageSuccess] = useState("");
 
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setMessageSuccess("");
+		}, 5000);
+		return () => clearTimeout(timer);
+	}, [messageSuccess]);
 
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setErrors("");
+		}, 5000);
+		return () => clearTimeout(timer);
+	}, [errors]);
 
 	// Focusing on the first input field of the form
 	const nameRef = useRef<HTMLInputElement>(null);
@@ -48,7 +64,8 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		setNature("");
 		setReservationTime("");
 		setDate("");
-		setError("");
+		setErrors("");
+		setMessage("");
 	};
 
 	const checkAllFieldsAreFilled = () => {
@@ -91,11 +108,11 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		timeHHMM: string,
 		number: string
 	): Result {
-		setError("");
+		setErrors("");
 
 		const numberCheck = validateNumber(number);
 		if (!numberCheck.ok) {
-			setError(numberCheck.msg);
+			setErrors(numberCheck.msg);
 			return {
 				ok: false,
 				msg: "Vous ne pouvez pas réserver pour plus de 10 personnes",
@@ -144,41 +161,48 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		e.preventDefault();
 		const fieldCheck = checkAllFieldsAreFilled();
 		if (!fieldCheck.ok) {
-			setError(fieldCheck.msg);
+			setErrors(fieldCheck.msg);
 			return;
 		}
 
 		const reservation = acceptReservation(date, reservationTime, number);
 		if (!reservation.ok) {
-			setError(reservation.msg);
+			setErrors(reservation.msg);
 			return;
 		}
+		setIsSubmitting(true);
+		try {
+			const res = fetch("/api/reservation", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					name,
+					email,
+					phone,
+					number,
+					location,
+					nature,
+					reservationTime,
+					date,
+					message,
+				}),
+			});
+			const data = await (await res).json();
+			if (data.ok) {
+				console.log("mail de réservation envoyé");
+			} else {
+				console.log("erreur lors de l'envoi du mail de réservation");
+			}
 
-		const res = fetch("/api/reservation", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				name,
-				email,
-				phone,
-				number,
-				location,
-				nature,
-				reservationTime,
-				date,
-				message,
-			}),
-		});
-		const data = await (await res).json()
-		if (data.ok) {
-			console.log("mail de réservation envoyé")
-		} else {
-			console.log("erreur lors de l'envoi du mail de réservation")
+			setMessageSuccess("Réservation effectuée avec succès");
+			setTimeout(() => onClose(), 3000);
+			setIsSubmitting(false);
+			
+		} catch {
+			setErrors("Une erreur est survenue, veuillez réessayer");
+		} finally {
+			resetFormState();
 		}
-
-		onClose();
-		setError("");
-		resetFormState();
 	}
 	if (!isOpen) return null;
 
@@ -187,7 +211,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			className="fixed inset-0 bg-black/50 backdrop-blur z-50 flex flex-col items-center justify-center"
 			onClick={() => {
 				onClose();
-				setError("");
+				setErrors("");
 				resetFormState();
 			}}
 		>
@@ -206,7 +230,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						<XIcon
 							onClick={() => {
 								resetFormState();
-								setError("");
+								setErrors("");
 								onClose();
 							}}
 							className="w-6 h-6"
@@ -217,8 +241,10 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 					Reservation
 				</h3>
 
-				<div className="font-body mb-4 px-12
-				max-sm:px-4">
+				<div
+					className="font-body mb-4 px-12
+				max-sm:px-4"
+				>
 					<form className="grid grid-cols-2 grid-row-8 gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
 						<input
 							type="hidden"
@@ -233,6 +259,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							type="text"
 							ref={nameRef}
 							name="name"
+							value={name}
 							onChange={(e) => setName(e.target.value)}
 							required
 							placeholder="Votre nom"
@@ -244,6 +271,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						<input
 							type="email"
 							name="email"
+							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							inputMode="email"
 							required
@@ -257,6 +285,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							type="tel"
 							inputMode="tel"
 							name="phone"
+							value={phone}
 							onChange={(e) => setPhone(e.target.value)}
 							pattern="^(?:(?:\+|00)33|0)[1-9](?:[0-9]{8})$"
 							required
@@ -270,6 +299,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							type="date"
 							inputMode="numeric"
 							name="date"
+							value={date}
 							onChange={(e) => setDate(e.target.value)}
 							required
 							placeholder="Date"
@@ -299,6 +329,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						<select
 							name="number"
 							inputMode="numeric"
+							value={number}
 							onChange={(e) => setNumber(e.target.value)}
 							required
 							id="number"
@@ -325,6 +356,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							name="location"
 							onChange={(e) => setLocation(e.target.value)}
 							id="location"
+							value={location}
 							required
 							className="border border-secondary p-1 pl-2 col-span-2"
 						>
@@ -341,6 +373,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							name="nature"
 							onChange={(e) => setNature(e.target.value)}
 							required
+							value={nature}
 							id="nature"
 							className="border border-secondary p-1 pl-2 col-span-2"
 						>
@@ -356,17 +389,33 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							onChange={(e) => setMessage(e.target.value)}
 							rows={5}
 							cols={50}
+							value={message}
 							placeholder="Votre message"
 							className="border border-secondary p-1 pl-2 col-span-2"
 						></textarea>
 					</form>
-				</div>
-				<Button type="submit" className="m-6 flex justify-self-center" onClick={(e) => handleSubmit(e)}>
-					Réservez votre table
-				</Button>
-				{error && error !== "" && (
-					<p className="font-body font-light italic text-red-500"> {error}</p>
+				{messageSuccess && messageSuccess !== "" && (
+					<p className="text-secondary py-2">{messageSuccess}</p>
 				)}
+				{errors && errors !== "" && (
+					<p className="font-body font-light italic text-red-500 py-2"> {errors}</p>
+				)}
+				</div>
+				<Button
+					type="submit"
+					disabled={isSubmitting}
+					className="m-6 flex justify-self-center"
+					onClick={(e) => handleSubmit(e)}
+				>
+					{isSubmitting ? (
+						<>
+							<Loader className="animate-spin mr-2" />
+							Réservation en cours
+						</>
+					) : (
+						"Réservez votre table"
+					)}
+				</Button>
 			</div>
 		</div>
 	);
