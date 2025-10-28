@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import {
@@ -37,17 +38,15 @@ const EmblaCarousel: React.FC<PropType> = ({ options, supplierContent }) => {
 						>
 								<Link
                                 href={item.url}>
-							<div className="relative w-full aspect-square max-w-sm max-sm:max-w-3xs xl:max-w-xs mx-auto">
+							<div className="relative w-full aspect-square max-w-sm mx-auto">
 								<Image
 									alt={`${item.name}`}
 									src={`/images/suppliers/${item.slug}.png`}
 									fill
+									sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
 									className="object-cover"
                                     />
 							</div>
-							{/* <p className="font-body text-center text-xl mt-2">
-                                    {item.name.toUpperCase()}
-							</p> */}
                                 </Link>
 						</div>
 					))}

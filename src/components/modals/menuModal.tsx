@@ -1,6 +1,5 @@
 import { Button } from "../ui/button";
 import { XIcon } from "../ui/XIcon";
-import { useState, useRef, useEffect } from "react";
 
 interface Modalprops {
 	openMenu: boolean;
@@ -71,6 +70,9 @@ export default function Modal({ openMenu, onClose }: Modalprops) {
 				</div>
 				{/* CONTENU SCROLLABLE - SORTI DU HEADER */}
 				<div className="flex-1 min-h-0 overflow-y-auto px-6 pb-3">
+					<h4 className="text-secondary border-b border-white my-2 pb-1 font-semibold text-center max-w-[80%] flex justify-self-center ">
+						Nom de la cat 2
+					</h4>
 					<ul className="w-full space-y-2">
 						<li className="flex items-baseline gap-2">
 							<span className="flex-1 break-words ">
@@ -105,6 +107,10 @@ export default function Modal({ openMenu, onClose }: Modalprops) {
 							<span className="flex-1 break-words">Seconde entrée</span>
 							<span className="shrink-0 text-bg font-semibold">9€</span>
 						</li>
+						<h4 className="text-secondary border-b border-white my-2 pb-1 font-semibold text-center max-w-[80%] flex justify-self-center ">
+							Nom de la cat 2
+						</h4>
+
 						<li className="flex items-baseline gap-2">
 							<span className="flex-1 break-words ">
 								Soupe de potiron et son lard grillé cest très long décidement
@@ -138,6 +144,9 @@ export default function Modal({ openMenu, onClose }: Modalprops) {
 							<span className="flex-1 break-words">Seconde entrée</span>
 							<span className="shrink-0 text-bg font-semibold">9€</span>
 						</li>
+						<h4 className="text-secondary border-b border-white my-2 pb-1 font-semibold text-center max-w-[80%] flex justify-self-center ">
+							Nom de la cat 2
+						</h4>
 						<li className="flex items-baseline gap-2">
 							<span className="flex-1 break-words ">
 								Soupe de potiron et son lard grillé cest très long décidement
@@ -162,11 +171,9 @@ export default function Modal({ openMenu, onClose }: Modalprops) {
 						</li>
 					</ul>
 				</div>
-                <div className="flex justify-center">
-                    <Button className="m-6">
-                        Menu en pdf
-                    </Button>
-                </div>
+				<div className="flex justify-center">
+					<Button className="m-6">Menu en pdf</Button>
+				</div>
 			</div>
 		</div>
 	);

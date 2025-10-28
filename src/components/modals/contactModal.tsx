@@ -1,3 +1,4 @@
+import { Loader } from "lucide-react";
 import { Button } from "../ui/button";
 import { XIcon } from "../ui/XIcon";
 import { useState, useRef, useEffect } from "react";
@@ -12,7 +13,23 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 	const [email, setEmail] = useState<string>("");
 	const [message, setMessage] = useState<string>("");
 	const [topic, setTopic] = useState<string>("");
-	const [error, setError] = useState<string>("");
+	const [errors, setErrors] = useState<string>("");
+	const [isSubmitting, setIsSubmitting] = useState(false);
+	const [messageSuccess, setMessageSuccess] = useState("");
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setMessageSuccess("");
+		}, 5000);
+		return () => clearTimeout(timer);
+	}, [messageSuccess]);
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setErrors("");
+		}, 5000);
+		return () => clearTimeout(timer);
+	}, [errors]);
 
 	// Focusing on the first input field of the form
 	const nameRef = useRef<HTMLInputElement>(null);
@@ -27,11 +44,12 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		setEmail("");
 		setMessage("");
 		setTopic("");
-		setError("");
+		setErrors("");
+		setMessage("");
 	};
 
 	const checkAllFieldsAreFilled = () => {
-		if (!name || !email ||!topic ||!message )
+		if (!name || !email || !topic || !message)
 			return {
 				ok: false,
 				msg: "Pour nous contacter, vous devez renseigner tous les champs",
@@ -49,30 +67,34 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		e.preventDefault();
 		const fieldCheck = checkAllFieldsAreFilled();
 		if (!fieldCheck.ok) {
-			setError(fieldCheck.msg);
+			setErrors(fieldCheck.msg);
 			return;
 		}
+		setIsSubmitting(true);
+		try {
+			const res = fetch("/api/contact", {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					name,
+					email,
+					topic,
+					message,
+				}),
+			});
+			const data = await (await res).json();
+			if (data.ok) {
+				console.log("mail de contact envoyé");
+			}
 
-		const res = fetch("/api/contact", {
-			method: "POST",
-			headers: { "Content-Type": "application/json" },
-			body: JSON.stringify({
-				name,
-				email,
-				topic,
-				message,
-			}),
-		});
-		const data = await (await res).json();
-		if (data.ok) {
-			console.log("mail de contact envoyé");
-		} else {
-			console.log("erreur lors de l'envoi du mail de contact");
+			setMessageSuccess("Message envoyé avec succès");
+			setTimeout(() => onClose(), 3000);
+			setIsSubmitting(false);
+		} catch {
+			setErrors("Une erreur est survenue, veuillez réessayer");
+		} finally {
+			resetFormState();
 		}
-
-		onClose();
-		setError("");
-		resetFormState();
 	}
 	if (!isOpen) return null;
 
@@ -81,7 +103,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			className="fixed inset-0 bg-black/50 backdrop-blur z-50 flex flex-col items-center justify-center"
 			onClick={() => {
 				onClose();
-				setError("");
+				setErrors("");
 				resetFormState();
 			}}
 		>
@@ -100,7 +122,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						<XIcon
 							onClick={() => {
 								resetFormState();
-								setError("");
+								setErrors("");
 								onClose();
 							}}
 							className="w-6 h-6"
@@ -123,6 +145,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							type="text"
 							ref={nameRef}
 							name="name"
+							value={name}
 							onChange={(e) => setName(e.target.value)}
 							required
 							placeholder="Votre nom"
@@ -134,6 +157,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						<input
 							type="email"
 							name="email"
+							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							inputMode="email"
 							required
@@ -146,6 +170,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						<input
 							type="text"
 							name="topic"
+							value={topic}
 							onChange={(e) => setTopic(e.target.value)}
 							required
 							placeholder="Objet de votre demande"
@@ -154,6 +179,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						<textarea
 							name="message"
 							inputMode="text"
+							value={message}
 							onChange={(e) => setMessage(e.target.value)}
 							rows={5}
 							cols={50}
@@ -161,13 +187,31 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							className="border border-secondary p-1 pl-2 col-span-2"
 						></textarea>
 					</form>
-				</div>
-				<Button type="submit" className="m-6 flex justify-self-center" onClick={(e) => handleSubmit(e)}>
-					Envoyer le message
-				</Button>
-				{error && error !== "" && (
-					<p className="font-body font-light italic text-red-500"> {error}</p>
+					{errors && errors !== "" && (
+						<p className="font-body font-light italic text-red-500 py-2">
+							{" "}
+							{errors}
+						</p>
+					)}
+					{messageSuccess && messageSuccess !== "" && (
+					<p className="text-secondary py-2">{messageSuccess}</p>
 				)}
+				</div>
+				<Button
+					type="submit"
+					className="m-6 flex justify-self-center"
+					disabled={isSubmitting}
+					onClick={(e) => handleSubmit(e)}
+				>
+					{isSubmitting ? (
+						<>
+							<Loader className="animate-spin mr-2" />
+							Envoi en cours...
+						</>
+					) : (
+						"Envoyer le message"
+					)}
+				</Button>
 			</div>
 		</div>
 	);

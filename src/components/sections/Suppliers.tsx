@@ -1,12 +1,10 @@
-"use client";
+
 import React from "react";
-import { EmblaOptionsType } from "embla-carousel";
-import Carousel from "../carousel/SupplierCarousel";
-import { Button } from "../ui/button";
-import ReservationModal from "../modals/reservationModal";
-import { useState } from "react";
-import "@/styles/embla.css";
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
+import Carousel from "../carousel/SupplierCarousel";
+import { EmblaOptionsType } from "embla-carousel";
+import "@/styles/embla.css";
+import ReservationTrigger from "../modals/reservationTrigger";
 
 export type SupplierContent = {
 	id: number;
@@ -21,7 +19,6 @@ const sectionTitle: SectionTitleProps = {
 };
 
 export default function Suppliers() {
-	const [isOpen, setIsOpen] = useState(false);
 	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
 
 	const supplierContent: SupplierContent[] = [
@@ -97,19 +94,14 @@ export default function Suppliers() {
 						<span className="text-secondary">indépendants</span> et <span className="text-secondary">locaux</span>
 					</h2>
 				</div>
-				<div className="w-full px-6">
+				<div className="w-full px-6 mb-6">
 					<Carousel options={OPTIONS} supplierContent={supplierContent} />
 				</div>
 				<div>
-					<Button
-						onClick={() => setIsOpen(true)}
-						className="max-w-45 mt-4 mb-12"
-					>
-						Réserver une table
-					</Button>
+<ReservationTrigger/>
 				</div>
 			</div>
-			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+
 		</section>
 	);
 }

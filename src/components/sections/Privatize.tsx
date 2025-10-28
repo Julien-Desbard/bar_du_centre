@@ -1,13 +1,10 @@
-"use client";
 import { Cake, PartyPopper, Martini } from "lucide-react";
 import Image from "next/image";
-import { Button } from "../ui/button";
-import ContactModal from "../modals/contactModal";
-import { useState } from "react";
+
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
+import ContacTrigger from "../modals/contactTrigger";
 
 export default function Privatize() {
-	const [isOpen, setIsOpen] = useState(false);
 	const sectionTitle: SectionTitleProps = {
 		part1: "salle",
 		part2: "privatisable",
@@ -58,26 +55,10 @@ export default function Privatize() {
 								<span className="text-secondary">40 personnes</span>
 							</p>
 						</div>
-				<div className="flex justify-center">
-							<Button
-								onClick={() => setIsOpen(true)}
-								className="max-w-45 mt-6 mb-12"
-							>
-								Contactez-nous
-							</Button>
-						</div>
+						<ContacTrigger />
 					</div>
 				</div>
-				<div className="self-center">
-					{/* <Button
-						onClick={() => setIsOpen(true)}
-						className="max-w-45 mt-6 mb-12 lg:hidden"
-					>
-						Contactez-nous
-					</Button> */}
-				</div>
 			</div>
-			<ContactModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 		</section>
 	);
 }

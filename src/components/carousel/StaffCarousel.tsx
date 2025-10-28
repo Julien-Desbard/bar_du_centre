@@ -1,3 +1,4 @@
+"use client"
 import React from "react";
 import { EmblaOptionsType } from "embla-carousel";
 import {
@@ -35,11 +36,12 @@ const EmblaCarousel: React.FC<PropType> = ({ options, staffContent }) => {
                             key={item.id}
 							className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] px-2 flex-shrink-0"
 						>
-							<div className="relative w-full aspect-square max-w-sm max-sm:max-w-3xs xl:max-w-xs mx-auto">
+							<div className="relative w-full aspect-square max-w-sm mx-auto">
                                 <Image
                                     alt={`${item.name}`}
                                     src={`/images/staff/${item.name}.jpg`}
                                     fill
+                                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
                                     className="object-cover"
                                 />
 								<div className="absolute max-lg:bottom-15 bottom-25 w-full z-50 bg-transparent text-center h-10">

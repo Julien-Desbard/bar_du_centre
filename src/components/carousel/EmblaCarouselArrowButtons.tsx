@@ -1,3 +1,4 @@
+"use client"
 import React, {
 	ComponentPropsWithRef,
 	useCallback,
@@ -56,7 +57,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
 
 	return (
 		<button
-			className="embla__button embla__button--prev"
+			className="embla__button embla__button--prev text-white"
 			type="button"
 			{...restProps}
 		>
