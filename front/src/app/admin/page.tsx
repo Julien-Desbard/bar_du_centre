@@ -1,4 +1,4 @@
-import MenuAdmin from "@/components/sections/admin";
+import MenuAdmin from "@/components/sections/Admin";
 
 export default function Admin() {
 	return (
