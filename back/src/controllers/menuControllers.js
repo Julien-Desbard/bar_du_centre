@@ -1,6 +1,6 @@
 import AppError from "../errors/AppError.js";
 import { Menu } from "../models/index.js";
-import { createMenuItemSchema } from "../schemas/menu.js";
+import { createMenuItemSchema, updateMenuItemSchema } from "../schemas/menu.js";
 
 const menuController = {
 	async getAllMenuItems(req, res, next) {
@@ -69,7 +69,7 @@ const menuController = {
 				throw AppError(404, "NOT_FOUND", `Élément ${id} introuvable`);
 			}
 
-			const updateData = createMenuItemSchema.safeParse(req.body);
+			const updateData = updateMenuItemSchema.safeParse(req.body);
 			if (!updateData.success) {
 				const zodIssues = updateData.error.issues;
 				throw AppError(

@@ -14,25 +14,27 @@ export const createMenuItemSchema = z.object({
 	name: z.string().min(1, { message: "name est obligatoire." }), // 
 
 
-	cat2: NullableStringSchema,
-	cat3: NullableStringSchema,
-	description: NullableStringSchema,
+	cat2: NullableStringSchema.optional(),
+	cat3: NullableStringSchema.optional(),
+	description: NullableStringSchema.optional(),
 
 
-	price_1_boule: PriceStringSchema,
-	price_2_boules: PriceStringSchema,
-	prix_unique: PriceStringSchema,
-	petit: PriceStringSchema,
-	grand: PriceStringSchema,
-	demi: PriceStringSchema,
-	pinte: PriceStringSchema,
-	verre: PriceStringSchema,
-	bouteille: PriceStringSchema,
-	cl_25: PriceStringSchema,
-	cl_50: PriceStringSchema,
-	l_1: PriceStringSchema,
+	price_1_boule: PriceStringSchema.optional(),
+	price_2_boules: PriceStringSchema.optional(),
+	prix_unique: PriceStringSchema.optional(),
+	petit: PriceStringSchema.optional(),
+	grand: PriceStringSchema.optional(),
+	demi: PriceStringSchema.optional(),
+	pinte: PriceStringSchema.optional(),
+	verre: PriceStringSchema.optional(),
+	bouteille: PriceStringSchema.optional(),
+	cl_25: PriceStringSchema.optional(),
+	cl_50: PriceStringSchema.optional(),
+	l_1: PriceStringSchema.optional(),
 
-	bio: NullableStringSchema, 
-	contenance: NullableStringSchema, 
-	titrage: NullableStringSchema, 
+	bio: NullableStringSchema.optional(), 
+	contenance: NullableStringSchema.optional(), 
+	titrage: NullableStringSchema.optional(), 
 });
+
+export const updateMenuItemSchema = createMenuItemSchema.partial()
