@@ -16,6 +16,7 @@ export const createMenuItemSchema = z.object({
 	name: z.string().min(1, { message: "name est obligatoire." }),
 
 	cat2: NullableStringSchema.optional(),
+	slug_cat2:NullableStringSchema.optional(),
 	cat3: NullableStringSchema.optional(),
 	description: NullableStringSchema.optional(),
 

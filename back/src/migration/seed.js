@@ -11,11 +11,17 @@ import {
 
 async function seed() {
 	try {
-		await sequelize.authenticate();
+await Menu.bulkCreate(
+  rawItems().map((it) => ({
+    ...it,
+    slug_cat2: it.cat2 ? it.cat2.replace(/\s+/g, "_").toLowerCase() : null,
+  }))
+);
 
-		// Menu (jeu de travail)
-		await Menu.bulkCreate([
-			{
+// Gardez votre tableau tel quel ici
+function rawItems() {
+  return [
+    {
 				cat1: "Boissons",
 				cat2: "Le chaud",
 				cat3: "Cafés",
@@ -1951,7 +1957,8 @@ async function seed() {
 				cl_50: null,
 				l_1: null,
 			},
-		]);
+		];
+	}
 
 		// Users
 		const [hpAdmin, hpUser1, hpUser2] = await Promise.all([

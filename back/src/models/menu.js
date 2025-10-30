@@ -8,6 +8,8 @@ Menu.init(
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     cat1: { type: DataTypes.STRING(100), allowNull: false }, // obligatoire
     cat2: { type: DataTypes.STRING(100), defaultValue: "", allowNull: true },
+    slug_cat2: { type: DataTypes.STRING(100), defaultValue: "", allowNull: true },
+
     cat3: { type: DataTypes.STRING(100), defaultValue: "", allowNull: true },
 
     name: { type: DataTypes.STRING(255), allowNull: false },

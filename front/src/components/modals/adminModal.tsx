@@ -1,35 +1,43 @@
 import { Loader } from "lucide-react";
 import { Button } from "../ui/button";
 import { XIcon } from "../ui/XIcon";
-import { useState, useRef, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 interface Modalprops {
 	isOpen: boolean;
 	onClose: () => void;
 	name: string;
-	description: string;
-	price_1: number | undefined;
-	price_2: number | undefined;
+	id: number | undefined;
+	description: string | undefined;
+	price_1: string | undefined;
+	price_2: string | undefined;
+	colonne1: string | undefined;
+	colonne2: string | undefined;
 }
 
-export default function AdminModal({
+export default function AdminModalDelete({
 	isOpen,
 	onClose,
 	name,
+	id,
 	description,
 	price_1,
 	price_2,
+	colonne1,
+	colonne2,
 }: Modalprops) {
 	const [errors, setErrors] = useState<string>("");
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [messageSuccess, setMessageSuccess] = useState("");
 
 	const [localName, setLocalName] = useState<string>("");
-	const [localDescription, setLocalDescription] = useState<string>("");
-	const [localPrice_1, setLocalPrice_1] = useState<number | undefined>(
+	const [localDescription, setLocalDescription] = useState<string | undefined>(
 		undefined
 	);
-	const [localPrice_2, setLocalPrice_2] = useState<number | undefined>(
+	const [localPrice_1, setLocalPrice_1] = useState<string | undefined>(
+		undefined
+	);
+	const [localPrice_2, setLocalPrice_2] = useState<string | undefined>(
 		undefined
 	);
 
@@ -56,34 +64,35 @@ export default function AdminModal({
 		return () => clearTimeout(timer);
 	}, [errors]);
 
-	// Focusing on the first input field of the form
-	const nameRef = useRef<HTMLInputElement>(null);
-	useEffect(() => {
-		if (isOpen && nameRef.current) {
-			nameRef.current.focus();
-		}
-	}, [isOpen]);
-
 	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
 
 		setIsSubmitting(true);
 		try {
-			const res = fetch("/api/contact", {
-				method: "POST",
+			const res = await fetch(`http://localhost:3001/api/menu/${id}`, {
+
+				method: "PATCH",
 				headers: { "Content-Type": "application/json" },
-				body: JSON.stringify({}),
+				body: JSON.stringify({
+					name: localName,
+					description: localDescription,
+					colonne1: localPrice_1,
+					colonne2: localPrice_2,
+				}),
 			});
-			const data = await (await res).json();
+
+			const data = await res.json(); 
+
 			if (data.ok) {
 				console.log("Base de donnée mise à jour");
 			}
 
 			setMessageSuccess("Mise à jour réalisée avec succès");
-			setTimeout(() => onClose(), 3000);
-			setIsSubmitting(false);
+			setTimeout(() => onClose(), 1000);
 		} catch {
 			setErrors("Une erreur est survenue, veuillez réessayer");
+		} finally {
+			setIsSubmitting(false)
 		}
 	}
 
@@ -110,7 +119,7 @@ export default function AdminModal({
 					</button>
 				</div>
 				<h3 className="text-2xl mb-8 text-white font-subtitle font-light justify-self-center">
-					Modification du plat : xxx
+					Modification de : {name}
 				</h3>
 
 				<div
@@ -123,7 +132,7 @@ export default function AdminModal({
 						</label>
 						<input
 							type="text"
-							ref={nameRef}
+
 							name="name"
 							value={localName}
 							onChange={(e) => setLocalName(e.target.value)}
@@ -151,7 +160,7 @@ export default function AdminModal({
 							value={localPrice_1 ?? ""}
 							onChange={(e) =>
 								setLocalPrice_1(
-									e.target.value === "" ? undefined : Number(e.target.value)
+									e.target.value === "" ? undefined : e.target.value
 								)
 							}
 							required
@@ -166,7 +175,7 @@ export default function AdminModal({
 							value={localPrice_2 ?? ""}
 							onChange={(e) =>
 								setLocalPrice_2(
-									e.target.value === "" ? undefined : Number(e.target.value)
+									e.target.value === "" ? undefined : e.target.value
 								)
 							}
 							required

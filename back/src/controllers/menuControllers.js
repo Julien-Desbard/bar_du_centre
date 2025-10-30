@@ -5,7 +5,10 @@ import { createMenuItemSchema, updateMenuItemSchema } from "../schemas/menu.js";
 const menuController = {
 	async getAllMenuItems(req, res, next) {
 		try {
-			const allMenuItems = await Menu.findAll();
+			const allMenuItems = await Menu.findAll({
+				order: [["cat2", "ASC"],["name", "ASC"]]
+
+			});
 
 			if (allMenuItems.length === 0) {
 				throw AppError(404, "NOT_FOUND", "Le menu est vide");
@@ -24,19 +27,45 @@ const menuController = {
 		try {
 			const menuItemsPerCat1 = await Menu.findAll({
 				where: { cat1 },
+				order: [["cat2", "ASC"],["name", "ASC"]]
 			});
 
 			if (menuItemsPerCat1.length === 0) {
 				throw AppError(
 					404,
 					"NOT_FOUND",
-					`Aucun élément trouvé pour la catégorie "${cat1}"`
+					`Aucun élément trouvé pour la catégorie ${cat1}`
 				);
 			}
 			return res.status(200).json({
-				message: `Éléments de la catégorie "${cat1}" récupérés avec succès`,
+				message: `Éléments de la catégorie ${cat1} récupérés avec succès`,
 				count: menuItemsPerCat1.length,
 				menuItemsPerCat1,
+			});
+		} catch (error) {
+			next(error);
+		}
+	},
+
+		async getMenuItemsPerSlugCat2(req, res, next) {
+		const { slug_cat2 } = req.params;
+		try {
+			const menuItemsPerSlugCat2 = await Menu.findAll({
+				where: { slug_cat2 },
+				order: [["cat2", "ASC"],["name", "ASC"]]
+			});
+
+			if (menuItemsPerSlugCat2.length === 0) {
+				throw AppError(
+					404,
+					"NOT_FOUND",
+					`Aucun élément trouvé pour la catégorie ${slug_cat2}`
+				);
+			}
+			return res.status(200).json({
+				message: `Éléments de la catégorie ${slug_cat2} récupérés avec succès`,
+				count: menuItemsPerSlugCat2.length,
+				menuItemsPerSlugCat2,
 			});
 		} catch (error) {
 			next(error);

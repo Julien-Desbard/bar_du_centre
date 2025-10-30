@@ -10,6 +10,11 @@ GET http://localhost:3001/api/menu/cat/Plats
 ###
 
 ###
+# Get  menu by cat2
+GET http://localhost:3001/api/menu/cat2/cocktails
+###
+
+###
 # Get menu item by id
 GET http://localhost:3001/api/menu/89
 ###
@@ -26,7 +31,7 @@ content-type: application/json
 
 ###
 # Delete a menu item
-DELETE http://localhost:3001/api/menu/90
+DELETE http://localhost:3001/api/menu/53
 
 ###
 
