@@ -7,17 +7,17 @@ Menu.init(
   {
     id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
     cat1: { type: DataTypes.STRING(100), allowNull: false }, // obligatoire
-    cat2: { type: DataTypes.STRING(100), allowNull: true },
-    cat3: { type: DataTypes.STRING(100), allowNull: true },
+    cat2: { type: DataTypes.STRING(100), defaultValue: "", allowNull: true },
+    cat3: { type: DataTypes.STRING(100), defaultValue: "", allowNull: true },
 
     name: { type: DataTypes.STRING(255), allowNull: false },
-    description: { type: DataTypes.TEXT, allowNull: true },
+    description: { type: DataTypes.TEXT, defaultValue: "", allowNull: true },
 
     price_1_boule: { type: DataTypes.DECIMAL(10, 2), allowNull: true },
     price_2_boules: { type: DataTypes.DECIMAL(10, 2), allowNull: true },
     prix_unique: { type: DataTypes.DECIMAL(10, 2), allowNull: true },
 
-    bio: { type: DataTypes.STRING(20), allowNull: true },
+    bio: { type: DataTypes.STRING(20), defaultValue: "", allowNull: true },
 
     petit: { type: DataTypes.DECIMAL(10, 2), allowNull: true },
     grand: { type: DataTypes.DECIMAL(10, 2), allowNull: true },

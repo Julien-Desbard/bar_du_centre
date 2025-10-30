@@ -8,6 +8,7 @@ import { useState } from "react";
 export default function MenuSection() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openMenu, setOpenMenu] = useState(false);
+	const [nature, setNature] = useState("");
 	return (
 		<section
 			id="menu"
@@ -29,7 +30,7 @@ export default function MenuSection() {
 		sm:grid sm:grid-cols-2 sm:grid-rows-2"
 					>
 						<h2
-							onClick={()=>setOpenMenu(true)}
+							onClick={() => (setOpenMenu(true), setNature("Plats"))}
 							className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-1 sm:row-start-1 sm:self-center"
 						>
 							menu de <br />
@@ -41,7 +42,7 @@ export default function MenuSection() {
 							alt="icone burger pour accéder au menu des plats"
 							width={250}
 							height={250}
-							onClick={()=>setOpenMenu(true)}
+							onClick={() => (setOpenMenu(true), setNature("Plats"))}
 						/>
 						<Image
 							className="max-sm:hidden sm:col-start-1 sm:row-start-2 sm:justify-self-center"
@@ -49,10 +50,10 @@ export default function MenuSection() {
 							alt="icone bière pour accéder au menu des boissons"
 							width={250}
 							height={250}
-							onClick={()=>setOpenMenu(true)}
-						/>
+							onClick={() => (setOpenMenu(true), setNature("Boissons"))}
+							/>
 						<h2
-							onClick={()=>setOpenMenu(true)}
+							onClick={() => (setOpenMenu(true), setNature("Boissons"))}
 							className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-2 sm:row-start-2 sm:self-center"
 						>
 							carte des <br />
@@ -144,8 +145,8 @@ export default function MenuSection() {
 
 				{/* emplacment des horaires */}
 			</div>
-			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
-			<MenuModal openMenu={openMenu} onClose={() => setOpenMenu(false)} />
+			<ReservationModal isOpen={isOpen}  onClose={() => setIsOpen(false)} />
+			<MenuModal openMenu={openMenu} nature={nature} onClose={() => setOpenMenu(false)} />
 		</section>
 	);
 }
