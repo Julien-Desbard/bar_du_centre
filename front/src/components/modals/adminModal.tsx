@@ -126,7 +126,7 @@ export default function AdminModalDelete({
 					className="font-body mb-4 px-12
 				max-sm:px-4"
 				>
-					<form className="grid grid-cols-2 grid-row-8 gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
+					<form className="grid grid-cols-2 grid-row-8 gap-1 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
 						<label htmlFor="name" className="">
 							Nom
 						</label>
@@ -152,7 +152,7 @@ export default function AdminModalDelete({
 							className="border border-secondary p-1 pl-2 col-span-2"
 						/>
 						<label htmlFor="name" className="">
-							Prix n°1
+							Prix 1
 						</label>
 						<input
 							type="number"
@@ -167,7 +167,7 @@ export default function AdminModalDelete({
 							className="border border-secondary p-1 pl-2 col-span-2"
 						/>
 						<label htmlFor="name" className="">
-							Prix n°2
+							Prix 2
 						</label>
 						<input
 							type="number"

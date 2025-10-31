@@ -3,6 +3,7 @@ import { Edit, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import AdminModal from "@/components/modals/adminModal";
 import AdminModalDelete from "@/components/modals/adminModalDelete";
+import SignOffButton from "../buttons/signOffButton";
 
 export type MenuItem = {
 	id: number;
@@ -71,14 +72,16 @@ function getPrixAvecColonnes(item: MenuItem): {
 export default function MenuAdmin() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openDelete, setOpenDelete] = useState(false);
-	const [activeSafeid, setActiveSafeid] = useState<string | undefined>(undefined);
+	const [activeSafeid, setActiveSafeid] = useState<string | undefined>(
+		undefined
+	);
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState<string | undefined>(undefined);
 	const [price_1, setPrice_1] = useState<string | undefined>(undefined);
 	const [price_2, setPrice_2] = useState<string | undefined>(undefined);
 	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-	const [category, setCategory] = useState("");
+	const [category, setCategory] = useState("bières");
 	const [categoryName, setCategoryName] = useState("");
 	const [categoryDetail, setCategoryDetail] = useState<MenuItem[] | undefined>(
 		undefined
@@ -129,11 +132,14 @@ export default function MenuAdmin() {
 	);
 
 	return (
-		<div className="text-white pt-24 flex flex-col w-full min-h-screen m-3">
-			<h3 className="text-2xl text-white font-subtitle font-light justify-self-center pb-6 text-center">
-				Console d&apos;administration du{" "}
-				<span className="text-secondary">MENU</span>
-			</h3>
+		<div className="text-white pt-24 flex flex-col w-full min-h-screen max-sm:overflow-visible">
+			<div className="flex flex-row justify-around mx-3">
+				<h3 className="text-2xl text-white font-subtitle font-light justify-self-center text-center mr-auto">
+					Console d&apos;administration du{" "}
+					<span className="text-secondary">MENU</span>
+				</h3>
+				<SignOffButton />
+			</div>
 			<div className="border-b border-t border-secondary m-3 p-3">
 				<h4 className="text-2xl text-secondary text-center m-3">Catégories</h4>
 				<ul className="flex flex-row flex-wrap gap-6 justify-center m-3">
@@ -163,12 +169,12 @@ export default function MenuAdmin() {
 					<h4 className="text-secondary text-xl my-2 pb-1 font-semibold text-center max-w-[80%] mx-auto">
 						{categoryName}
 					</h4>
-					<div className="px-6 w-full">
-						<div className="grid grid-cols-[minmax(150px,2fr)_minmax(200px,3fr)_100px_100px_28px_28px] gap-2 font-bold py-3 border-b border-gray-600">
+					<div className="px-3 w-full">
+						<div className="grid grid-cols-[minmax(150px,2fr)_minmax(200px,3fr)_100px_100px_28px_28px] gap-2 font-bold">
 							<div>Nom du plat</div>
 							<div>Description</div>
-							<div>Prix</div>
-							<div>Prix (optionnel)</div>
+							<div>Prix 1</div>
+							<div>Prix 2</div>
 							<div></div>
 							<div></div>
 						</div>
