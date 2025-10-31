@@ -185,7 +185,7 @@ export default function MenuAdmin() {
 							return (
 								<div
 									key={item.id}
-									className="grid grid-cols-[minmax(150px,2fr)_minmax(200px,3fr)_100px_100px_28px_28px] gap-2 py-2 border-b border-gray-700/50"
+									className="grid grid-cols-[minmax(150px,2fr)_minmax(200px,3fr)_100px_100px_28px_28px] gap-2 py-1"
 								>
 									<input
 										type="text"

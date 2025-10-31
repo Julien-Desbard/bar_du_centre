@@ -1,14 +1,18 @@
+import { signOut } from "next-auth/react";
 import { Button } from "../ui/button";
-import {handleSignOut} from "@/lib/actions";
+import { handleSignOut } from "@/lib/actions";
 
 export default function SignOffButton() {
 	return (
 		<div>
-			<form
-				action={handleSignOut}
+			<Button
+				onClick={() => {
+					signOut({ callbackUrl: "/", redirect: true });
+					handleSignOut();
+				}}
 			>
-				<Button type="submit">Se déconnecter</Button>
-			</form>
+				Se déconnecter
+			</Button>
 		</div>
 	);
 }

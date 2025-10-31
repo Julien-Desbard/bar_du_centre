@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import { usePathname } from "next/navigation";
 import BurgerMenu from "./BurgerMenu";
+import { useSession } from "next-auth/react";
+import { useAuth } from "@/app/context/AuthContext";
 
 // Creating Nav menu
 type NavItem = {
@@ -23,6 +25,7 @@ const Nav: NavItem[] = [
 export default function Header() {
 	const pathname = usePathname();
 	const [activeSection, setActiveSection] = useState<string>("");
+
 
 	const activePath = activeSection ? `${pathname}#${activeSection}` : pathname;
 
@@ -78,6 +81,8 @@ export default function Header() {
 		};
 	}, [pathname]);
 
+  const { data: session } = useSession();
+
 	return (
 		<header className="sticky top-0 w-full z-50">
 			<nav
@@ -88,6 +93,10 @@ export default function Header() {
 					<BurgerMenu nav={Nav} />
 				</div>
 				<ul className="flex items-center gap-6 p-6 pr-10 tracking-wide">
+					{session && (<Link
+					href="/admin"
+					className="text-secondary">ADMIN
+					</Link>)}
 					{/* Mapping Nav to create the menu */}
 					{Nav.map(({ href, label }) => {
 						const isActive = href === activePath;

@@ -1,4 +1,4 @@
-import MenuAdmin from "@/components/sections/admin";
+import MenuAdmin from "@/components/sections/Admin";
 import { auth } from "@/auth"
 import { redirect } from "next/navigation"
 
