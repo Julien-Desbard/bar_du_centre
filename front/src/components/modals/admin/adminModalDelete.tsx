@@ -1,6 +1,6 @@
 import { Loader } from "lucide-react";
-import { Button } from "../ui/button";
-import { XIcon } from "../ui/XIcon";
+import { Button } from "@/components/ui/button";
+import { XIcon } from "@/components/ui//XIcon";
 import { useState, useEffect } from "react";
 
 interface Modalprops {

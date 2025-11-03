@@ -1,11 +1,5 @@
 import * as z from "zod";
 
-const PriceStringSchema = z
-	.string()
-	.regex(/^\d+(\.\d{1,2})?$/, "Doit être un nombre positif (ex: 4.50)")
-	.nullable();
-
-
 const NullableStringSchema = z
 	.string()
 	.nullable()
@@ -16,26 +10,12 @@ export const createMenuItemSchema = z.object({
 	name: z.string().min(1, { message: "name est obligatoire." }),
 
 	cat2: NullableStringSchema.optional(),
-	slug_cat2:NullableStringSchema.optional(),
+	slug_cat2: NullableStringSchema.optional(),
 	cat3: NullableStringSchema.optional(),
 	description: NullableStringSchema.optional(),
-
-	price_1_boule: PriceStringSchema.optional(),
-	price_2_boules: PriceStringSchema.optional(),
-	prix_unique: PriceStringSchema.optional(),
-	petit: PriceStringSchema.optional(),
-	grand: PriceStringSchema.optional(),
-	demi: PriceStringSchema.optional(),
-	pinte: PriceStringSchema.optional(),
-	verre: PriceStringSchema.optional(),
-	bouteille: PriceStringSchema.optional(),
-	cl_25: PriceStringSchema.optional(),
-	cl_50: PriceStringSchema.optional(),
-	l_1: PriceStringSchema.optional(),
-
-	bio: NullableStringSchema.optional(),
-	contenance: NullableStringSchema.optional(),
-	titrage: NullableStringSchema.optional(),
+	prix_1: z.number().optional(),
+	prix_2: z.number().optional(),
+	prix_3: z.number().optional(),
 });
 
 export const updateMenuItemSchema = createMenuItemSchema.partial();

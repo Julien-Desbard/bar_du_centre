@@ -17,40 +17,11 @@ export type MenuItem = {
 	cat2?: string | null;
 	cat3?: string | null;
 	description?: string | null;
-
-	price_1_boule?: string | null;
-	price_2_boules?: string | null;
-	prix_unique?: string | null;
-	petit?: string | null;
-	grand?: string | null;
-	demi?: string | null;
-	pinte?: string | null;
-	verre?: string | null;
-	bouteille?: string | null;
-	cl_25?: string | null;
-	cl_50?: string | null;
-	l_1?: string | null;
-
-	bio?: string | null;
-	contenance?: string | null;
-	titrage?: string | null;
+	intitule?: string | null;
+	prix_1: string | undefined;
+	prix_2: string | undefined;
+	prix_3: string | undefined;
 };
-
-// Fonction helper pour récupérer le prix à afficher
-function getPrixDisplay(item: MenuItem): string {
-	// Ordre de priorité des prix
-	if (item.prix_unique) return `${item.prix_unique}€`;
-	if (item.petit && item.grand) return `${item.petit}€ / ${item.grand}€`;
-	if (item.demi && item.pinte)
-		return `Demi ${item.demi}€ / Pinte ${item.pinte}€`;
-	if (item.verre && item.bouteille)
-		return `Verre ${item.verre}€ / Bout. ${item.bouteille}€`;
-	if (item.price_1_boule && item.price_2_boules)
-		return `1B ${item.price_1_boule}€ / 2B ${item.price_2_boules}€`;
-	if (item.cl_25) return `${item.cl_25}€`;
-
-	return "Prix non disponible";
-}
 
 export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -141,31 +112,107 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 					{itemsCat2.map((cat2) => {
 						if (!cat2) return null;
 						const safeId = cat2.replace(/\s+/g, "").toLowerCase();
+						const firstItem = menuItems.find((item) => item.cat2 === cat2);
+						
+						// Récupérer les cat3 uniques pour cette cat2
+						const itemsCat3 = [
+							...new Set(
+								menuItems
+									.filter((item) => item.cat2 === cat2)
+									.map((item) => item.cat3)
+							),
+						].filter(Boolean);
+
 						return (
 							<div key={safeId} id={safeId}>
-								<h4 className="text-secondary border-b border-white my-3 font-semibold text-center max-w-[80%] flex justify-self-center">
+								<h4 className="text-secondary text-xl border-b border-white my-3 font-semibold text-center max-w-[80%] flex justify-self-center">
 									{cat2}
 								</h4>
-								<ul className="w-full space-y-2">
-									{menuItems
-										.filter((item) => item.cat2 === cat2)
-										.map((item) => (
-											<li key={item.id} className="flex items-baseline gap-2">
-												<div className="break-words">
-													{item.name}
-													{/* {item.description && (
-														<small className="text-xs text-gray-300 italic block">
-															{item.description}
-														</small>
-													)} */}
+								{firstItem?.intitule && itemsCat3.length === 0 && (
+									<p className="text-right text-sm text-white/80 mb-1">
+										{firstItem.intitule}
+									</p>
+								)}
+
+								{/* Si des cat3 existent, les afficher avec leurs items */}
+								{itemsCat3.length > 0 ? (
+									itemsCat3.map((cat3) => {
+										const firstItemCat3 = menuItems.find(
+											(item) => item.cat2 === cat2 && item.cat3 === cat3
+										);
+										return (
+											<div key={cat3} className="mb-4">
+												<div className="flex justify-between items-baseline mb-2">
+													<h5 className="text-bg">
+														{cat3}
+													</h5>
+													{firstItemCat3?.intitule && (
+														<p className="text-sm text-white/80">
+															{firstItemCat3.intitule}
+														</p>
+													)}
 												</div>
-												<div className="flex-shrink-0 border-b border-dotted border-white/80 flex-2 mb-1" />
-												<div className="shrink-0 text-bg">
-													{getPrixDisplay(item)}
-												</div>
-											</li>
-										))}
-								</ul>
+												<ul className="w-full space-y-2">
+													{menuItems
+														.filter(
+															(item) => item.cat2 === cat2 && item.cat3 === cat3
+														)
+														.map((item) => (
+															<li key={item.id} className="flex items-baseline gap-2">
+																<div className="break-words">{item.name}</div>
+																<div className="flex-shrink-0 border-b border-dotted border-white/80 flex-2 mb-1" />
+																{nature === "plats" && (
+																	<div className="shrink-0 text-bg">{item.prix_1} €</div>
+																)}
+																{nature === "boissons" &&
+																	(item.prix_3 ? (
+																		<div className="shrink-0 text-bg">
+																			{item.prix_1} € / {item.prix_2} € /{" "}
+																			{item.prix_3} €
+																		</div>
+																	) : item.prix_2 ? (
+																		<div className="shrink-0 text-bg">
+																			{item.prix_1} € / {item.prix_2} €
+																		</div>
+																	) : (
+																		<div className="shrink-0 text-bg">
+																			{item.prix_1} €
+																		</div>
+																	))}
+															</li>
+														))}
+												</ul>
+											</div>
+										);
+									})
+								) : (
+									// Si pas de cat3, afficher directement les items de cat2
+									<ul className="w-full space-y-2">
+										{menuItems
+											.filter((item) => item.cat2 === cat2)
+											.map((item) => (
+												<li key={item.id} className="flex items-baseline gap-2">
+													<div className="break-words">{item.name}</div>
+													<div className="flex-shrink-0 border-b border-dotted border-white/80 flex-2 mb-1" />
+													{nature === "plats" && (
+														<div className="shrink-0 text-bg">{item.prix_1} €</div>
+													)}
+													{nature === "boissons" &&
+														(item.prix_3 ? (
+															<div className="shrink-0 text-bg">
+																{item.prix_1} € / {item.prix_2} € / {item.prix_3} €
+															</div>
+														) : item.prix_2 ? (
+															<div className="shrink-0 text-bg">
+																{item.prix_1} € / {item.prix_2} €
+															</div>
+														) : (
+															<div className="shrink-0 text-bg">{item.prix_1} €</div>
+														))}
+												</li>
+											))}
+									</ul>
+								)}
 							</div>
 						);
 					})}

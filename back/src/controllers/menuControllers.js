@@ -5,10 +5,7 @@ import { createMenuItemSchema, updateMenuItemSchema } from "../schemas/menu.js";
 const menuController = {
 	async getAllMenuItems(req, res, next) {
 		try {
-			const allMenuItems = await Menu.findAll({
-				order: [["cat2", "ASC"],["name", "ASC"]]
-
-			});
+			const allMenuItems = await Menu.findAll();
 
 			if (allMenuItems.length === 0) {
 				throw AppError(404, "NOT_FOUND", "Le menu est vide");
@@ -27,7 +24,6 @@ const menuController = {
 		try {
 			const menuItemsPerCat1 = await Menu.findAll({
 				where: { cat1 },
-				order: [["cat2", "ASC"],["name", "ASC"]]
 			});
 
 			if (menuItemsPerCat1.length === 0) {
@@ -51,8 +47,8 @@ const menuController = {
 		const { slug_cat2 } = req.params;
 		try {
 			const menuItemsPerSlugCat2 = await Menu.findAll({
-				where: { slug_cat2 },
-				order: [["cat2", "ASC"],["name", "ASC"]]
+				where: { slug_cat2 }, 
+				order : [["id" , "ASC"]]
 			});
 
 			if (menuItemsPerSlugCat2.length === 0) {

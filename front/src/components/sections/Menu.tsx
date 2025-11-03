@@ -30,7 +30,7 @@ export default function MenuSection() {
 		sm:grid sm:grid-cols-2 sm:grid-rows-2"
 					>
 						<h2
-							onClick={() => (setOpenMenu(true), setNature("Plats"))}
+							onClick={() => (setOpenMenu(true), setNature("plats"))}
 							className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-1 sm:row-start-1 sm:self-center"
 						>
 							menu de <br />
@@ -42,7 +42,7 @@ export default function MenuSection() {
 							alt="icone burger pour accéder au menu des plats"
 							width={250}
 							height={250}
-							onClick={() => (setOpenMenu(true), setNature("Plats"))}
+							onClick={() => (setOpenMenu(true), setNature("plats"))}
 						/>
 						<Image
 							className="max-sm:hidden sm:col-start-1 sm:row-start-2 sm:justify-self-center"
@@ -50,10 +50,10 @@ export default function MenuSection() {
 							alt="icone bière pour accéder au menu des boissons"
 							width={250}
 							height={250}
-							onClick={() => (setOpenMenu(true), setNature("Boissons"))}
+							onClick={() => (setOpenMenu(true), setNature("boissons"))}
 							/>
 						<h2
-							onClick={() => (setOpenMenu(true), setNature("Boissons"))}
+							onClick={() => (setOpenMenu(true), setNature("boissons"))}
 							className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-2 sm:row-start-2 sm:self-center"
 						>
 							carte des <br />
@@ -93,7 +93,7 @@ export default function MenuSection() {
 					</ul>
 
 					<h3 className="text-2xl font-light text-center text-secondary">
-						Plats
+						plats
 					</h3>
 					<ul className="w-full space-y-2 px-4">
 						<li className="flex items-baseline gap-2">
