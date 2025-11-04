@@ -11,7 +11,7 @@ GET http://localhost:3001/api/menu/cat/boissons
 
 ###
 # Get  menu by cat2
-GET http://localhost:3001/api/menu/cat2/bières
+GET http://localhost:3001/api/menu/cat2/plats
 ###
 
 ###

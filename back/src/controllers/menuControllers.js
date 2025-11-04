@@ -12,6 +12,8 @@ const menuController = {
 			}
 
 			return res.status(200).json({
+				ok:true,
+
 				message: "Ensemble du menu récupéré avec succès",
 				allMenuItems,
 			});
@@ -34,6 +36,8 @@ const menuController = {
 				);
 			}
 			return res.status(200).json({
+				ok:true,
+
 				message: `Éléments de la catégorie ${cat1} récupérés avec succès`,
 				count: menuItemsPerCat1.length,
 				menuItemsPerCat1,
@@ -59,6 +63,8 @@ const menuController = {
 				);
 			}
 			return res.status(200).json({
+				ok:true,
+
 				message: `Éléments de la catégorie ${slug_cat2} récupérés avec succès`,
 				count: menuItemsPerSlugCat2.length,
 				menuItemsPerSlugCat2,
@@ -77,6 +83,8 @@ const menuController = {
 				throw AppError(404, "NOT_FOUND", `Élément ${id} introuvable`);
 			}
 			return res.status(200).json({
+				ok:true,
+
 				message: `Succès lors de la récupération de l'\élément ${id} du menu`,
 				oneMenuItem,
 			});
@@ -108,6 +116,7 @@ const menuController = {
 			await itemToUpdate.update(updateData.data);
 
 			return res.status(200).json({
+				ok:true,
 				message: `Elément ${id} bien mis à jour`,
 				itemToUpdate,
 			});
@@ -127,6 +136,7 @@ const menuController = {
 
 			await itemToDelete.destroy();
 			return res.status(200).json({
+				ok:true,
 				message: "Elément du menu supprimé avec succès",
 			});
 		} catch (error) {
@@ -135,6 +145,7 @@ const menuController = {
 	},
 	async createOneMenuItem(req, res, next) {
 		const newItemData = createMenuItemSchema.safeParse(req.body);
+
 		if (!newItemData.success) {
 			const zodIssues = newItemData.error.issues;
 			throw AppError(400, "ZOD_ERROR", "La validation des données a échoué.", {
@@ -146,6 +157,7 @@ const menuController = {
 			const newMenuItem = await Menu.create(newItemData.data);
 
 			return res.status(201).json({
+				ok : true,
 				message: "Succès lors de la création d'un nouvel élemement du menu",
 				newMenuItem,
 			});

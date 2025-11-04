@@ -113,8 +113,7 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 						if (!cat2) return null;
 						const safeId = cat2.replace(/\s+/g, "").toLowerCase();
 						const firstItem = menuItems.find((item) => item.cat2 === cat2);
-						
-						// Récupérer les cat3 uniques pour cette cat2
+
 						const itemsCat3 = [
 							...new Set(
 								menuItems
@@ -225,3 +224,4 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 		</div>
 	);
 }
+

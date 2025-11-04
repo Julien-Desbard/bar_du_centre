@@ -3,9 +3,7 @@ import { Edit, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import AdminModalUpdate from "@/components/modals/admin/adminModalUpdate";
 import AdminModalDelete from "@/components/modals/admin/adminModalDelete";
-import SignOffButton from "../buttons/signOffButton";
 import AdminModalCreate from "../modals/admin/adminModalCreate";
-import { Butterfly_Kids } from "next/font/google";
 import { Button } from "../ui/button";
 
 export type MenuItem = {
@@ -27,9 +25,7 @@ export default function MenuAdmin() {
 	const [openDelete, setOpenDelete] = useState(false);
 	const [openCreate, setOpenCreate] = useState(false);
 
-	const [activeSafeid, setActiveSafeid] = useState<string | undefined>(
-		undefined
-	);
+	const [activeSafeid, setActiveSafeid] = useState<string>("lechaud");
 
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState<string | undefined>(undefined);
@@ -38,7 +34,7 @@ export default function MenuAdmin() {
 	const [price_2, setPrice_2] = useState<string | undefined>(undefined);
 	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 	const [category, setCategory] = useState("le_chaud");
-	const [categoryName, setCategoryName] = useState("");
+	const [categoryName, setCategoryName] = useState("Le chaud");
 	const [categoryDetail, setCategoryDetail] = useState<MenuItem[] | undefined>(
 		undefined
 	);
@@ -60,7 +56,7 @@ export default function MenuAdmin() {
 			}
 		}
 		getMenuCategories();
-	}, []);
+	}, [isOpen, openCreate, openDelete]);
 
 	useEffect(() => {
 		async function getCategoryContent() {
@@ -79,11 +75,7 @@ export default function MenuAdmin() {
 			}
 		}
 		getCategoryContent();
-	}, [category, isOpen, openDelete]);
-
-	// const itemsCat2 = [...new Set(menuItems.map((item) => item.cat2))].filter(
-	// 	Boolean
-	// );
+	}, [category, isOpen, openDelete, openCreate]);
 
 	const drinks = [
 		...new Set(
@@ -99,17 +91,16 @@ export default function MenuAdmin() {
 		),
 	].filter(Boolean);
 
-	console.log(menuItems);
-
+	// Vérifier si la catégorie contient des cat3
+	const hasCat3 = categoryDetail?.some((item) => item.cat3 && item.cat3.trim() !== "");
 
 	return (
 		<div className="text-white pt-24 flex flex-col w-full min-h-screen max-sm:overflow-visible">
 			<div className="flex flex-row justify-around mx-3">
-				<h3 className="text-2xl text-white font-subtitle font-light justify-self-center text-center mr-auto">
+				<h3 className="text-4xl text-white font-subtitle font-light text-center">
 					Console d&apos;administration du{" "}
 					<span className="text-secondary">MENU</span>
 				</h3>
-				<SignOffButton />
 			</div>
 			<div className="border-b border-t border-secondary m-3">
 				<div className="flex flex-row border-b border-white">
@@ -169,95 +160,119 @@ export default function MenuAdmin() {
 					</ul>
 				</div>
 			</div>
+
 			<div className="justify-self-center">
 				<div className="mb-8">
 					<h4 className="text-secondary text-xl my-2 pb-1 font-semibold text-center max-w-[80%] mx-auto">
 						{categoryName}
 					</h4>
 					<div className="px-3 w-full">
-						<div className="grid grid-cols-[minmax(150px,2fr)_minmax(200px,3fr)_70px_70px_70px_28px_28px_28px] gap-2 font-bold">
-							<div>Nom du plat</div>
-							<div>Description</div>
-							<div className="text-center">Prix 1</div>
-							<div className="text-center">Prix 2</div>
-							<div className="text-center">Prix 3</div>
-							<div></div>
-						</div>
-						{categoryDetail?.map((item) => (
-							<div
-								key={item.id}
-								className="grid grid-cols-[minmax(150px,2fr)_minmax(200px,3fr)_70px_70px_70px_28px_28px_28px] gap-2 py-1"
-							>
-								<input
-									type="text"
-									value={item.name}
-									className="border border-secondary p-2 bg-transparent text-white"
-									readOnly
-								/>
-								<input
-									type="text"
-									value={item.description || ""}
-									className="border border-secondary p-2 bg-transparent text-white"
-									readOnly
-								/>
-								<input
-									type="text"
-									name="Prix 1"
-									value={`${item.prix_1} €`}
-									className="border border-secondary p-2 bg-transparent text-white text-center"
-									readOnly
-								/>
-								<input
-									type="text"
-									name="Prix 2"
-									value={item.prix_2 ? `${item.prix_2} €` : ""}
-									className="border border-secondary p-2 bg-transparent text-white text-center"
-									readOnly
-								/>
-								<input
-									type="text"
-									name="Prix 3"
-									value={item.prix_3 ? `${item.prix_3} €` : ""}
-									className="border border-secondary p-2 bg-transparent text-white text-center"
-									readOnly
-								/>
-								<button
-									type="button"
-									onClick={() => {
-										setIsOpen(true);
-										setId(item.id);
-										setName(item.name);
-										setDescription(item.description);
-										setPrice_1(item.prix_1);
-										setPrice_2(item.prix_2);
-										setPrice_3(item.prix_3);
-									}}
-									className="flex items-center justify-center"
-								>
-									<Edit className="w-5 h-5 cursor-pointer hover:text-secondary transition-colors duration-300" />
-								</button>
-								<button
-									type="button"
-									onClick={() => {
-										setOpenDelete(true);
-										setId(item.id);
-										setName(item.name);
-									}}
-									className="flex items-center justify-center"
-								>
-									<Trash className="w-5 h-5 cursor-pointer hover:text-secondary transition-colors duration-300" />
-								</button>
+						{/* Afficher les en-têtes seulement s'il n'y a PAS de cat3 */}
+						{!hasCat3 && (
+							<div className="grid grid-cols-[minmax(150px,2fr)_minmax(200px,3fr)_70px_70px_70px_28px_28px] gap-2 font-bold">
+								<div>Nom</div>
+								<div>Description</div>
+								<div className="text-center">Prix 1</div>
+								<div className="text-center">Prix 2</div>
+								<div className="text-center">Prix 3</div>
 							</div>
-							// );
-						))}
-					</div>
-					<div>
-						<Button 
-						onClick={()=> setOpenCreate(true)}>
-							Créer un élement de menu
-						</Button>
+						)}
+						
+						{categoryDetail?.map((item, index) => {
+							// On récupère la cat3 de l'item précédent pour comparer
+							const previousItem = index > 0 ? categoryDetail[index - 1] : null;
+							const showCat3Title =
+								item.cat3 && item.cat3 !== previousItem?.cat3;
+
+							return (
+								<div key={item.id}>
+									{/* Affiche le titre cat3 et les en-têtes seulement si c'est un nouveau groupe */}
+									{showCat3Title && (
+										<div>
+											<h5 className="text-secondary text-lg font-semibold mb-2 mt-4 text-start">
+												{item.cat3}
+											</h5>
+											<div className="grid grid-cols-[minmax(150px,2fr)_minmax(200px,3fr)_70px_70px_70px_28px_28px] gap-2 font-bold">
+												<div>Nom</div>
+												<div>Description</div>
+												<div className="text-center">Prix 1</div>
+												<div className="text-center">Prix 2</div>
+												<div className="text-center">Prix 3</div>
+											</div>
+										</div>
+									)}
+
+									<div className="grid grid-cols-[minmax(150px,2fr)_minmax(200px,3fr)_70px_70px_70px_28px_28px] gap-2 py-1">
+										<input
+											type="text"
+											value={item.name}
+											className="border border-secondary p-2 bg-transparent text-white"
+											readOnly
+										/>
+										<input
+											type="text"
+											value={item.description || ""}
+											className="border border-secondary p-2 bg-transparent text-white"
+											readOnly
+										/>
+										<input
+											type="text"
+											name="Prix 1"
+											value={`${item.prix_1} €`}
+											className="border border-secondary p-2 bg-transparent text-white text-center"
+											readOnly
+										/>
+										<input
+											type="text"
+											name="Prix 2"
+											value={item.prix_2 ? `${item.prix_2} €` : ""}
+											className="border border-secondary p-2 bg-transparent text-white text-center"
+											readOnly
+										/>
+										<input
+											type="text"
+											name="Prix 3"
+											value={item.prix_3 ? `${item.prix_3} €` : ""}
+											className="border border-secondary p-2 bg-transparent text-white text-center"
+											readOnly
+										/>
+										<button
+											type="button"
+											onClick={() => {
+												setIsOpen(true);
+												setId(item.id);
+												setName(item.name);
+												setDescription(item.description);
+												setPrice_1(item.prix_1);
+												setPrice_2(item.prix_2);
+												setPrice_3(item.prix_3);
+											}}
+											className="flex items-center justify-center"
+										>
+											<Edit className="w-5 h-5 cursor-pointer hover:text-secondary transition-colors duration-300" />
+										</button>
+										<button
+											type="button"
+											onClick={() => {
+												setOpenDelete(true);
+												setId(item.id);
+												setName(item.name);
+											}}
+											className="flex items-center justify-center"
+										>
+											<Trash className="w-5 h-5 cursor-pointer hover:text-secondary transition-colors duration-300" />
+										</button>
+									</div>
+								</div>
+							);
+						})}
 					</div>
 				</div>
+			</div>
+			<div className="flex self-center mb-8">
+				<Button onClick={() => setOpenCreate(true)}>
+					Créer un élement de menu
+				</Button>
 			</div>
 			<AdminModalUpdate
 				isOpen={isOpen}
@@ -275,10 +290,11 @@ export default function MenuAdmin() {
 				id={id}
 				name={name}
 			/>
-			<AdminModalCreate 
-			isOpen={openCreate} 
-			onClose={() => setOpenCreate(false)}
-			menuItems={menuItems} />
+			<AdminModalCreate
+				isOpen={openCreate}
+				onClose={() => setOpenCreate(false)}
+				menuItems={menuItems}
+			/>
 		</div>
 	);
 }

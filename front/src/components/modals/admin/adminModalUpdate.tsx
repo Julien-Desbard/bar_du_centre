@@ -77,12 +77,14 @@ export default function AdminModalDelete({
 
 			const data = await res.json();
 
-			if (data.ok) {
-				console.log("Base de donnée mise à jour");
+			if (res.ok) {
+				console.log(
+					"Voici les data de la mise à jour : ",
+					JSON.stringify(data, null, 2)
+				);
 			}
 			setMessageSuccess("Mise à jour réalisée avec succès");
 			setTimeout(() => onClose(), 1000);
-
 		} catch {
 			setErrors("Une erreur est survenue, veuillez réessayer");
 		} finally {
