@@ -3,12 +3,52 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import ReservationModal from "../modals/reservationModal";
 import MenuModal from "../modals/menuModal";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import CategoryCarte from "../lists/categoryCarte";
+
+export type CarteItems = {
+	id: number;
+	name: string;
+	categorie: string;
+	prix: string;
+};
 
 export default function MenuSection() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openMenu, setOpenMenu] = useState(false);
 	const [nature, setNature] = useState("");
+	const [carteItems, setCarteItems] = useState<CarteItems[]>([]);
+
+	useEffect(() => {
+		async function getCarteItems() {
+			try {
+				const httpResponse = await fetch(`http://localhost:3001/api/carte`);
+				const data = await httpResponse.json();
+
+				if (httpResponse.ok) {
+					setCarteItems(data.allCarteItems);
+				} else {
+					throw new Error("L'appel à l'API a échoué, veuillez réessayer...");
+				}
+			} catch (error) {
+				console.log(error);
+			}
+		}
+		getCarteItems();
+	}, []);
+
+	const entrees = [
+		...new Set(carteItems.filter((item) => item.categorie === "Entrées")),
+	];
+
+	const plats = [
+		...new Set(carteItems.filter((item) => item.categorie === "Plats")),
+	];
+
+	const desserts = [
+		...new Set(carteItems.filter((item) => item.categorie === "Desserts")),
+	];
+
 	return (
 		<section
 			id="menu"
@@ -51,7 +91,7 @@ export default function MenuSection() {
 							width={250}
 							height={250}
 							onClick={() => (setOpenMenu(true), setNature("boissons"))}
-							/>
+						/>
 						<h2
 							onClick={() => (setOpenMenu(true), setNature("boissons"))}
 							className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-2 sm:row-start-2 sm:self-center"
@@ -76,57 +116,10 @@ export default function MenuSection() {
 				>
 					<h2 className="font-subtitle text-4xl text-center ">Carte du jour</h2>
 
-					<h3 className="text-2xl font-light text-center text-secondary">
-						Entrées
-					</h3>
-					<ul className="w-full space-y-2 px-4">
-						<li className="flex items-baseline gap-2">
-							<span className="flex-1 break-words text-xl">
-								Soupe de potiron et son lard grillé cest très long
-							</span>
-							<span className="shrink-0 text-bg font-semibold">9€</span>
-						</li>
-						<li className="flex items-baseline gap-2">
-							<span className="flex-1 break-words text-xl">Seconde entrée</span>
-							<span className="shrink-0 text-bg font-semibold">9€</span>
-						</li>
-					</ul>
+					<CategoryCarte items={entrees}/>
+					<CategoryCarte items={plats}/>
+					<CategoryCarte items={desserts}/>
 
-					<h3 className="text-2xl font-light text-center text-secondary">
-						plats
-					</h3>
-					<ul className="w-full space-y-2 px-4">
-						<li className="flex items-baseline gap-2">
-							<span className="flex-1 break-words text-xl">
-								Burger maison au cheddar
-							</span>
-							<span className="shrink-0 text-bg font-semibold">14€</span>
-						</li>
-						<li className="flex items-baseline gap-2">
-							<span className="flex-1 break-words text-xl">
-								Salade césar au poulet
-							</span>
-							<span className="shrink-0 text-bg font-semibold">12€</span>
-						</li>
-					</ul>
-
-					<h3 className="text-2xl font-light text-center text-secondary">
-						Desserts
-					</h3>
-					<ul className="w-full space-y-2 px-4">
-						<li className="flex items-baseline gap-2">
-							<span className="flex-1 break-words text-xl">
-								Mousse au chocolat maison
-							</span>
-							<span className="shrink-0 text-bg font-semibold">7€</span>
-						</li>
-						<li className="flex items-baseline gap-2">
-							<span className="flex-1 break-words text-xl">
-								Tarte aux pommes caramélisées
-							</span>
-							<span className="shrink-0 text-bg font-semibold">7€</span>
-						</li>
-					</ul>
 
 					<Button
 						onClick={() => setIsOpen(true)}
@@ -145,8 +138,12 @@ export default function MenuSection() {
 
 				{/* emplacment des horaires */}
 			</div>
-			<ReservationModal isOpen={isOpen}  onClose={() => setIsOpen(false)} />
-			<MenuModal openMenu={openMenu} nature={nature} onClose={() => setOpenMenu(false)} />
+			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
+			<MenuModal
+				openMenu={openMenu}
+				nature={nature}
+				onClose={() => setOpenMenu(false)}
+			/>
 		</section>
 	);
 }

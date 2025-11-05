@@ -12,7 +12,7 @@ const menuController = {
 			}
 
 			return res.status(200).json({
-				ok:true,
+				ok: true,
 
 				message: "Ensemble du menu récupéré avec succès",
 				allMenuItems,
@@ -36,7 +36,7 @@ const menuController = {
 				);
 			}
 			return res.status(200).json({
-				ok:true,
+				ok: true,
 
 				message: `Éléments de la catégorie ${cat1} récupérés avec succès`,
 				count: menuItemsPerCat1.length,
@@ -47,12 +47,12 @@ const menuController = {
 		}
 	},
 
-		async getMenuItemsPerSlugCat2(req, res, next) {
+	async getMenuItemsPerSlugCat2(req, res, next) {
 		const { slug_cat2 } = req.params;
 		try {
 			const menuItemsPerSlugCat2 = await Menu.findAll({
-				where: { slug_cat2 }, 
-				order : [["id" , "ASC"]]
+				where: { slug_cat2 },
+				order: [["id", "ASC"]],
 			});
 
 			if (menuItemsPerSlugCat2.length === 0) {
@@ -63,7 +63,7 @@ const menuController = {
 				);
 			}
 			return res.status(200).json({
-				ok:true,
+				ok: true,
 
 				message: `Éléments de la catégorie ${slug_cat2} récupérés avec succès`,
 				count: menuItemsPerSlugCat2.length,
@@ -83,7 +83,7 @@ const menuController = {
 				throw AppError(404, "NOT_FOUND", `Élément ${id} introuvable`);
 			}
 			return res.status(200).json({
-				ok:true,
+				ok: true,
 
 				message: `Succès lors de la récupération de l'\élément ${id} du menu`,
 				oneMenuItem,
@@ -94,6 +94,13 @@ const menuController = {
 	},
 	async updateOneMenuItem(req, res, next) {
 		const { id } = req.params;
+		const updateData = updateMenuItemSchema.safeParse(req.body);
+		if (!updateData.success) {
+			const zodIssues = updateData.error.issues;
+			throw AppError(400, "ZOD_ERROR", "La validation des données a échoué.", {
+				zodIssues: zodIssues,
+			});
+		}
 
 		try {
 			const itemToUpdate = await Menu.findByPk(id);
@@ -102,21 +109,10 @@ const menuController = {
 				throw AppError(404, "NOT_FOUND", `Élément ${id} introuvable`);
 			}
 
-			const updateData = updateMenuItemSchema.safeParse(req.body);
-			if (!updateData.success) {
-				const zodIssues = updateData.error.issues;
-				throw AppError(
-					400,
-					"ZOD_ERROR",
-					"La validation des données a échoué.",
-					{ zodIssues: zodIssues }
-				);
-			}
-
 			await itemToUpdate.update(updateData.data);
 
 			return res.status(200).json({
-				ok:true,
+				ok: true,
 				message: `Elément ${id} bien mis à jour`,
 				itemToUpdate,
 			});
@@ -136,7 +132,7 @@ const menuController = {
 
 			await itemToDelete.destroy();
 			return res.status(200).json({
-				ok:true,
+				ok: true,
 				message: "Elément du menu supprimé avec succès",
 			});
 		} catch (error) {
@@ -157,7 +153,7 @@ const menuController = {
 			const newMenuItem = await Menu.create(newItemData.data);
 
 			return res.status(201).json({
-				ok : true,
+				ok: true,
 				message: "Succès lors de la création d'un nouvel élemement du menu",
 				newMenuItem,
 			});

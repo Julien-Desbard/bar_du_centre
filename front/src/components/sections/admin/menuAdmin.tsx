@@ -3,8 +3,8 @@ import { Edit, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import AdminModalUpdate from "@/components/modals/admin/adminModalUpdate";
 import AdminModalDelete from "@/components/modals/admin/adminModalDelete";
-import AdminModalCreate from "../modals/admin/adminModalCreate";
-import { Button } from "../ui/button";
+import AdminModalCreate from "../../modals/admin/adminModalCreate";
+import { Button } from "../../ui/button";
 
 export type MenuItem = {
 	id: number;
@@ -96,9 +96,9 @@ export default function MenuAdmin() {
 
 	return (
 		<div className="text-white pt-24 flex flex-col w-full min-h-screen max-sm:overflow-visible">
-			<div className="flex flex-row justify-around mx-3">
-				<h3 className="text-4xl text-white font-subtitle font-light text-center">
-					Console d&apos;administration du{" "}
+			<div className="flex flex-row justify-around p-6">
+				<h3 className="text-5xl text-white font-subtitle font-light text-center">
+					Administration du{" "}
 					<span className="text-secondary">MENU</span>
 				</h3>
 			</div>

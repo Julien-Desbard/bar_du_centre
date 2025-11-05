@@ -1,0 +1,43 @@
+
+###
+# Get all carte items
+GET http://localhost:3001/api/carte
+###
+
+
+###
+# Get carte item by id
+GET http://localhost:3001/api/carte/1
+###
+
+###
+# Update a carte item
+PATCH http://localhost:3001/api/carte/7
+content-type: application/json
+
+{
+    "categorie" : "Entrées"
+}
+###
+
+###
+# Delete a carte item
+DELETE http://localhost:3001/api/carte/18
+
+###
+
+# Create a carte item
+POST http://localhost:3001/api/carte
+content-type: application/json
+
+{
+    "categorie" : "Plats",
+    "name": "test création item",
+    "prix" : 12
+}
+###
+
+
+
+
+

@@ -1,9 +1,11 @@
 import express from "express";
 import menuRoute from "./routes/menu.Routes.js"
-import errorHandler from '../errors/AppError.js'
+import carteRoute from "./routes/carte.Routes.js"
 
 const router = express.Router()
 
 router.use('/menu',menuRoute)
+router.use('/carte',carteRoute)
+
 
 export default router

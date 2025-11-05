@@ -2,7 +2,7 @@ import { Loader } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { XIcon } from "@/components/ui/XIcon";
 import { useState, useEffect } from "react";
-import { MenuItem } from "@/components/sections/Admin";
+import { MenuItem } from "@/components/sections/admin/menuAdmin";
 
 interface Modalprops {
 	isOpen: boolean;
