@@ -2,45 +2,45 @@
 
 import { Button } from "@/components/ui/button";
 import { XIcon } from "@/components/ui/XIcon";
-import type { ReactNode } from "react";
+import { Loader } from "lucide-react";
+import { type ReactNode } from "react";
 
-interface ModalPropsCompat {
+interface ModalProps {
 	isOpen: boolean;
 	onClose: () => void;
-
-	// mêmes noms que ta modale existante
-	name: string;
-	id?: number;
-	description?: string;
-	price_1?: string;
-	price_2?: string;
-	price_3?: string;
 
 	// contrôles d’action
 	confirmText?: string; // ex: "Modifier le plat"
 	onConfirm?: () => void;
 	disableConfirm?: boolean;
 	loading?: boolean;
+	isSubmitting: boolean;
+
+	// messages
+	errors: string;
+	messageSuccess: string;
 
 	// contenu optionnel si tu veux injecter un formulaire custom
 	children?: ReactNode;
+	name: string;
+	title: string;
+message: string | undefined
 }
 
 export default function ModalBdcCompat({
 	isOpen,
 	onClose,
-	name,
-	id,
-	description,
-	price_1,
-	price_2,
-	price_3,
 	confirmText = "Confirmer",
+	isSubmitting,
 	onConfirm,
-	disableConfirm = false,
-	loading = false,
 	children,
-}: ModalPropsCompat) {
+	name,
+	title,
+	errors,
+	messageSuccess,
+	message = undefined
+}: ModalProps) {
+	// setTimeout(() => onClose(), 5000);
 	if (!isOpen) return null;
 
 	return (
@@ -66,47 +66,56 @@ export default function ModalBdcCompat({
 
 				{/* Titre basé sur `name` */}
 				<h3 className="text-2xl mb-8 text-white font-subtitle font-light text-center">
-					Modification de : <br />
+					{title} <br />
 					<span className="text-secondary">{name}</span>
 				</h3>
 
-				{/* Contenu par défaut si tu ne fournis pas `children` */}
-				<div className="font-body mb-4 px-12 max-sm:px-4">
-					{children ?? (
-						<div className="space-y-2 text-sm opacity-80">
-							<div>ID: {id ?? "—"}</div>
-							<div>Description: {description ?? "—"}</div>
-							<div>Prix 1: {price_1 ?? "—"}</div>
-							<div>Prix 2: {price_2 ?? "—"}</div>
-							<div>Prix 3: {price_3 ?? "—"}</div>
-						</div>
-					)}
-				</div>
+				{/* Emplacement des children */}
+				<div>{children}</div>
+				{message && <div
+					className="font-body mb-4 px-12 text-xl text-center
+				max-sm:px-4"
+				>
+					<p>{message}</p>
+				</div>}
+
+				{/* Message erreurs ou réussite */}
+				{errors && errors !== "" && (
+					<p className="font-body font-light italic text-red-500 py-2">
+						{" "}
+						{errors}
+					</p>
+				)}
+				{messageSuccess && messageSuccess !== "" && (
+					<p className="text-secondary py-2 text-center">{messageSuccess}</p>
+				)}
 
 				{/* Footer */}
 				<div className="flex flex-row justify-center pb-2">
 					<Button
-						type="button"
+						type="submit"
 						className="m-6 flex justify-self-center"
+						disabled={isSubmitting}
 						onClick={onClose}
-						disabled={loading}
 					>
 						Annuler
 					</Button>
 
 					{onConfirm && (
 						<Button
-							type="button"
-							className={`m-6 flex justify-self-center ${
-								confirmText.toLowerCase().includes("supprim") ||
-								confirmText.toLowerCase().includes("annul")
-									? "bg-red-600 hover:bg-red-700"
-									: "bg-primary text-black hover:bg-primary-dark"
-							}`}
+							type="submit"
+							className="m-6 flex justify-self-center"
+							disabled={isSubmitting}
 							onClick={onConfirm}
-							disabled={disableConfirm || loading}
 						>
-							{loading ? "Envoi…" : confirmText}
+							{isSubmitting ? (
+								<>
+									<Loader className="animate-spin mr-2" />
+									Modification en cours...
+								</>
+							) : (
+								`${confirmText} ?`
+							)}
 						</Button>
 					)}
 				</div>

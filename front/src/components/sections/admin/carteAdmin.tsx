@@ -121,27 +121,6 @@ export default function CarteAdmin() {
 					Créer un élement de menu
 				</Button>
 			</div>
-			{/* <AdminModalUpdate
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-                id={id}
-                name={name}
-                description={description}
-                price_1={price_1}
-                price_2={price_2}
-                price_3={price_3}
-            />
-            <AdminModalDelete
-                isOpen={openDelete}
-                onClose={() => setOpenDelete(false)}
-                id={id}
-                name={name}
-            />
-            <AdminModalCreate
-                isOpen={openCreate}
-                onClose={() => setOpenCreate(false)}
-                menuItems={menuItems}
-            /> */}
 		</div>
 	);
 }
