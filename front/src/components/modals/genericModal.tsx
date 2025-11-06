@@ -10,7 +10,7 @@ interface ModalProps {
 	onClose: () => void;
 
 	// contrôles d’action
-	confirmText?: string; // ex: "Modifier le plat"
+	confirmText?: string; 
 	onConfirm?: () => void;
 	disableConfirm?: boolean;
 	loading?: boolean;
@@ -20,14 +20,14 @@ interface ModalProps {
 	errors: string;
 	messageSuccess: string;
 
-	// contenu optionnel si tu veux injecter un formulaire custom
+	// emplacement formulaire
 	children?: ReactNode;
 	name: string;
 	title: string;
 message: string | undefined
 }
 
-export default function ModalBdcCompat({
+export default function GenericModal({
 	isOpen,
 	onClose,
 	confirmText = "Confirmer",

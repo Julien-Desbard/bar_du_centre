@@ -33,7 +33,7 @@ export default function MenuAdmin() {
 	const [openCreate, setOpenCreate] = useState(false);
 
 	// Update + create modal states
-	const [openUpdate, setOpenUpdate] = useState(false);
+	const [openEdit, setOpenEdit] = useState(false);
 	const [localName, setLocalName] = useState<string>("");
 	const [localDescription, setLocalDescription] = useState<string>("");
 	const [localPrice_1, setLocalPrice_1] = useState<string>("");
@@ -46,10 +46,6 @@ export default function MenuAdmin() {
 
 	const [activeSafeid, setActiveSafeid] = useState<string>("lechaud");
 	const [name, setName] = useState("");
-	const [description, setDescription] = useState<string | undefined>(undefined);
-	const [price_1, setPrice_1] = useState<string | undefined>(undefined);
-	const [price_3, setPrice_3] = useState<string | undefined>(undefined);
-	const [price_2, setPrice_2] = useState<string | undefined>(undefined);
 	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 	const [category, setCategory] = useState("le_chaud");
 	const [categoryName, setCategoryName] = useState("Le chaud");
@@ -118,16 +114,11 @@ export default function MenuAdmin() {
 
 	const resetAllModalStatesAndClose = () => {
 		// 1. Fermeture des modales
-		setOpenUpdate(false);
+		setOpenEdit(false);
 		setOpenCreate(false);
 		setOpenDelete(false);
 
 		// 2. Réinitialisation des states temporaires liés à l'élément sélectionné
-		setName("");
-		setDescription(undefined);
-		setPrice_1(undefined);
-		setPrice_2(undefined);
-		setPrice_3(undefined);
 		setId(undefined);
 
 		// 3. Réinitialisation des states locaux du formulaire (local...)
@@ -164,17 +155,7 @@ export default function MenuAdmin() {
 
 	// ========================= Update modal =================
 
-	useEffect(() => {
-		if (openUpdate) {
-			setLocalName(name);
-			setLocalDescription(description || "");
-			setLocalPrice_1(price_1 || "");
-			setLocalPrice_2(price_2 || "");
-			setLocalPrice_3(price_3 || "");
-		}
-	}, [openUpdate, name, description, price_1, price_2, price_3]);
-
-	async function handleUpdate() {
+	async function handleEdit() {
 		setIsSubmitting(true);
 		try {
 			const res = await fetch(`http://localhost:3001/api/menu/${id}`, {
@@ -198,7 +179,7 @@ export default function MenuAdmin() {
 				);
 			}
 			setMessageSuccess("Mise à jour réalisée avec succès");
-			setTimeout(() => setOpenUpdate(false), 3000);
+			setTimeout(() => setOpenEdit(false), 3000);
 			setDataVersion((prev) => prev + 1);
 		} catch {
 			setErrors("Une erreur est survenue, veuillez réessayer");
@@ -357,29 +338,6 @@ export default function MenuAdmin() {
 						food={food}
 						activeSafeid={activeSafeid}
 					/>
-					{/* <ul className="flex flex-row flex-wrap gap-3 m-3 flex-3 justify-start">
-						{food.map((cat2) => {
-							if (!cat2) return null;
-							const safeId = cat2.replace(/\s+/g, "").toLowerCase();
-							return (
-								<li
-									key={safeId}
-									className={`text-xl hover:text-secondary transition-colors duration-300 ease-in-out cursor-pointer ${
-										activeSafeid === safeId
-											? "text-secondary  font-semibold"
-											: ""
-									}`}
-									onClick={() => {
-										setCategory(cat2.replace(/\s+/g, "_").toLowerCase());
-										setCategoryName(cat2);
-										setActiveSafeid(safeId);
-									}}
-								>
-									{cat2}
-								</li>
-							);
-						})}
-					</ul> */}
 				</div>
 			</div>
 
@@ -461,13 +419,14 @@ export default function MenuAdmin() {
 										<button
 											type="button"
 											onClick={() => {
-												setOpenUpdate(true);
+												setOpenEdit(true);
 												setId(item.id);
-												setName(item.name);
-												setDescription(item.description);
-												setPrice_1(item.prix_1);
-												setPrice_2(item.prix_2);
-												setPrice_3(item.prix_3);
+												
+												setLocalName(item.name);
+												setLocalDescription(item.description || "");
+												setLocalPrice_1(item.prix_1 || "");
+												setLocalPrice_2(item.prix_2 || "");
+												setLocalPrice_3(item.prix_3 || "");
 											}}
 											className="flex items-center justify-center"
 										>
@@ -498,7 +457,7 @@ export default function MenuAdmin() {
 			</div>
 			{/* ========================== Update Modal ==========================*/}
 			<GenericModal
-				isOpen={openUpdate}
+				isOpen={openEdit}
 				onClose={resetAllModalStatesAndClose}
 				title={"Modification de"}
 				name={name}
@@ -506,7 +465,7 @@ export default function MenuAdmin() {
 				errors={errors}
 				messageSuccess={messageSuccess}
 				confirmText={"Modifier"}
-				onConfirm={handleUpdate}
+				onConfirm={handleEdit}
 				message={undefined}
 			>
 				<div className="font-body mb-4 px-12 max-sm:px-4">

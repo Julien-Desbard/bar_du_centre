@@ -12,11 +12,13 @@ GET http://localhost:3001/api/carte/1
 
 ###
 # Update a carte item
-PATCH http://localhost:3001/api/carte/7
+PATCH http://localhost:3001/api/carte/2
 content-type: application/json
 
 {
-    "categorie" : "Entrées"
+    "categorie" : "Entrées",
+    "name": "restest",
+    "prix" : 250
 }
 ###
 
