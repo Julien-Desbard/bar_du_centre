@@ -22,7 +22,7 @@ interface ModalProps {
 
 	// emplacement formulaire
 	children?: ReactNode;
-	name: string;
+	name: string | undefined;
 	title: string;
 message: string | undefined
 }

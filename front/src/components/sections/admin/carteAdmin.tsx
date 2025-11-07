@@ -72,6 +72,8 @@ export default function CarteAdmin() {
 		setMessageSuccess("");
 	};
 
+	// ================================== Update modal ==================================
+
 	async function handleEdit() {
 		setIsSubmitting(true);
 		try {
@@ -85,20 +87,20 @@ export default function CarteAdmin() {
 				}),
 			});
 
-			if(!res.ok) {
-				console.log("La mise à jour n'a pas réussi")
-				return 
+			if (!res.ok) {
+				console.log(`La mise à jour de ${name}n'a pas réussi`);
+				return;
 			}
-				const data = await res.json();
+			const data = await res.json();
 
 			if (res.ok) {
 				console.log(
-					"Voici les data de la mise à jour : ",
+					`Voici les data de la mise à jour de ${name}: `,
 					JSON.stringify(data, null, 2)
 				);
 			}
-			setMessageSuccess("Mise à jour réalisée avec succès");
-			setTimeout(() => setOpenEdit(false), 3000);
+			setMessageSuccess(`Mise à jour de ${name}réalisée avec succès`);
+			setTimeout(() => resetAllModalStatesAndClose(), 3000);
 			setDataVersion((prev) => prev + 1);
 		} catch {
 			setErrors("Une erreur est survenue, veuillez réessayer");
@@ -106,6 +108,77 @@ export default function CarteAdmin() {
 			setIsSubmitting(false);
 		}
 	}
+
+	// ================================== Delete modal ==================================
+
+	async function handleDelete() {
+		setIsSubmitting(true);
+		try {
+			const res = await fetch(`http://localhost:3001/api/carte/${id}`, {
+				method: "DELETE",
+				headers: { "Content-Type": "application/json" },
+			});
+
+			if (!res.ok) {
+				console.log(`La suppression de ${name} n'a pas réussi`);
+				return;
+			}
+
+			if (res.ok) {
+				console.log(`Suppression de ${name} réussie`);
+			}
+			setMessageSuccess(`Suppression de ${name} réussie`);
+			setTimeout(() => resetAllModalStatesAndClose(), 3000);
+			setDataVersion((prev) => prev + 1);
+		} catch {
+			setErrors("Une erreur est survenue, veuillez réessayer");
+		} finally {
+			setIsSubmitting(false);
+		}
+	}
+
+	// ================================== Create modal ==================================
+
+	async function handleCreate() {
+		setIsSubmitting(true);
+		try {
+			const res = await fetch(`http://localhost:3001/api/carte`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json" },
+				body: JSON.stringify({
+					name: localName,
+					categorie: localCategorie,
+					prix: Number(localPrix),
+				}),
+			});
+
+			if (!res.ok) {
+				console.log(`La création de ${localName} n'a pas réussi`);
+				return;
+			}
+
+			const data = await res.json();
+
+			if (res.ok) {
+				console.log(
+					`Voici les data de la création de ${name}: `,
+					JSON.stringify(data, null, 2)
+				);
+			}
+
+			setMessageSuccess(`Création de ${localName} réussie`);
+			setTimeout(() => resetAllModalStatesAndClose(), 3000);
+			setDataVersion((prev) => prev + 1);
+		} catch {
+			setErrors("Une erreur est survenue, veuillez réessayer");
+		} finally {
+			setIsSubmitting(false);
+		}
+	}
+
+	const listCat1 = [
+		...new Set(carteItems.map((item) => item.categorie)),
+	].filter(Boolean);
 
 	return (
 		<div className="text-white flex flex-col w-full min-h-screen max-sm:overflow-visible">
@@ -168,6 +241,7 @@ export default function CarteAdmin() {
 											onClick={() => {
 												setOpenEdit(true);
 												setId(item.id);
+												setName(item.name)
 												setLocalName(item.name);
 												setLocalCategorie(item.categorie);
 												setLocalPrix(item.prix);
@@ -204,7 +278,7 @@ export default function CarteAdmin() {
 				isOpen={openEdit}
 				onClose={resetAllModalStatesAndClose}
 				title={"Modification de"}
-				name={localName}
+				name={name}
 				isSubmitting={isSubmitting}
 				errors={errors}
 				messageSuccess={messageSuccess}
@@ -254,6 +328,78 @@ export default function CarteAdmin() {
 						</div>
 					</form>
 				</div>
+			</GenericModal>
+			{/* ========================== Delete Modal ==========================*/}
+			<GenericModal
+				isOpen={openDelete}
+				onClose={resetAllModalStatesAndClose}
+				title={"Suppression de"}
+				name={name}
+				isSubmitting={isSubmitting}
+				errors={errors}
+				messageSuccess={messageSuccess}
+				confirmText={"Supprimer"}
+				onConfirm={handleDelete}
+				message={`Etes-vous certain de vouloir supprimer ${name} ?`}
+			/>
+			{/* ========================== Create Modal ==========================*/}
+			<GenericModal
+				isOpen={openCreate}
+				onClose={resetAllModalStatesAndClose}
+				title={"Ajout d'un élement à la carte du jour"}
+				name={undefined}
+				isSubmitting={isSubmitting}
+				errors={errors}
+				messageSuccess={messageSuccess}
+				confirmText={"Ajouter"}
+				onConfirm={handleCreate}
+				message={undefined}
+			>
+				<form className=" [color-scheme:dark] grid grid-co-2 grid-row-16 gap-y-2 px-12">
+					<label htmlFor="categorie" className="">
+						Catégorie
+					</label>
+					<select
+						name="categorie"
+						value={localCategorie}
+						onChange={(e) => setLocalCategorie(e.target.value)}
+						required
+						className="border border-secondary p-1 pl-2 col-span-2"
+					>
+						<option value="" hidden>
+							(obligatoire)
+						</option>
+						{listCat1.map((cat1) => {
+							if (!cat1) return null;
+							return (
+								<option key={cat1} value={cat1}>
+									{cat1}
+								</option>
+							);
+						})}
+					</select>
+					<label htmlFor="nom" className="">
+						Nom
+					</label>
+					<input
+						name="nom"
+						value={localName}
+						onChange={(e) => setLocalName(e.target.value)}
+						required
+						className="border border-secondary p-1 pl-2 col-span-2"
+					/>
+										<label htmlFor="prix" className="">
+						Prix
+					</label>
+					<input
+						name="prix"
+						type="number"
+						value={localPrix}
+						onChange={(e) => setLocalPrix(e.target.value)}
+						required
+						className="border border-secondary p-1 pl-2 col-span-2"
+					/>
+				</form>
 			</GenericModal>
 		</div>
 	);
