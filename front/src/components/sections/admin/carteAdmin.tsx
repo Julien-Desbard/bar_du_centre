@@ -181,22 +181,12 @@ export default function CarteAdmin() {
 	].filter(Boolean);
 
 	return (
-		<div className="text-white flex flex-col w-full min-h-screen max-sm:overflow-visible">
+		<div className="text-white pt-24 flex flex-col w-full max-sm:overflow-visible">
 			<div className="flex flex-row justify-around p-6">
-				<h3 className="text-5xl text-white font-subtitle font-light text-center">
-					Administration de la{" "}
-					<span className="text-secondary">CARTE DU JOUR</span>
+				<h3 className="text-5xl text-white underline font-subtitle font-light text-center">
+CARTE DU JOUR
 				</h3>
 			</div>
-			{/* <AdminCarteList
-				carteItems={carteItems}
-				setOpenEdit={setOpenEdit}
-				setOpenDelete={setOpenDelete}
-				setId={setId}
-				setName={setName}
-				setCategorie={setCategorie}
-				setPrix={setPrix}
-			/> */}
 			<div className="justify-self-center">
 				<div className="mb-8">
 					<div className="px-3 w-full">
@@ -268,7 +258,7 @@ export default function CarteAdmin() {
 					</div>
 				</div>
 			</div>
-			<div className="flex self-center">
+			<div className="flex self-center pb-12">
 				<Button onClick={() => setOpenCreate(true)}>
 					Créer un élement de menu
 				</Button>
@@ -288,18 +278,6 @@ export default function CarteAdmin() {
 			>
 				<div className="font-body mb-4 px-12 max-sm:px-4">
 					<form className="grid grid-cols-1 gap-3 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
-						<div>
-							<label htmlFor="description" className="block mb-1">
-								Categorie
-							</label>
-							<input
-								type="text"
-								name="categorie"
-								value={localCategorie}
-								onChange={(e) => setLocalCategorie(e.target.value)}
-								className="border border-secondary p-1 pl-2 w-full"
-							/>
-						</div>
 						<div>
 							<label htmlFor="name" className="block mb-1">
 								Nom

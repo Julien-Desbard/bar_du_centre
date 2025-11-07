@@ -12,14 +12,14 @@ export default function ({ items }: CategoryList) {
 		const showCategorie =
 			item.categorie && item.categorie !== previousItem?.categorie;
 		return (
-			<div>
+			<div key={item.id}>
 				{showCategorie && (
 					<h3 className="text-2xl font-light text-center text-secondary">
 						{item.categorie}
 					</h3>
 				)}
 				<ul className="w-full space-y-2 px-4">
-					<li key={item.id} className="flex items-baseline gap-2">
+					<li className="flex items-baseline gap-2">
 						<span className="flex-1 break-words text-xl">{item.name}</span>
 						<span className="shrink-0 text-bg font-semibold">{item.prix}€</span>
 					</li>
