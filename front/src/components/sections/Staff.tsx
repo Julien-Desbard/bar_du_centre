@@ -13,14 +13,6 @@ export type StaffContent = {
 export default function Staff() {
 	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
 
-	const staffContent: StaffContent[] = [
-		{ id: 1, name: "fariborz" },
-		{ id: 2, name: "jerome" },
-		{ id: 3, name: "hamala" },
-		{ id: 4, name: "fariborz" },
-		{ id: 5, name: "jerome" },
-		{ id: 6, name: "hamala" },
-	];
 
 	const sectionTitle: SectionTitleProps = {
 		part1: "notre",
@@ -37,7 +29,7 @@ export default function Staff() {
 					</h2>
 				</div>
 				<div className="w-full px-6 mb-6">
-					<Carousel options={OPTIONS} staffContent={staffContent} />
+					<Carousel options={OPTIONS} />
 				</div>
 <ReservationTrigger/>
 			</div>
