@@ -4,12 +4,27 @@ import {
 	createCarteDuJourItem,
 	updateCarteDuJourItem,
 } from "../schemas/carteDuJour.js";
-
+import { sequelize } from "../models/index.js";
 
 const carteController = {
 	async getAllCarteItems(req, res, next) {
 		try {
-			const allCarteItems = await CarteDuJour.findAll({ order : [["id", "ASC"]]});
+			const allCarteItems = await CarteDuJour.findAll({
+				order: [
+					[
+						sequelize.literal(`
+						CASE categorie
+							WHEN 'Entrées' THEN 1
+							WHEN 'Plats' THEN 2
+							WHEN 'Desserts' THEN 3
+							ELSE 4
+						END
+					`),
+						"ASC",
+					],
+					["name", "ASC"], // Tri secondaire par nom
+				],
+			});
 
 			if (allCarteItems.length === 0) {
 				throw AppError(404, "NOT_FOUND", "Le menu est vide");
@@ -18,27 +33,27 @@ const carteController = {
 			return res.status(200).json({
 				ok: true,
 				message: "Ensemble des élements de la carte du jour récupérés",
-				count : allCarteItems.length,
+				count: allCarteItems.length,
 				allCarteItems,
 			});
 		} catch (error) {
 			next(error);
 		}
 	},
-	
+
 	async getOneCarteItem(req, res, next) {
 		const { id } = req.params;
 		try {
 			const oneCarteItem = await CarteDuJour.findByPk(id);
 
-			if (oneCarteItem.length === 0) {
+			if (!oneCarteItem) {
 				throw AppError(404, "NOT_FOUND", `Element ${id} introuvable`);
 			}
 
 			return res.status(200).json({
 				ok: true,
 				message: `Succès lors de la récupération de l'\élément ${id} de la carte`,
-                oneCarteItem
+				oneCarteItem,
 			});
 		} catch (error) {
 			next(error);
@@ -78,7 +93,7 @@ const carteController = {
 	async createCarteItem(req, res, next) {
 		const createData = createCarteDuJourItem.safeParse(req.body);
 		if (!createData.success) {
-			const zodIssues = updateData.error.issues;
+			const zodIssues = createData.error.issues;
 			throw AppError(400, "ZOD_ERROR", "La validation des données a échoué.", {
 				zodIssues: zodIssues,
 			});
@@ -105,9 +120,9 @@ const carteController = {
 				throw AppError(404, "NOT_FOUND", `Element ${id} introuvable`);
 			}
 
-            await carteItemToDelete.destroy()
+			await carteItemToDelete.destroy();
 
-            return res.status(200).json({
+			return res.status(200).json({
 				ok: true,
 				message: "Elément de la carte supprimé avec succès",
 			});
@@ -117,4 +132,4 @@ const carteController = {
 	},
 };
 
-export default carteController
+export default carteController;

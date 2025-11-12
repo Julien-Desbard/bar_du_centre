@@ -16,16 +16,16 @@ GET http://localhost:3001/api/menu/cat2/plats
 
 ###
 # Get menu item by id
-GET http://localhost:3001/api/menu/139
+GET http://localhost:3001/api/menu/13
 ###
 
 ###
 # Update a menu item
-PATCH http://localhost:3001/api/menu/139
+PATCH http://localhost:3001/api/menu/13
 content-type: application/json
 
 {
-    "prix_3" : 1.1
+    "prix_2" : 2
 }
 ###
 

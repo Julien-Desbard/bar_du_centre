@@ -7,22 +7,24 @@ GET http://localhost:3001/api/carte
 
 ###
 # Get carte item by id
-GET http://localhost:3001/api/carte/1
+GET http://localhost:3001/api/carte/2
 ###
 
 ###
 # Update a carte item
-PATCH http://localhost:3001/api/carte/7
+PATCH http://localhost:3001/api/carte/18
 content-type: application/json
 
 {
-    "categorie" : "Entrées"
+    "categorie" : "Entrées",
+    "name": "restest",
+    "prix" : 250
 }
 ###
 
 ###
 # Delete a carte item
-DELETE http://localhost:3001/api/carte/18
+DELETE http://localhost:3001/api/carte/2
 
 ###
 
@@ -31,9 +33,9 @@ POST http://localhost:3001/api/carte
 content-type: application/json
 
 {
-    "categorie" : "Plats",
-    "name": "test création item",
-    "prix" : 12
+    "categorie" : "Entrées",
+    "name": "test",
+    "prix" : 250
 }
 ###
 

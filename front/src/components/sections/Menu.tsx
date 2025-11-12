@@ -71,7 +71,7 @@ export default function MenuSection() {
 					>
 						<h2
 							onClick={() => (setOpenMenu(true), setNature("plats"))}
-							className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-1 sm:row-start-1 sm:self-center"
+							className="font-subtitle text-5xl/10 text-h2 font-semibold text-center max-sm:text-left sm:col-start-1 sm:row-start-1 sm:self-center"
 						>
 							menu de <br />
 							<span className="text-white">la cantine</span>
@@ -94,7 +94,7 @@ export default function MenuSection() {
 						/>
 						<h2
 							onClick={() => (setOpenMenu(true), setNature("boissons"))}
-							className="font-subtitle text-5xl text-h2 font-semibold text-center sm:col-start-2 sm:row-start-2 sm:self-center"
+							className="font-subtitle text-5xl/10 text-h2 font-semibold text-center max-sm:text-left sm:col-start-2 sm:row-start-2 sm:self-center"
 						>
 							carte des <br />
 							<span className="text-white">boissons</span>
@@ -111,7 +111,7 @@ export default function MenuSection() {
 
 				{/* --------------------- Carte du jour --------------------- */}
 				<div
-					className="flex flex-col items-center gap-4 max-w-full w-fit justify-self-center
+					className="flex flex-col items-center gap-2 max-w-full w-fit justify-self-center
 				lg:mt-30"
 				>
 					<h2 className="font-subtitle text-4xl text-center ">Carte du jour</h2>
