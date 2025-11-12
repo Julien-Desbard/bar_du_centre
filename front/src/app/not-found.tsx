@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { ChevronLeft } from "lucide-react"; // Assurez-vous que 'lucide-react' est installé
 import { Button } from "@/components/ui/button";
 
 export default function NotFound() {
