@@ -19,4 +19,3 @@ export const createMenuItemSchema = z.object({
 });
 
 export const updateMenuItemSchema = createMenuItemSchema.partial();
-a

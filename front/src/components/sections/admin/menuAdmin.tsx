@@ -56,10 +56,12 @@ export default function MenuAdmin() {
 
 	const [dataVersion, setDataVersion] = useState(0);
 
+	const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 	useEffect(() => {
 		async function getMenuCategories() {
 			try {
-				const httpResponse = await fetch(`http://localhost:3001/api/menu`);
+				const httpResponse = await fetch(`${BASE_URL}menu`);
 				const data = await httpResponse.json();
 
 				if (httpResponse.ok) {
@@ -77,9 +79,7 @@ export default function MenuAdmin() {
 	useEffect(() => {
 		async function getCategoryContent() {
 			try {
-				const httpResponse = await fetch(
-					`http://localhost:3001/api/menu/cat2/${category}`
-				);
+				const httpResponse = await fetch(`${BASE_URL}menu/cat2/${category}`);
 				const data = await httpResponse.json();
 				if (httpResponse.ok) {
 					setCategoryDetail(data.menuItemsPerSlugCat2);
@@ -158,7 +158,7 @@ export default function MenuAdmin() {
 	async function handleEdit() {
 		setIsSubmitting(true);
 		try {
-			const res = await fetch(`http://localhost:3001/api/menu/${id}`, {
+			const res = await fetch(`${BASE_URL}menu/${id}`, {
 				method: "PATCH",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
@@ -224,7 +224,7 @@ export default function MenuAdmin() {
 
 		setIsSubmitting(true);
 		try {
-			const res = await fetch(`http://localhost:3001/api/menu`, {
+			const res = await fetch(`${BASE_URL}menu`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
@@ -287,7 +287,7 @@ export default function MenuAdmin() {
 	async function handleDelete() {
 		setIsSubmitting(true);
 		try {
-			const res = await fetch(`http://localhost:3001/api/menu/${id}`, {
+			const res = await fetch(`${BASE_URL}menu/${id}`, {
 				method: "DELETE",
 			});
 
@@ -311,7 +311,7 @@ export default function MenuAdmin() {
 		<div className="text-white flex flex-col w-full min-h-screen max-sm:overflow-visible">
 			<div className="flex flex-row justify-around p-6">
 				<h3 className="text-5xl text-white font-subtitle underline font-light text-center">
-MENU
+					MENU
 				</h3>
 			</div>
 			<div className="border-b border-t border-secondary m-3">
