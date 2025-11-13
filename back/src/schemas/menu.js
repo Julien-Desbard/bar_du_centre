@@ -14,8 +14,9 @@ export const createMenuItemSchema = z.object({
 	cat3: NullableStringSchema.optional(),
 	description: NullableStringSchema.optional(),
 	prix_1: z.number().positive(),
-	prix_2: z.number().positive().optional(),
-	prix_3: z.number().positive().optional(),
+	prix_2: z.number().positive().nullable().optional(),
+	prix_3: z.number().positive().nullable().optional(),
 });
 
 export const updateMenuItemSchema = createMenuItemSchema.partial();
+a
