@@ -26,13 +26,16 @@ export type MenuItem = {
 export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
 
+
+	const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 	useEffect(() => {
 		if (!openMenu) return;
 
 		async function getMenuItems() {
 			try {
 				const httpResponse = await fetch(
-					`http://localhost:3001/api/menu/cat/${nature}`
+					`${BASE_URL}menu/cat/${nature}`
 				);
 				const data = await httpResponse.json();
 				console.log(data);

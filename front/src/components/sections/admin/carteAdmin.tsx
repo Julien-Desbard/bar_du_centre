@@ -34,10 +34,12 @@ export default function CarteAdmin() {
 	// Create modal states
 	const [openCreate, setOpenCreate] = useState(false);
 
+	const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 	useEffect(() => {
 		async function getCarteItems() {
 			try {
-				const httpResponse = await fetch(`http://localhost:3001/api/carte`);
+				const httpResponse = await fetch(`${BASE_URL}carte`);
 				const data = await httpResponse.json();
 
 				if (httpResponse.ok) {
@@ -53,21 +55,17 @@ export default function CarteAdmin() {
 	}, [dataVersion]);
 
 	const resetAllModalStatesAndClose = () => {
-		// 1. Fermeture des modales
 		setOpenEdit(false);
 		setOpenCreate(false);
 		setOpenDelete(false);
 
-		// 2. Réinitialisation des states temporaires liés à l'élément sélectionné
 		setName("");
 		setId(undefined);
 
-		// 3. Réinitialisation des states locaux du formulaire (local...)
 		setLocalName("");
 		setLocalCategorie("");
 		setLocalPrix("");
 
-		// 4. Réinitialisation des messages de feedback/erreur
 		setErrors("");
 		setMessageSuccess("");
 	};
@@ -77,7 +75,7 @@ export default function CarteAdmin() {
 	async function handleEdit() {
 		setIsSubmitting(true);
 		try {
-			const res = await fetch(`http://localhost:3001/api/carte/${id}`, {
+			const res = await fetch(`${BASE_URL}carte/${id}`, {
 				method: "PATCH",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
@@ -99,7 +97,7 @@ export default function CarteAdmin() {
 					JSON.stringify(data, null, 2)
 				);
 			}
-			setMessageSuccess(`Mise à jour de ${name}réalisée avec succès`);
+			setMessageSuccess(`Mise à jour de ${name} réalisée avec succès`);
 			setTimeout(() => resetAllModalStatesAndClose(), 3000);
 			setDataVersion((prev) => prev + 1);
 		} catch {
@@ -114,7 +112,7 @@ export default function CarteAdmin() {
 	async function handleDelete() {
 		setIsSubmitting(true);
 		try {
-			const res = await fetch(`http://localhost:3001/api/carte/${id}`, {
+			const res = await fetch(`${BASE_URL}carte/${id}`, {
 				method: "DELETE",
 				headers: { "Content-Type": "application/json" },
 			});
@@ -142,7 +140,7 @@ export default function CarteAdmin() {
 	async function handleCreate() {
 		setIsSubmitting(true);
 		try {
-			const res = await fetch(`http://localhost:3001/api/carte`, {
+			const res = await fetch(`${BASE_URL}carte`, {
 				method: "POST",
 				headers: { "Content-Type": "application/json" },
 				body: JSON.stringify({
@@ -184,7 +182,7 @@ export default function CarteAdmin() {
 		<div className="text-white pt-24 flex flex-col w-full max-sm:overflow-visible">
 			<div className="flex flex-row justify-around p-6">
 				<h3 className="text-5xl text-white underline font-subtitle font-light text-center">
-CARTE DU JOUR
+					CARTE DU JOUR
 				</h3>
 			</div>
 			<div className="justify-self-center">
@@ -231,7 +229,7 @@ CARTE DU JOUR
 											onClick={() => {
 												setOpenEdit(true);
 												setId(item.id);
-												setName(item.name)
+												setName(item.name);
 												setLocalName(item.name);
 												setLocalCategorie(item.categorie);
 												setLocalPrix(item.prix);
@@ -366,7 +364,7 @@ CARTE DU JOUR
 						required
 						className="border border-secondary p-1 pl-2 col-span-2"
 					/>
-										<label htmlFor="prix" className="">
+					<label htmlFor="prix" className="">
 						Prix
 					</label>
 					<input

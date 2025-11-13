@@ -19,10 +19,12 @@ export default function MenuSection() {
 	const [nature, setNature] = useState("");
 	const [carteItems, setCarteItems] = useState<CarteItems[]>([]);
 
+	const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
 	useEffect(() => {
 		async function getCarteItems() {
 			try {
-				const httpResponse = await fetch(`http://localhost:3001/api/carte`);
+				const httpResponse = await fetch(`${BASE_URL}carte`);
 				const data = await httpResponse.json();
 
 				if (httpResponse.ok) {
