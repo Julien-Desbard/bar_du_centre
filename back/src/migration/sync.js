@@ -1,4 +1,4 @@
-// back/src/migration/sync.js
+
 import 'dotenv/config';
 import { sequelize } from '../models/index.js';
 import '../models/index.js'; // importe modèles + associations
@@ -19,4 +19,4 @@ try {
   }
 }
 
-initDatabase()
+// initDatabase()

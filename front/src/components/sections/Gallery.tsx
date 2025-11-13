@@ -14,16 +14,6 @@ export type BrasserieContent = {
 export default function Gallery() {
 	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
 
-	const brasserieContent: BrasserieContent[] = [
-		{ id: 1, name: "le zinc" },
-		{ id: 2, name: "Arrière salle" },
-		{ id: 3, name: "Le bar" },
-		{ id: 4, name: "Seconde salle" },
-		{ id: 5, name: "Décoration" },
-		{ id: 6, name: "l'entrée" },
-		{ id: 7, name: "" },
-		{ id: 8, name: "" },
-	];
 
 	const sectionTitle: SectionTitleProps = {
 		part1: "notre",
@@ -43,7 +33,7 @@ export default function Gallery() {
 					</h2>
 				</div>
 				<div className="w-full px-6 pb-6">
-					<Carousel options={OPTIONS} brasserieContent={brasserieContent} />
+					<Carousel options={OPTIONS} />
 				</div>
 				<ReservationTrigger />
 			</div>

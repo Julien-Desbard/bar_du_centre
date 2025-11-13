@@ -452,7 +452,7 @@ MENU
 			</div>
 			<div className="flex self-center pb-8">
 				<Button onClick={() => setOpenCreate(true)}>
-					Créer un élement de menu
+					Ajouter un élement au menu
 				</Button>
 			</div>
 			{/* ========================== Update Modal ==========================*/}

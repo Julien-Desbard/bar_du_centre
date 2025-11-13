@@ -3771,4 +3771,4 @@ async function seed() {
 }
 
 export default seed;
-seed();
+// seed();
