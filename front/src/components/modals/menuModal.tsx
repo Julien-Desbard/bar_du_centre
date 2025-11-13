@@ -142,9 +142,7 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 										return (
 											<div key={cat3} className="mb-4">
 												<div className="flex justify-between items-baseline mb-2">
-													<h5 className="text-bg">
-														{cat3}
-													</h5>
+													<h5 className="text-bg">{cat3}</h5>
 													{firstItemCat3?.intitule && (
 														<p className="text-sm text-white/80">
 															{firstItemCat3.intitule}
@@ -157,11 +155,16 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 															(item) => item.cat2 === cat2 && item.cat3 === cat3
 														)
 														.map((item) => (
-															<li key={item.id} className="flex items-baseline gap-2">
+															<li
+																key={item.id}
+																className="flex items-baseline gap-2"
+															>
 																<div className="break-words">{item.name}</div>
 																<div className="flex-shrink-0 border-b border-dotted border-white/80 flex-2 mb-1" />
 																{nature === "plats" && (
-																	<div className="shrink-0 text-bg">{item.prix_1} €</div>
+																	<div className="shrink-0 text-bg">
+																		{item.prix_1} €
+																	</div>
 																)}
 																{nature === "boissons" &&
 																	(item.prix_3 ? (
@@ -194,19 +197,24 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 													<div className="break-words">{item.name}</div>
 													<div className="flex-shrink-0 border-b border-dotted border-white/80 flex-2 mb-1" />
 													{nature === "plats" && (
-														<div className="shrink-0 text-bg">{item.prix_1} €</div>
+														<div className="shrink-0 text-bg">
+															{item.prix_1} €
+														</div>
 													)}
 													{nature === "boissons" &&
 														(item.prix_3 ? (
 															<div className="shrink-0 text-bg">
-																{item.prix_1} € / {item.prix_2} € / {item.prix_3} €
+																{item.prix_1} € / {item.prix_2} € /{" "}
+																{item.prix_3} €
 															</div>
 														) : item.prix_2 ? (
 															<div className="shrink-0 text-bg">
 																{item.prix_1} € / {item.prix_2} €
 															</div>
 														) : (
-															<div className="shrink-0 text-bg">{item.prix_1} €</div>
+															<div className="shrink-0 text-bg">
+																{item.prix_1} €
+															</div>
 														))}
 												</li>
 											))}
@@ -218,10 +226,15 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 				</div>
 
 				<div className="flex justify-center border-t border-secondary mt-3">
-					<Button className="m-6">Menu en pdf</Button>
+					<a
+						href="/menu.pdf"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<Button className="m-6">Menu en pdf</Button>
+					</a>
 				</div>
 			</div>
 		</div>
 	);
 }
-

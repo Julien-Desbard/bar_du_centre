@@ -260,7 +260,7 @@ CARTE DU JOUR
 			</div>
 			<div className="flex self-center pb-12">
 				<Button onClick={() => setOpenCreate(true)}>
-					Créer un élement de menu
+					Ajouter un élément à la carte
 				</Button>
 			</div>
 			{/* ========================== Update Modal ==========================*/}

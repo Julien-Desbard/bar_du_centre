@@ -15,7 +15,7 @@ type PropType = {
 	options?: EmblaOptionsType;
 };
 
-interface EventData {
+type EventData = {
 	id: number;
 	documentId: string;
 	titre: string;
@@ -51,8 +51,8 @@ const EmblaCarousel = ({ options }: PropType) => {
 		const fetchEvents = async () => {
 			try {
 				const response = await fetch(
-					"https://light-cheese-efa53451a5.strapiapp.com/api/evenements?populate=*"
-				);
+                    "https://light-cheese-efa53451a5.strapiapp.com/api/evenements?populate=*&sort=createdAt:asc"
+                );
 				const data = await response.json();
 				setEvents(data.data);
 			} catch (error) {
