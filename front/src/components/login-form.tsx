@@ -11,7 +11,7 @@ export function LoginForm({
 			<Card>
 				<CardHeader>
 					<CardTitle className="text-center">
-						Accès à l'espace admin
+						Accès à l&apos;espace admin
 					</CardTitle>
 				</CardHeader>
 				<CardContent>

@@ -25,7 +25,7 @@ export default function AdminCarteList({ carteItems, setId, setName, setCategori
 									<div className="text-center">Prix</div>
 								</div>
 							</div>
-							{carteItems?.map((item, index) => {
+							{carteItems?.map((item) => {
                                 if (!item) return null
 								return (
 									<div

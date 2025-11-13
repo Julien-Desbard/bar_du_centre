@@ -37,7 +37,7 @@ export default function MenuSection() {
 			}
 		}
 		getCarteItems();
-	}, []);
+	}, [BASE_URL]);
 
 	const entrees = [
 		...new Set(carteItems.filter((item) => item.categorie === "Entrées")),

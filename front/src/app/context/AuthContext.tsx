@@ -3,8 +3,11 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useSession } from 'next-auth/react';
 
+import { Session } from 'next-auth';
+
+
 interface AuthContextType {
-  session: any;
+  session: Session | null; 
   isAuthenticated: boolean;
   isLoading: boolean;
   isConnected: boolean;
@@ -20,18 +23,20 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   
   const [isConnected, setIsConnected] = useState<boolean>(false);
   
-  // ← useEffect pour synchroniser isConnected avec la session
+
+  
   useEffect(() => {
     if (session) {
-      setIsConnected(true);  // Connecté
+      setIsConnected(true);
     } else {
-      setIsConnected(false); // Déconnecté
+      setIsConnected(false);
     }
-  }, [session]); // Se déclenche à chaque changement de session
+  }, [session]);
   
   return (
     <AuthContext.Provider value={{ 
-      session, 
+
+      session: session ?? null, 
       isAuthenticated,
       isLoading,
       isConnected,

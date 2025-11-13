@@ -4,7 +4,7 @@ interface CategoryList {
 	items: CarteItems[];
 }
 
-export default function ({ items }: CategoryList) {
+export default function CategoryCarte({ items }: CategoryList) {
 	if (!items || items.length === 0) return null;
 
 	// Regrouper les éléments par catégorie
