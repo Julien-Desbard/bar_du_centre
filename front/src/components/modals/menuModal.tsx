@@ -2,7 +2,6 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { XIcon } from "../ui/XIcon";
-import Link from "next/link";
 
 interface Modalprops {
 	openMenu: boolean;
@@ -49,7 +48,7 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 			}
 		}
 		getMenuItems();
-	}, [openMenu]);
+	}, [openMenu, nature, BASE_URL]);
 
 	if (!openMenu) return null;
 

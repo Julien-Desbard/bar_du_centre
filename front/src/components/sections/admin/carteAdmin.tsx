@@ -2,7 +2,6 @@
 import { Edit, Trash } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Button } from "../../ui/button";
-import AdminCarteList from "@/components/lists/adminCarteList";
 import GenericModal from "@/components/modals/genericModal";
 
 export type CarteItems = {
@@ -52,7 +51,7 @@ export default function CarteAdmin() {
 			}
 		}
 		getCarteItems();
-	}, [dataVersion]);
+	}, [dataVersion,BASE_URL]);
 
 	const resetAllModalStatesAndClose = () => {
 		setOpenEdit(false);
@@ -196,7 +195,7 @@ export default function CarteAdmin() {
 									<div className="text-center">Prix</div>
 								</div>
 							</div>
-							{carteItems?.map((item, index) => {
+							{carteItems?.map((item) => {
 								if (!item) return null;
 								return (
 									<div

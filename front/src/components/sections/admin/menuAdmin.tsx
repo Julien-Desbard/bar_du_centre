@@ -42,8 +42,6 @@ export default function MenuAdmin() {
 	const [localCat1, setLocalCat1] = useState<string>("");
 	const [localCat2, setLocalCat2] = useState<string>("");
 	const [localCat3, setLocalCat3] = useState<string>("");
-	const [localSlugCat2, setLocalSlugCat2] = useState<string>("");
-
 	const [activeSafeid, setActiveSafeid] = useState<string>("lechaud");
 	const [name, setName] = useState("");
 	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
@@ -74,7 +72,7 @@ export default function MenuAdmin() {
 			}
 		}
 		getMenuCategories();
-	}, [dataVersion]);
+	}, [dataVersion, BASE_URL]);
 
 	useEffect(() => {
 		async function getCategoryContent() {
@@ -91,7 +89,7 @@ export default function MenuAdmin() {
 			}
 		}
 		getCategoryContent();
-	}, [category, dataVersion]);
+	}, [category, dataVersion, BASE_URL]);
 
 	const drinks = [
 		...new Set(
@@ -130,7 +128,6 @@ export default function MenuAdmin() {
 		setLocalCat1("");
 		setLocalCat2("");
 		setLocalCat3("");
-		setLocalSlugCat2("");
 
 		// 4. Réinitialisation des messages de feedback/erreur
 		setErrors("");
@@ -220,7 +217,6 @@ export default function MenuAdmin() {
 			return;
 		}
 
-		setLocalSlugCat2(localCat2.replace(/\s+/g, "_").toLowerCase());
 
 		setIsSubmitting(true);
 		try {

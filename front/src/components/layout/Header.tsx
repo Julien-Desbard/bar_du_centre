@@ -1,11 +1,10 @@
 "use client";
 
 import Link from "next/link";
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import { usePathname } from "next/navigation";
 import BurgerMenu from "./BurgerMenu";
 import { useSession } from "next-auth/react";
-import { useAuth } from "@/app/context/AuthContext";
 import SignOffButton from "../buttons/signOffButton";
 
 // Creating Nav menu

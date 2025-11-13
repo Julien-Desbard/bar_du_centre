@@ -52,10 +52,12 @@ const XIcon = forwardRef<XIconHandle, XIconProps>(
 					path1Controls.start("animate");
 					path2Controls.start("animate");
 				} else {
-					onMouseEnter?.(e as any);
+					if (e) {
+						onMouseEnter?.(e);
+					}
 				}
 			},
-			[svgControls, path1Controls, path2Controls, reduced, onMouseEnter],
+			[svgControls, path1Controls, path2Controls, reduced, onMouseEnter]
 		);
 
 		const handleLeave = useCallback(
@@ -68,7 +70,7 @@ const XIcon = forwardRef<XIconHandle, XIconProps>(
 					onMouseLeave?.(e);
 				}
 			},
-			[svgControls, path1Controls, path2Controls, onMouseLeave],
+			[svgControls, path1Controls, path2Controls, onMouseLeave]
 		);
 
 		const svgVariants: Variants = {
@@ -126,7 +128,7 @@ const XIcon = forwardRef<XIconHandle, XIconProps>(
 				</motion.svg>
 			</motion.div>
 		);
-	},
+	}
 );
 
 XIcon.displayName = "XIcon";
