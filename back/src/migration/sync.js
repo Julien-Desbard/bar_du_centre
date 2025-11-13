@@ -1,7 +1,7 @@
 
 import 'dotenv/config';
 import { sequelize } from '../models/index.js';
-import '../models/index.js'; // importe modèles + associations
+import '../models/index.js'; 
 
 export async function initDatabase({ force = true, alter = false } = {}) {
   try {
