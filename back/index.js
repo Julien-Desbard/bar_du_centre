@@ -29,18 +29,18 @@ app.listen(PORT, () => {
 async function startServer() {
 	try {
 		// ⚠️ Ne sync/seed qu’en dev ou si activé explicitement
-		if (
-			process.env.NODE_ENV !== "production" ||
-			process.env.ALLOW_SYNC === "true"
-		) {
+		// if (
+		// 	process.env.NODE_ENV !== "production" ||
+		// 	process.env.ALLOW_SYNC === "true"
+		// ) {
 			await initDatabase(); // en prod: passe en alter:true et déclenche seulement manuellement
-		}
-		if (
-			process.env.NODE_ENV !== "production" ||
-			process.env.ALLOW_SEED === "true"
-		) {
+		// }
+		// if (
+		// 	process.env.NODE_ENV !== "production" ||
+		// 	process.env.ALLOW_SEED === "true"
+		// ) {
 			await seed();
-		}
+		// }
 
 		app.listen(PORT, () => {
 			console.log(`Server running on port ${PORT}`);
