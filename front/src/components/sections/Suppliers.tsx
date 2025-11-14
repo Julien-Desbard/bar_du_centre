@@ -91,7 +91,7 @@ export default function Suppliers() {
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start">
-					<h2 className="font-body text-3xl m-6">
+					<h2 className="font-body max-sm:text-2xl text-3xl m-6">
 						Des artisans <span className="text-secondary">indépendants</span> et{" "}
 						<span className="text-secondary">locaux</span>
 					</h2>

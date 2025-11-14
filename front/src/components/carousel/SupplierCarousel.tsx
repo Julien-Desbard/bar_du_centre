@@ -46,7 +46,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options, supplierContent }) => {
 								href={item.url}
 								className="block transition-transform delay-100 duration-300 ease-in-out hover:-translate-y-1 hover:opacity-90"
 							>
-								<div className="relative w-full aspect-square max-w-sm mx-auto">
+								<div className="relative w-[90%] aspect-square max-w-sm mx-auto">
 									<Image
 										alt={item.name}
 										src={`/images/suppliers/${item.slug}.png`}

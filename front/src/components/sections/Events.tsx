@@ -17,7 +17,7 @@ export default function Events() {
 			<SectionTitle sectionTitle={sectionTitle} />
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<div className="self-start m-6">
-					<h2 className="font-body text-3xl text-left">
+					<h2 className="font-body max-sm:text-2xl text-3xl text-left">
 						Venez participer à{" "}
 						<span className="text-secondary">nos événements</span>
 					</h2>

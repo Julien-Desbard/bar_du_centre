@@ -15,19 +15,19 @@ export default function Home() {
                 </div>
             </section>
 
-            <section className="min-h-screen snap-start w-full">
+            <section className="min-h-screen snap-start w-full  max-sm:mt-48">
                 <div className="max-w-[1280px] mx-auto">
                     <Menu />
                 </div>
             </section>
 
-            <section className="min-h-screen snap-start w-full">
+            <section className="min-h-screen snap-start w-full  max-sm:mt-48">
                 <div className="max-w-[1280px] mx-auto">
                     <Privatize />
                 </div>
             </section>
 
-            <section className="min-h-screen snap-start w-full">
+            <section className="min-h-screen snap-start w-full  max-sm:mt-48">
                 <div className="max-w-[1280px] mx-auto">
                     <Events />
                 </div>

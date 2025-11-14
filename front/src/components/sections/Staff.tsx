@@ -24,7 +24,7 @@ export default function Staff() {
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start">
-					<h2 className="font-body text-3xl m-6 text-left">
+					<h2 className="font-body max-sm:text-2xl text-3xl m-6 text-left">
 						Une équipe <span className="text-secondary">soudée</span> et de{" "}
 						<span className="text-secondary">passionnés</span>
 					</h2>
