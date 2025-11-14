@@ -94,6 +94,7 @@ export default function GenericModal({
 				<div className="flex flex-row justify-center pb-2">
 					<Button
 						type="submit"
+						aria-label="Annuler"
 						className="m-6 flex justify-self-center"
 						disabled={isSubmitting}
 						onClick={onClose}
@@ -105,6 +106,7 @@ export default function GenericModal({
 						<Button
 							type="submit"
 							className="m-6 flex justify-self-center"
+							aria-label={confirmText}
 							disabled={isSubmitting}
 							onClick={onConfirm}
 						>

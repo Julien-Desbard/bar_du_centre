@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, {
 	ComponentPropsWithRef,
 	useCallback,
@@ -59,6 +59,7 @@ export const PrevButton: React.FC<PropType> = (props) => {
 		<button
 			className="embla__button embla__button--prev text-white"
 			type="button"
+			aria-label="image précédente"
 			{...restProps}
 		>
 			<svg className="embla__button__svg" viewBox="0 0 532 532">
@@ -79,6 +80,7 @@ export const NextButton: React.FC<PropType> = (props) => {
 		<button
 			className="embla__button embla__button--next"
 			type="button"
+			aria-label="image suivante"
 			{...restProps}
 		>
 			<svg className="embla__button__svg" viewBox="0 0 532 532">

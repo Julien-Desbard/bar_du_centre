@@ -3,53 +3,36 @@ import Image from "next/image";
 import { Button } from "../ui/button";
 import ReservationModal from "../modals/reservationModal";
 import MenuModal from "../modals/menuModal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import CategoryCarte from "../lists/categoryCarte";
+import { ApiResponse} from "@/@types";
 
-export type CarteItems = {
-	id: number;
-	name: string;
-	categorie: string;
-	prix: string;
+type MenuProps = {
+	menuData: ApiResponse | null; // Correction : c'est un tableau, et peut être null
 };
 
-export default function Menu() {
+export default function Menu({ menuData }: MenuProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openMenu, setOpenMenu] = useState(false);
 	const [nature, setNature] = useState("");
-	const [carteItems, setCarteItems] = useState<CarteItems[]>([]);
 
-	const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+	console.log("menuData reçu dans Menu :", menuData); // <-- log navigateur
 
-	useEffect(() => {
-		async function getCarteItems() {
-			try {
-				const httpResponse = await fetch(`${BASE_URL}carte`);
-				const data = await httpResponse.json();
+	const carteItems = Array.isArray(menuData?.allCarteItems)
+		? menuData.allCarteItems
+		: [];
 
-				if (httpResponse.ok) {
-					setCarteItems(data.allCarteItems);
-				} else {
-					throw new Error("L'appel à l'API a échoué, veuillez réessayer...");
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		getCarteItems();
-	}, [BASE_URL]);
+	// ---- DEBUG ----
+	console.log("carteItems après normalisation :", carteItems);
+	// ---------------
 
-	const entrees = [
-		...new Set(carteItems.filter((item) => item.categorie === "Entrées")),
-	];
+	const entrees = carteItems.filter((i) => i.categorie === "Entrées");
+	const plats = carteItems.filter((i) => i.categorie === "Plats");
+	const desserts = carteItems.filter((i) => i.categorie === "Desserts");
 
-	const plats = [
-		...new Set(carteItems.filter((item) => item.categorie === "Plats")),
-	];
-
-	const desserts = [
-		...new Set(carteItems.filter((item) => item.categorie === "Desserts")),
-	];
+	// ---- DEBUG ----
+	console.log({ entrees, plats, desserts });
+	// ---------------
 
 	return (
 		<section
@@ -114,14 +97,13 @@ export default function Menu() {
 				{/* --------------------- Carte du jour --------------------- */}
 				<div
 					className="flex flex-col items-center gap-2 max-w-full w-fit justify-self-center
-				lg:mt-30"
+				lg:mt-42"
 				>
 					<h2 className="font-subtitle text-4xl text-center ">Carte du jour</h2>
 
-					<CategoryCarte items={entrees}/>
-					<CategoryCarte items={plats}/>
-					<CategoryCarte items={desserts}/>
-
+					<CategoryCarte items={entrees} />
+					<CategoryCarte items={plats} />
+					<CategoryCarte items={desserts} />
 
 					<Button
 						onClick={() => setIsOpen(true)}

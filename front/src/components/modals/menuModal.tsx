@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { XIcon } from "../ui/XIcon";
+import { MenuItem } from "@/@types";
 
 interface Modalprops {
 	openMenu: boolean;
@@ -9,22 +10,8 @@ interface Modalprops {
 	onClose: () => void;
 }
 
-export type MenuItem = {
-	id: number;
-	cat1: string;
-	name: string;
-	cat2?: string | null;
-	cat3?: string | null;
-	description?: string | null;
-	intitule?: string | null;
-	prix_1: string | undefined;
-	prix_2: string | undefined;
-	prix_3: string | undefined;
-};
-
 export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-
 
 	const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -33,9 +20,7 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 
 		async function getMenuItems() {
 			try {
-				const httpResponse = await fetch(
-					`${BASE_URL}menu/cat/${nature}`
-				);
+				const httpResponse = await fetch(`${BASE_URL}menu/cat/${nature}`);
 				const data = await httpResponse.json();
 				console.log(data);
 				if (httpResponse.ok) {
@@ -228,12 +213,13 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 				</div>
 
 				<div className="flex justify-center border-t border-secondary mt-3">
-					<a
-						href="/menu.pdf"
-						target="_blank"
-						rel="noopener noreferrer"
-					>
-						<Button className="m-6">Menu en pdf</Button>
+					<a href="/menu.pdf" target="_blank" rel="noopener noreferrer">
+						<Button
+							className="m-6"
+							aria-label="Menu en pdf"
+						>
+							Menu en pdf
+						</Button>
 					</a>
 				</div>
 			</div>

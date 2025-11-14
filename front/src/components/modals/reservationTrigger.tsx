@@ -9,7 +9,9 @@ export default function ReservationTrigger() {
 
 	return (
 		<>
-			<Button onClick={() => setIsOpen(true)} className="max-w-45">
+			<Button onClick={() => setIsOpen(true)} className="max-w-45"
+			aria-label="Reserver une table"
+				>
 				Réserver une table
 			</Button>
 

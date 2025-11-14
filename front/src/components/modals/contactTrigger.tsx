@@ -9,7 +9,9 @@ export default function ContacTrigger() {
 	return (
 		<>
 			<div className="flex justify-center ">
-				<Button onClick={() => setIsOpen(true)} className="max-w-45 ">
+				<Button onClick={() => setIsOpen(true)} className="max-w-45 "
+			aria-label="Contactez-nous"
+					>
 					Contactez-nous
 				</Button>
 			</div>

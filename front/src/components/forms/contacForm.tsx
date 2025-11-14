@@ -155,6 +155,7 @@ useEffect (() => {
 					type="submit"
 					className="m-6 flex justify-self-center max-md:hidden"
 					onClick={(e) => handleSubmit(e)}
+					aria-label="envoyer le message"
 					disabled={isSubmitting}
 				>
 					{isSubmitting ? (

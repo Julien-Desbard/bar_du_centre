@@ -1,11 +1,11 @@
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 import EventCarousel from "../carousel/EventCarousel";
-import type { EmblaOptionsType } from "embla-carousel";
-import "@/styles/embla.css";
+// import type { EmblaOptionsType } from "embla-carousel";
+// import "@/styles/embla.css";
 import ReservationTrigger from "../modals/reservationTrigger";
 
 export default function Events() {
-	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
+	// const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
 
 	const sectionTitle: SectionTitleProps = { part1: "nos", part2: "événements" };
 
@@ -23,7 +23,7 @@ export default function Events() {
 					</h2>
 				</div>
 				<div className="w-full mx-6 sm:py-6 lg:pb-3">
-					<EventCarousel options={OPTIONS} />
+					<EventCarousel  />
 				</div>
 				<ReservationTrigger />
 			</div>
