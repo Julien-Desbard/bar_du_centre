@@ -106,10 +106,10 @@ const EmblaCarousel = ({ options }: PropType) => {
 									/>
 									<div className="absolute max-lg:bottom-20 bottom-25 w-full z-50 bg-transparent text-center h-10">
 										<h3 className="font-title font-lighter max-md:text-4xl text-5xl text-shadow-lg">
-											{event.titre}
+											{event.titre.toUpperCase()}
 										</h3>
 										<p className="font-title max-md:text-2xl text-3xl text-shadow-lg">
-											{event.sous_titre}
+											{event.sous_titre.toUpperCase()}
 										</p>
 										<p className="font-body text-center text-xl mt-2 mb-2">
 											{event.jour} {event.date}

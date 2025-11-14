@@ -129,12 +129,12 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						/>
 					</button>
 				</div>
-				<h3 className="text-2xl mb-8 text-white font-subtitle font-light justify-self-center">
+				<h3 className="text-3xl mb-8 text-white font-subtitle font-light justify-self-center">
 					Nous contacter
 				</h3>
 
 				<div
-					className="font-body mb-4 px-12
+					className="font-body text-base mb-4 px-12
 				max-sm:px-4"
 				>
 					<form className="grid grid-cols-2 grid-row-8 gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
