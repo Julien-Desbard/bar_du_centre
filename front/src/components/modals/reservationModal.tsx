@@ -197,7 +197,6 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			setMessageSuccess("Réservation effectuée avec succès");
 			setTimeout(() => onClose(), 3000);
 			setIsSubmitting(false);
-			
 		} catch {
 			setErrors("Une erreur est survenue, veuillez réessayer");
 		} finally {
@@ -303,8 +302,8 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							onChange={(e) => setDate(e.target.value)}
 							required
 							placeholder="Date"
-							className="border border-secondary p-1 pl-2 
-							max-sm:col-span-2"
+							className={`border border-secondary p-1 pl-2 max-sm:col-span-2 ${
+								date ? "text-white" : "text-gray-500" }`}
 						/>
 						<label htmlFor="reservation_time" className="sr-only">
 							Heure de votre visite
@@ -313,15 +312,17 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							type="time"
 							inputMode="numeric"
 							name="reservation_time"
+							value={reservationTime}
 							onChange={(e) => {
-								const value = e.target.value; // "HH:mm"
+								const value = e.target.value;
 								setReservationTime(value);
 								if (!value) return;
 							}}
 							required
 							placeholder="Heure"
-							className="border border-secondary p-1 pl-2
-							max-sm:col-span-2"
+							className={`border border-secondary p-1 pl-2 max-sm:col-span-2 ${
+								reservationTime ? "text-white" : "text-gray-500" 
+							}`}
 						/>
 						<label htmlFor="number" className="sr-only">
 							Nombre de convives
@@ -394,12 +395,15 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							className="border border-secondary p-1 pl-2 col-span-2"
 						></textarea>
 					</form>
-				{messageSuccess && messageSuccess !== "" && (
-					<p className="text-secondary py-2">{messageSuccess}</p>
-				)}
-				{errors && errors !== "" && (
-					<p className="font-body font-light italic text-red-500 py-2"> {errors}</p>
-				)}
+					{messageSuccess && messageSuccess !== "" && (
+						<p className="text-secondary py-2">{messageSuccess}</p>
+					)}
+					{errors && errors !== "" && (
+						<p className="font-body font-light italic text-red-500 py-2">
+							{" "}
+							{errors}
+						</p>
+					)}
 				</div>
 				<Button
 					type="submit"

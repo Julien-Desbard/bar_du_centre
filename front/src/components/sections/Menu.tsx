@@ -13,7 +13,7 @@ export type CarteItems = {
 	prix: string;
 };
 
-export default function MenuSection() {
+export default function Menu() {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openMenu, setOpenMenu] = useState(false);
 	const [nature, setNature] = useState("");
