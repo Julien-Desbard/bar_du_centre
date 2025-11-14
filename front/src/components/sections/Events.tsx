@@ -12,7 +12,7 @@ export default function Events() {
 	return (
 		<section
 			id="events"
-			className="snap-start min-h-screen text-white overflow-hidden max-sm:pt-12"
+			className="snap-start min-h-screen text-white overflow-hidden max-sm:pt-5"
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">

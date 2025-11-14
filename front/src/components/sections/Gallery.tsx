@@ -22,7 +22,7 @@ export default function Gallery() {
 	return (
 		<section
 			id="gallery"
-			className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-12"
+			className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-6"
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />

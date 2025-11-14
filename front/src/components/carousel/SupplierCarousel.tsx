@@ -49,7 +49,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options, supplierContent }) => {
 								<div className="relative w-[90%] aspect-square max-w-sm mx-auto">
 									<Image
 										alt={item.name}
-										src={`/images/suppliers/${item.slug}.png`}
+										src={`/images/suppliers/${item.slug}.webp`}
 										fill
 										sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
 										className="object-cover"

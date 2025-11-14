@@ -47,20 +47,16 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		return () => clearTimeout(timer);
 	}, [errors]);
 
-	// Focusing on the first input field of the form
 	const nameRef = useRef<HTMLInputElement>(null);
 	useEffect(() => {
 		if (isOpen && nameRef.current) {
 			nameRef.current.focus();
 
-			// --- Logique Day.js ajoutée ici ---
 			const TZ = "Europe/Paris";
 			const now = dayjs().tz(TZ);
 
-			// Définir la date du jour (format YYYY-MM-DD pour l'input type="date")
 			setDate(now.format("YYYY-MM-DD"));
 
-			// Définir l'heure actuelle (format HH:mm pour l'input type="time")
 			setReservationTime(now.format("HH:mm"));
 			// ------------------------------------
 		}
@@ -154,7 +150,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			if (now.isBefore(cutoff10)) return { ok: true, msg: "" };
 			return {
 				ok: false,
-				msg: "Pour déjeuner aujourd’hui, les réservations en ligne ferment à 10h00. Appelez le 01-23-45-67-89.",
+				msg: "Pour déjeuner aujourd’hui, les réservations en ligne ferment à 10h00. Appelez le +33(0)2 41 87 45 07.",
 			};
 		}
 
@@ -162,7 +158,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			if (now.isBefore(cutoff17)) return { ok: true, msg: "" };
 			return {
 				ok: false,
-				msg: "Pour diner aujourd’hui, les réservations en ligne ferment à 17h00. Appelez le 01-23-45-67-89.",
+				msg: "Pour diner aujourd’hui, les réservations en ligne ferment à 17h00. Appelez le +33(0)2 41 87 45 07.",
 			};
 		}
 		return { ok: true, msg: "" };
