@@ -2,9 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { Playfair_Display, Poppins } from "next/font/google";
-import {AuthProvider} from "@/app/context/AuthContext"
+import { AuthProvider } from "@/app/context/AuthContext";
 import { SessionProvider } from "next-auth/react";
-
 
 const playfair = Playfair_Display({
 	weight: ["400", "500", "600", "700"],
@@ -30,7 +29,7 @@ export default function RootLayout({
 	return (
 		<html lang="fr" className={`${playfair.variable} ${poppins.variable}`}>
 			<body
-				className="bg-bgbody m-0 p-0 overflow-hidden"
+				className="bg-bgbody overflow-x-hidden"
 				suppressHydrationWarning={true}
 			>
 				<SessionProvider>
@@ -40,7 +39,10 @@ export default function RootLayout({
 								<Header />
 							</div>
 						</header>
-						{children}
+
+						<main className="snap-y snap-proximity scroll-smooth overflow-y-auto h-screen w-full">
+							{children}
+						</main>
 					</AuthProvider>
 				</SessionProvider>
 			</body>

@@ -13,17 +13,20 @@ export default function BdcHistory() {
 	};
 
 	return (
-		<section id="history" className="snap-start min-h-screen text-white ">
-			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
+		<section id="history" 
+				className="snap-start relative text-white overflow-hidden min-h-screen"
+		>
+			<div className="w-full h-full flex flex-col justify-between items-center mx-auto"
+			>
 				<SectionTitle sectionTitle={sectionTitle} />
-				<div className="self-start">
-					<h2 className="font-body text-3xl m-6 text-left">
+				<div className="self-start m-6">
+					<h2 className="font-body text-3xl  text-left">
 						Un lieu à
 						<span className="text-secondary"> l&apos;histoire riche</span>
 					</h2>
 				</div>
-				<div className="flex justify-between">
-					<section className="text-white font-bod flex flex-col lg:max-w-5/10 p-6 lg:pl-6 lg:pr-3 gap-6 text-justify">
+				<div className="flex justify-between pb-6">
+					<section className="text-white flex flex-col lg:max-w-5/10 p-6 lg:pl-6 lg:pr-3 gap-6 text-justify">
 						<p>
 							On me surnomme couramment le BDC. Mais savez-vous que les Angevins
 							m&apos;ont jadis appelé Maison du Roi David ou maison Vogelweith ?
@@ -86,9 +89,9 @@ export default function BdcHistory() {
 						>
 							Pour plus d&apos;infos, cliquer ici{" "}
 						</Link>
-						<div className="lg:hidden self-center mt-6">
+						{/* <div className="lg:hidden self-center mt-6">
 							<ReservationTrigger />
-						</div>
+						</div> */}
 					</section>
 					<div className="pr-6 pl-3 flex max-lg:hidden lg:flex-col lg:items-center lg:justify-center gap-18">
 						<Image
@@ -97,14 +100,14 @@ export default function BdcHistory() {
 							width={500}
 							height={500}
 						/>
-						<div className="xl:hidden">
+						{/* <div className="xl:hidden">
 							<ReservationTrigger />
-						</div>
+						</div> */}
 					</div>
 				</div>
-				<div className="max-xl:hidden self-center mb-12">
+				{/* <div className="max-xl:hidden self-center mb-12">
 					<ReservationTrigger />
-				</div>
+				</div> */}
 			</div>
 		</section>
 	);

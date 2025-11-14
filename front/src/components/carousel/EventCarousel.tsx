@@ -33,10 +33,17 @@ type EventData = {
 			};
 		};
 	}>;
-}
+};
 
 const EmblaCarousel = ({ options }: PropType) => {
-	const [emblaRef, emblaApi] = useEmblaCarousel(options);
+	const defaultOptions: EmblaOptionsType = {
+		loop: true,
+		align: "start",
+		skipSnaps: false,
+		...options,
+	};
+
+	const [emblaRef, emblaApi] = useEmblaCarousel(defaultOptions);
 	const [events, setEvents] = useState<EventData[]>([]);
 	const [loading, setLoading] = useState(true);
 
@@ -51,8 +58,8 @@ const EmblaCarousel = ({ options }: PropType) => {
 		const fetchEvents = async () => {
 			try {
 				const response = await fetch(
-                    "https://light-cheese-efa53451a5.strapiapp.com/api/evenements?populate=*&sort=createdAt:asc"
-                );
+					"https://light-cheese-efa53451a5.strapiapp.com/api/evenements?populate=*&sort=createdAt:asc"
+				);
 				const data = await response.json();
 				setEvents(data.data);
 			} catch (error) {
@@ -80,9 +87,9 @@ const EmblaCarousel = ({ options }: PropType) => {
 					{events.map((event) => (
 						<div
 							key={event.id}
-							className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] px-2 flex-shrink-0"
+							className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] flex-shrink-0"
 						>
-							<div className="relative w-full aspect-square max-w-sm mx-auto">
+							<div className="relative w-full aspect-square max-w-sm">
 								<Image
 									alt={
 										event.photo[0]?.alternativeText ||
@@ -95,24 +102,24 @@ const EmblaCarousel = ({ options }: PropType) => {
 									sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
 									className="object-contain"
 								/>
-								<div className="absolute max-lg:bottom-15 bottom-25 w-full z-50 bg-transparent text-center h-10">
+								<div className="absolute max-lg:bottom-20 bottom-25 w-full z-50 bg-transparent text-center h-10">
 									<h3 className="font-title font-lighter max-md:text-4xl text-5xl text-shadow-lg">
 										{event.titre}
 									</h3>
 									<p className="font-title max-md:text-2xl text-3xl text-shadow-lg">
 										{event.sous_titre}
 									</p>
+									<p className="font-body text-center text-xl mt-2 mb-2">
+										{event.jour} {event.date}
+									</p>
 								</div>
 							</div>
-							<p className="font-body text-center text-xl mt-2">
-								{event.jour} {event.date}
-							</p>
 						</div>
 					))}
 				</div>
 			</div>
 
-			<div className="flex items-center justify-center mt-6 px-4">
+			<div className="flex items-center justify-center">
 				<div className="flex gap-2">
 					<PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
 					<NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />

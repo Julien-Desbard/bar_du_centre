@@ -16,13 +16,13 @@ export default function Privatize() {
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 			<div className="w-full h-full flex flex-col justify-between self-start mx-auto">
-				<div className="px-6">
-					<h2 className="text-3xl font-body text-left mt-6">
+				<div className="px-6 mt-6">
+					<h2 className="text-3xl font-body text-left ">
 						Reservez notre{" "}
 						<span className="text-secondary ">seconde salle</span>
 					</h2>
 				</div>
-				<div className="lg:flex lg:flex-row">
+				<div className="lg:flex lg:flex-row sm:py-6">
 					<div className="px-6 mt-6 flex justify-center">
 						<Image
 							alt="image de la salle privatisable"
@@ -33,28 +33,27 @@ export default function Privatize() {
 						/>
 					</div>
 					{/* Texte descriptif */}
-					<div className="px-6 mt-6 flex-1 flex flex-col justify-between">
-						<div className="text-2xl/10 font-light">
-							<p>Pour vos : </p>
-							<ul>
-								<li className="flex items-center gap-2">
-									<Cake size={24} className="text-secondary" />
-									<span>Anniversaires</span>
-								</li>
-								<li className="flex items-center gap-2">
-									<PartyPopper size={24} className="text-secondary" />
-									<span>Pots de départ</span>
-								</li>
-								<li className="flex items-center gap-2">
-									<Martini size={24} className="text-secondary" />
-									<span>Soirées en famille ou entre amis</span>
-								</li>
-							</ul>
-							<p className="mt-6">
-								Réservez notre seconde salle d&apos;une capacité de{" "}
-								<span className="text-secondary">40 personnes</span>
-							</p>
-						</div>
+					<div className="px-6 mt-6 flex-1 flex flex-col justify-between text-2xl/10 font-light">
+						<p>Pour vos : </p>
+						<ul>
+							<li className="flex items-center gap-2">
+								<Cake size={24} className="text-secondary" />
+								<span>Anniversaires</span>
+							</li>
+							<li className="flex items-center gap-2">
+								<PartyPopper size={24} className="text-secondary" />
+								<span>Pots de départ</span>
+							</li>
+							<li className="flex items-center gap-2">
+								<Martini size={24} className="text-secondary" />
+								<span>Soirées en famille ou entre amis</span>
+							</li>
+						</ul>
+						<p className="">
+							Réservez notre seconde salle d&apos;une capacité de{" "}
+							<span className="text-secondary">40 personnes</span>
+						</p>
+
 						<ContacTrigger />
 					</div>
 				</div>

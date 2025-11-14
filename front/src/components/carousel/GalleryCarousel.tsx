@@ -35,7 +35,14 @@ type PropType = {
 };
 
 const EmblaCarousel: React.FC<PropType> = ({ options }) => {
-    const [emblaRef, emblaApi] = useEmblaCarousel(options);
+    const defaultOptions: EmblaOptionsType = {
+        loop: true,
+        align: "start",
+        skipSnaps: false,
+        ...options,
+    };
+
+    const [emblaRef, emblaApi] = useEmblaCarousel(defaultOptions);
     
     const [galleryItems, setGalleryItems] = useState<GalleryItemData[]>([]);
     const [loading, setLoading] = useState(true);
@@ -84,14 +91,14 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
     
 
     return (
-        <div className="w-full mt-12">
+        <div className="w-full">
             <div className="overflow-hidden" ref={emblaRef}>
                 <div className="flex">
                     {galleryItems.map((item) => (
                         <div
 
                             key={item.id}
-                            className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] xl:flex-[0_0_25%] px-2 flex-shrink-0"
+                            className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] flex-shrink-0"
                         >
                             {item.photo && item.photo.length > 0 && (
                                 <div className="relative w-full aspect-square max-w-sm mx-auto">
@@ -121,8 +128,8 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
                 </div>
             </div>
 
-            <div className="flex items-center justify-center mt-6 px-4">
-                <div className="flex gap-2">
+            <div className="flex items-center justify-center">
+                <div className="flex gap-2 ">
                     <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
                     <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
                 </div>

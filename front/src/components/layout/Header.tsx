@@ -28,7 +28,7 @@ export default function Header() {
 
 	const activePath = activeSection ? `${pathname}#${activeSection}` : pathname;
 
-	// Initialiser la section active au chargement
+
 	useEffect(() => {
 		if (typeof window !== "undefined") {
 			const hash = window.location.hash.replace("#", "");
@@ -38,7 +38,7 @@ export default function Header() {
 		}
 	}, []);
 
-	// Écouter les changements de hash (clic sur liens)
+
 	useEffect(() => {
 		const handleHashChange = () => {
 			const hash = window.location.hash.replace("#", "");
@@ -49,7 +49,7 @@ export default function Header() {
 		return () => window.removeEventListener("hashchange", handleHashChange);
 	}, []);
 
-	// Détecter les sections actives lors du scroll
+
 	useEffect(() => {
 		const sections = document.querySelectorAll("section[id]");
 
@@ -62,7 +62,6 @@ export default function Header() {
 						const sectionId = entry.target.id;
 						setActiveSection(sectionId);
 
-						// Mettre à jour l'URL sans recharger
 						window.history.replaceState(null, "", `${pathname}#${sectionId}`);
 					}
 				});
@@ -100,14 +99,13 @@ export default function Header() {
 							</Link>
 						</div>
 					)}
-					{/* Mapping Nav to create the menu */}
 					{Nav.map(({ href, label }) => {
 						const isActive = href === activePath;
 						return (
 							<li key={href}>
 								<Link
 									href={href}
-									className={`hover:text-secondary transition-colors duration-300 ease-in-out lg:block hidden ${
+									className={`hover:text-secondary transition-colors duration-300 ease-in-out lg:block hidden tracking-wide${
 										isActive
 											? "underline underline-offset-8 decoration-secondary"
 											: ""

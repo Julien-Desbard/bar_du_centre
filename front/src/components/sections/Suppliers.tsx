@@ -1,4 +1,3 @@
-
 import React from "react";
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 import Carousel from "../carousel/SupplierCarousel";
@@ -85,23 +84,25 @@ export default function Suppliers() {
 		},
 	];
 	return (
-		<section id="gallery" className="snap-start min-h-screen text-white ">
+		<section
+			id="gallery"
+			className="snap-start relative text-white overflow-hidden min-h-screen"
+		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start">
 					<h2 className="font-body text-3xl m-6">
-						Des artisans{" "}
-						<span className="text-secondary">indépendants</span> et <span className="text-secondary">locaux</span>
+						Des artisans <span className="text-secondary">indépendants</span> et{" "}
+						<span className="text-secondary">locaux</span>
 					</h2>
 				</div>
 				<div className="w-full px-6 mb-6">
 					<Carousel options={OPTIONS} supplierContent={supplierContent} />
 				</div>
 				<div>
-<ReservationTrigger/>
+					<ReservationTrigger />
 				</div>
 			</div>
-
 		</section>
 	);
 }

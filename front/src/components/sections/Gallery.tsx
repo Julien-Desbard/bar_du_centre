@@ -22,17 +22,17 @@ export default function Gallery() {
 	return (
 		<section
 			id="gallery"
-			className="snap-start min-h-screen text-white overflow-hidden "
+			className="snap-start relative text-white overflow-hidden min-h-screen"
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
-				<div className="self-start">
-					<h2 className="font-body text-3xl m-6 text-left">
+				<div className="self-start m-6">
+					<h2 className="font-body text-3xl text-left">
 						Le <span className="text-secondary">Bar Du Centre</span> sous toutes
 						ses coutures
 					</h2>
 				</div>
-				<div className="w-full px-6 pb-6">
+				<div className="w-full mx-6 sm:py-6 lg:pb-3">
 					<Carousel options={OPTIONS} />
 				</div>
 				<ReservationTrigger />
