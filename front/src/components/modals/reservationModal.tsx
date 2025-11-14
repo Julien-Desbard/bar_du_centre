@@ -52,6 +52,17 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 	useEffect(() => {
 		if (isOpen && nameRef.current) {
 			nameRef.current.focus();
+
+			// --- Logique Day.js ajoutée ici ---
+			const TZ = "Europe/Paris";
+			const now = dayjs().tz(TZ);
+
+			// Définir la date du jour (format YYYY-MM-DD pour l'input type="date")
+			setDate(now.format("YYYY-MM-DD"));
+
+			// Définir l'heure actuelle (format HH:mm pour l'input type="time")
+			setReservationTime(now.format("HH:mm"));
+			// ------------------------------------
 		}
 	}, [isOpen]);
 
@@ -215,12 +226,12 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			}}
 		>
 			<div
-				className="bg-[url('/images/background.jpg')] bg-cover bg-center p-2 w-full max-w-xl shadow-lg text-white font-body"
+				className="bg-[url('/images/background.jpg')] bg-cover bg-center p-2 w-full max-w-xl shadow-lg text-white font-body flex flex-col"
 				onClick={(e) => {
 					e.stopPropagation();
 				}}
 			>
-				<div className="justify-self-end">
+				<div className="self-end">
 					<button
 						type="button"
 						aria-label="Fermer le menu"
@@ -236,13 +247,13 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 						/>
 					</button>
 				</div>
-				<h3 className="text-2xl mb-8 text-white font-subtitle font-light justify-self-center">
+				<h3 className="text-3xl mb-8 font-subtitle font-bold self-center">
 					Reservation
 				</h3>
 
 				<div
 					className="font-body mb-4 px-12
-				max-sm:px-4"
+                max-sm:px-4"
 				>
 					<form className="grid grid-cols-2 grid-row-8 gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
 						<input
@@ -301,9 +312,9 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							value={date}
 							onChange={(e) => setDate(e.target.value)}
 							required
-							placeholder="Date"
 							className={`border border-secondary p-1 pl-2 max-sm:col-span-2 ${
-								date ? "text-white" : "text-gray-500" }`}
+								date ? "text-white" : "text-gray-500"
+							}`}
 						/>
 						<label htmlFor="reservation_time" className="sr-only">
 							Heure de votre visite
@@ -319,9 +330,8 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 								if (!value) return;
 							}}
 							required
-							placeholder="Heure"
 							className={`border border-secondary p-1 pl-2 max-sm:col-span-2 ${
-								reservationTime ? "text-white" : "text-gray-500" 
+								reservationTime ? "text-white" : "text-gray-500"
 							}`}
 						/>
 						<label htmlFor="number" className="sr-only">
@@ -408,7 +418,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 				<Button
 					type="submit"
 					disabled={isSubmitting}
-					className="m-6 flex justify-self-center"
+					className="m-6 self-center"
 					onClick={(e) => handleSubmit(e)}
 				>
 					{isSubmitting ? (
