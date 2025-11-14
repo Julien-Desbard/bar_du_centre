@@ -8,7 +8,9 @@ export default function SignInButton() {
 				action={handleSignIn}
 				className="flex justify-center"
 			>
-				<Button type="submit">Connexion</Button>
+				<Button type="submit"
+			aria-label="Connexion"
+				>Connexion</Button>
 			</form>
 		</>
 	);

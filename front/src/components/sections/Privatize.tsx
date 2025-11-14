@@ -25,11 +25,13 @@ export default function Privatize() {
 				<div className="lg:flex lg:flex-row sm:py-6">
 					<div className="px-6 mt-6 flex justify-center">
 						<Image
-							alt="image de la salle privatisable"
 							src="/images/privatize.webp"
+							alt="Privatisation"
 							width={800}
 							height={600}
-							className="sm:max-w-lg"
+							quality={75}
+							sizes="(max-width: 768px) 100vw, 364px"
+							className="w-full max-w-[364px] h-auto"
 						/>
 					</div>
 					{/* Texte descriptif */}

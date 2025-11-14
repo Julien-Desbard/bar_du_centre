@@ -10,6 +10,8 @@ export default function SignOffButton() {
 					signOut({ callbackUrl: "/", redirect: true });
 					handleSignOut();
 				}}
+			aria-label="Déconnexion"
+
 			>
 				Se déconnecter
 			</Button>

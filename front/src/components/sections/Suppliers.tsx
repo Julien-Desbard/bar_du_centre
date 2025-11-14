@@ -1,8 +1,8 @@
 import React from "react";
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 import Carousel from "../carousel/SupplierCarousel";
-import { EmblaOptionsType } from "embla-carousel";
-import "@/styles/embla.css";
+// import { EmblaOptionsType } from "embla-carousel";
+// import "@/styles/embla.css";
 import ReservationTrigger from "../modals/reservationTrigger";
 
 export type SupplierContent = {
@@ -18,7 +18,7 @@ const sectionTitle: SectionTitleProps = {
 };
 
 export default function Suppliers() {
-	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
+	// const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
 
 	const supplierContent: SupplierContent[] = [
 		{
@@ -97,7 +97,7 @@ export default function Suppliers() {
 					</h2>
 				</div>
 				<div className="w-full px-6 mb-6">
-					<Carousel options={OPTIONS} supplierContent={supplierContent} />
+					<Carousel supplierContent={supplierContent} />
 				</div>
 				<div>
 					<ReservationTrigger />

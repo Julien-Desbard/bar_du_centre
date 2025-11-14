@@ -2,9 +2,9 @@
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 import ReservationTrigger from "../modals/reservationTrigger";
 import Carousel from "../carousel/GalleryCarousel";
-import { EmblaOptionsType } from "embla-carousel";
+// import { EmblaOptionsType } from "embla-carousel";
 import React from "react";
-import "@/styles/embla.css";
+// import "@/styles/embla.css";
 
 export type BrasserieContent = {
 	id: number;
@@ -12,7 +12,7 @@ export type BrasserieContent = {
 };
 
 export default function Gallery() {
-	const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
+	// const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
 
 
 	const sectionTitle: SectionTitleProps = {
@@ -33,7 +33,7 @@ export default function Gallery() {
 					</h2>
 				</div>
 				<div className="w-full mx-6 sm:py-6 lg:pb-3">
-					<Carousel options={OPTIONS} />
+					<Carousel />
 				</div>
 				<ReservationTrigger />
 			</div>
