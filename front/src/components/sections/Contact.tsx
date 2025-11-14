@@ -12,7 +12,7 @@ export default function Contact() {
 	return (
 		<section
 			id="contact"
-			className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-48"
+			className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-12"
 		>
 			<div className="w-full h-full flex flex-col items-start mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />

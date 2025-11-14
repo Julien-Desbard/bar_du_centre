@@ -54,7 +54,7 @@ export default function Menu() {
 	return (
 		<section
 			id="menu"
-			className="snap-start relative text-white overflow-hidden min-h-screen  max-sm:pt-48"
+			className="snap-start relative text-white overflow-hidden min-h-screen  max-sm:pt-12"
 		>
 			<div
 				className="w-full h-full mx-auto p-4 flex flex-row flex-wrap justify-around gap-x-3
