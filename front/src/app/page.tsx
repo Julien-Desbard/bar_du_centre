@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { ApiResponse, CarteItems } from "@/@types";
+import { ApiResponse } from "@/@types";
 import dynamicImport from "next/dynamic"; // Renommer l'import pour éviter le conflit
 
 // Importations statiques pour les composants légers ou critiques (comme Hero)
