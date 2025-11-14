@@ -14,7 +14,7 @@ export default function BdcHistory() {
 
 	return (
 		<section id="history" 
-				className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-48"
+				className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-12"
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto"
 			>

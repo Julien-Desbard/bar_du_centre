@@ -12,7 +12,7 @@ export default function Privatize() {
 	return (
 		<section
 			id="private"
-			className="snap-start text-white min-h-screen overflow-hidden max-sm:pt-48"
+			className="snap-start text-white min-h-screen overflow-hidden max-sm:pt-12"
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 			<div className="w-full h-full flex flex-col justify-between self-start mx-auto">
