@@ -3,8 +3,6 @@ import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 import Link from "next/link";
 import Image from "next/image";
 
-import ReservationTrigger from "../modals/reservationTrigger";
-
 export default function BdcHistory() {
 
 	const sectionTitle: SectionTitleProps = {
