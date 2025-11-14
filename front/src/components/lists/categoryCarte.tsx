@@ -1,4 +1,4 @@
-import { CarteItems } from "../sections/Menu";
+import { CarteItems } from "@/@types";
 
 interface CategoryList {
 	items: CarteItems[];
