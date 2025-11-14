@@ -27,7 +27,7 @@ export default function Gallery() {
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start m-6">
-					<h2 className="font-body text-3xl text-left">
+					<h2 className="font-body max-sm:text-2xl text-3xl text-left">
 						Le <span className="text-secondary">Bar Du Centre</span> sous toutes
 						ses coutures
 					</h2>

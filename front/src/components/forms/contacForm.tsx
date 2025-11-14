@@ -83,7 +83,7 @@ useEffect (() => {
 	}
 	return (
 		<>
-			<div className="flex-1 lg:flex-2 p-2 max-md:hidden">
+			<div className="flex-1 lg:flex-2 max-md:hidden">
 				<div className="font-body ">
 					<form className="flex flex-col gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark] text-base">
 						<div className="flex flex-col xl:flex-row gap-2">

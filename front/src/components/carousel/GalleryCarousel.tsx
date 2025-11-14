@@ -101,7 +101,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
                             className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] flex-shrink-0"
                         >
                             {item.photo && item.photo.length > 0 && (
-                                <div className="relative w-full aspect-square max-w-sm mx-auto">
+                                <div className="relative w-[90%] aspect-square max-w-sm mx-auto">
                                     <Image
                                         alt={
                                             item.photo[0]?.alternativeText ||

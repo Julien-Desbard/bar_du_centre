@@ -20,7 +20,6 @@ type EventData = {
 	documentId: string;
 	titre: string;
 	sous_titre: string;
-
 	jour: string;
 	date: string;
 	photo: Array<{
@@ -40,6 +39,7 @@ const EmblaCarousel = ({ options }: PropType) => {
 		loop: true,
 		align: "start",
 		skipSnaps: false,
+		containScroll: "trimSnaps",
 		...options,
 	};
 
@@ -87,33 +87,36 @@ const EmblaCarousel = ({ options }: PropType) => {
 					{events.map((event) => (
 						<div
 							key={event.id}
-							className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] flex-shrink-0"
+							className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] min-w-0 px-2"
 						>
-							<div className="relative w-full aspect-square max-w-sm">
-								<Image
-									alt={
-										event.photo[0]?.alternativeText ||
-										`${event.titre.toLowerCase()} ${event.sous_titre.toLowerCase()}`
-									}
-									src={
-										event.photo[0]?.formats?.medium?.url || event.photo[0]?.url
-									}
-									fill
-									sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
-									className="object-contain"
-								/>
-								<div className="absolute max-lg:bottom-20 bottom-25 w-full z-50 bg-transparent text-center h-10">
-									<h3 className="font-title font-lighter max-md:text-4xl text-5xl text-shadow-lg">
-										{event.titre}
-									</h3>
-									<p className="font-title max-md:text-2xl text-3xl text-shadow-lg">
-										{event.sous_titre}
-									</p>
-									<p className="font-body text-center text-xl mt-2 mb-2">
-										{event.jour} {event.date}
-									</p>
+							{event.photo && event.photo.length > 0 && (
+								<div className="relative w-[90%] mx-auto aspect-square overflow-hidden">
+									<Image
+										alt={
+											event.photo[0]?.alternativeText ||
+											`${event.titre.toLowerCase()} ${event.sous_titre.toLowerCase()}`
+										}
+										src={
+											event.photo[0]?.formats?.medium?.url ||
+											event.photo[0]?.url
+										}
+										fill
+										sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
+										className="object-cover"
+									/>
+									<div className="absolute max-lg:bottom-20 bottom-25 w-full z-50 bg-transparent text-center h-10">
+										<h3 className="font-title font-lighter max-md:text-4xl text-5xl text-shadow-lg">
+											{event.titre}
+										</h3>
+										<p className="font-title max-md:text-2xl text-3xl text-shadow-lg">
+											{event.sous_titre}
+										</p>
+										<p className="font-body text-center text-xl mt-2 mb-2">
+											{event.jour} {event.date}
+										</p>
+									</div>
 								</div>
-							</div>
+							)}
 						</div>
 					))}
 				</div>
