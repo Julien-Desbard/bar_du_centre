@@ -1,5 +1,5 @@
+import { CarteItems } from "@/@types";
 import { Edit, Trash } from "lucide-react";
-import { CarteItems } from "../sections/admin/carteAdmin";
 
 interface CarteProps {
 	carteItems: CarteItems[];
