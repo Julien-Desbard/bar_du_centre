@@ -9,7 +9,7 @@ export default function HeroSection() {
 				</h1>
 				<h2 className="font-body pb-12 text-2xl font-thin text-center text-white">
 					En plein coeur d&apos;Angers, le{" "}
-					<span className="text-secondary">BDC</span> pour les intimes
+					<span className="text-secondary">BDC</span> pour les intîmes
 				</h2>
 				<ReservationTrigger/>
 			</div>

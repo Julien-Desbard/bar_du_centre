@@ -14,7 +14,7 @@ export default function BdcHistory() {
 
 	return (
 		<section id="history" 
-				className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-12"
+				className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-3"
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto"
 			>
@@ -95,7 +95,7 @@ export default function BdcHistory() {
 					</section>
 					<div className="pr-6 pl-3 flex max-lg:hidden lg:flex-col lg:items-center lg:justify-center gap-18">
 						<Image
-							src="/images/bdchistory/histoire.jpg"
+							src="/images/bdchistory/histoire.webp"
 							alt="Photos du bar du centre au fil des anénes"
 							width={500}
 							height={500}
