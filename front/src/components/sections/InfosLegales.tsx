@@ -54,7 +54,7 @@ export default function InfosLegales() {
 
 					<p className="underline mt-3">Propriété intellectuelle</p>
 					<p>
-						L'ensemble des contenus du site (textes, images, logos) demeure la
+						L&apos;ensemble des contenus du site (textes, images, logos) demeure la
 						propriété exclusive du Bar du Centre ou de ses partenaires.
 						Toute reproduction partielle ou totale sans autorisation est interdite.
 					</p>
