@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { SpeedInsights } from "@vercel/speed-insights/next"
 import "./globals.css";
 import Header from "@/components/layout/Header";
 import { Playfair_Display, Poppins } from "next/font/google";
@@ -27,7 +28,7 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="fr" className={`${playfair.variable} ${poppins.variable}`}>
+		<html lang="fr" className={`${playfair.variable} ${poppins.variable} scroll-smooth`}>
 			<body
 				className="bg-bgbody overflow-x-hidden"
 				suppressHydrationWarning={true}
@@ -35,12 +36,12 @@ export default function RootLayout({
 				<SessionProvider>
 					<AuthProvider>
 						<header className="w-full fixed top-0 z-50">
-							<div className="max-w-[1280px] mx-auto px-4 bg-transparent backdrop-blur-md">
+							<div className="max-w-[1280px] mx-auto px-4 bg-transparent lg:backdrop-blur-md">
 								<Header />
 							</div>
 						</header>
 
-						<main className="snap-y snap-proximity scroll-smooth overflow-y-auto h-screen w-full">
+						<main className="w-full">
 							{children}
 						</main>
 					</AuthProvider>

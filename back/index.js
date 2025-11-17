@@ -11,7 +11,21 @@ import seed from "./src/migration/seed.js";
 
 const app = express();
 
-app.use(cors());
+// 2) CORS (autorise Vercel + local)
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://localhost:3001',
+  'bar-du-centre.vercel.app',
+];
+app.use(cors({
+  origin: (origin, cb) => {
+    // autorise requêtes sans Origin (clients type curl/postman) ou whitelisted
+    if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
+    cb(new Error('CORS: origin non autorisée'));
+  },
+  credentials: true,
+  methods: ['GET','POST','PATCH','DELETE','PUT'],
+}));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));

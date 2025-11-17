@@ -12,12 +12,12 @@ export default function Privatize() {
 	return (
 		<section
 			id="private"
-			className="snap-start text-white min-h-screen overflow-hidden max-sm:pt-8"
+			className="snap-start text-white overflow-hidden pt-6"
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 			<div className="w-full h-full flex flex-col justify-between self-start mx-auto">
 				<div className="px-6 mt-6">
-					<h2 className="text-3xl max-sm:text-2xl font-body text-left ">
+					<h2 className="text-2xl font-body text-left ">
 						Reservez notre{" "}
 						<span className="text-secondary ">seconde salle</span>
 					</h2>
@@ -55,7 +55,7 @@ export default function Privatize() {
 							Réservez notre seconde salle d&apos;une capacité de{" "}
 							<span className="text-secondary">40 personnes</span>
 						</p>
-						<div className="m-6">
+						<div className="m-6 mb-12">
 							<ContacTrigger />
 						</div>
 					</div>
