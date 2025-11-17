@@ -122,7 +122,7 @@ const EmblaCarousel = ({ options }: PropType) => {
 				</div>
 			</div>
 
-			<div className="flex items-center justify-center">
+			<div className="flex items-center justify-center mt-2">
 				<div className="flex gap-2">
 					<PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
 					<NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />

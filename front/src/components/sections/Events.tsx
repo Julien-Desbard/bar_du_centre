@@ -12,12 +12,12 @@ export default function Events() {
 	return (
 		<section
 			id="events"
-			className="snap-start min-h-screen text-white overflow-hidden max-sm:pt-5"
+			className=" text-white overflow-hidden pt-6"
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<div className="self-start m-6">
-					<h2 className="font-body max-sm:text-2xl text-3xl text-left">
+					<h2 className="font-body text-2xl text-left">
 						Venez participer à{" "}
 						<span className="text-secondary">nos événements</span>
 					</h2>
@@ -25,7 +25,9 @@ export default function Events() {
 				<div className="w-full mx-6 sm:py-6 lg:pb-3">
 					<EventCarousel  />
 				</div>
-				<ReservationTrigger />
+				<div className="">
+					<ReservationTrigger />
+				</div>
 			</div>
 		</section>
 	);

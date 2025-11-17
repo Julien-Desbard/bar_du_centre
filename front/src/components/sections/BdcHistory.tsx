@@ -12,13 +12,13 @@ export default function BdcHistory() {
 
 	return (
 		<section id="history" 
-				className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-3"
+				className="snap-start relative text-white overflow-hidden pt-6"
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto"
 			>
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start m-6">
-					<h2 className="font-body text-3xl  text-left">
+					<h2 className="font-body text-2xl  text-left">
 						Un lieu à
 						<span className="text-secondary"> l&apos;histoire riche</span>
 					</h2>

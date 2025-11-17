@@ -86,12 +86,12 @@ export default function Suppliers() {
 	return (
 		<section
 			id="gallery"
-			className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-10"
+			className="snap-start relative text-white overflow-hidden"
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start">
-					<h2 className="font-body max-sm:text-2xl text-3xl m-6">
+					<h2 className="font-body text-2xl m-6">
 						Des artisans <span className="text-secondary">indépendants</span> et{" "}
 						<span className="text-secondary">locaux</span>
 					</h2>
@@ -99,7 +99,7 @@ export default function Suppliers() {
 				<div className="w-full px-6 mb-6">
 					<Carousel supplierContent={supplierContent} />
 				</div>
-				<div>
+				<div className="mb-12">
 					<ReservationTrigger />
 				</div>
 			</div>

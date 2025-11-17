@@ -12,14 +12,17 @@
 
 	/* Font colors */
 	--color-secondary: #d5b370;
+	--color-h2: #d5b370;
+	/* origine
 	--color-h2: #65361b;
+	 */
 
 	/* Button background color */
 	--color-bg: #d5b370;
-	--color-bgbody: #1D0B01;
+	--color-bgbody: #1d0b01;
 
-/* Icon color */
---color-icon:#d5b370;
+	/* Icon color */
+	--color-icon: #d5b370;
 
 	/* --color-hover: #d39926; */
 	--color-sidebar-ring: var(--sidebar-ring);
@@ -131,41 +134,89 @@
 	* {
 		@apply border-border outline-ring/50;
 	}
-	body {
-		@apply bg-background text-foreground;
-	}
-}
-
-html, body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
-
 body {
-  overflow: hidden;
+	@apply text-foreground;
+	background: 
+		radial-gradient(ellipse 140% 100% at 50% -10%, #3a322a 0%, transparent 40%),
+		radial-gradient(ellipse 100% 80% at 80% 100%, #2a241f 0%, transparent 50%),
+		radial-gradient(ellipse 150% 120% at 50% 50%, #1a1612 0%, #0e0c0a 60%, #050403 100%);
+	background-attachment: fixed;
+	min-height: 100vh;
+	position: relative;
 }
+
+body::after {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+	background-size: 20px 20px;
+	pointer-events: none;
+	z-index: 1;
+}
+}
+
+/* Origine
+@layer base {
+	* {
+		@apply border-border outline-ring/50;
+	}
+body {
+	@apply text-foreground;
+	background: radial-gradient(ellipse 120% 80% at 50% 0%, #3D2010 0%, #2A1505 30%, #1D0B01 60%);
+	background-attachment: fixed;
+	min-height: 100vh;
+	position: relative;
+}
+
+body::after {
+	content: '';
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-image: radial-gradient(circle, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+	background-size: 20px 20px;
+	pointer-events: none;
+	z-index: 1;
+}
+} */
+
+html,
+body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+/* body {
+  overflow: hidden;
+} */
 /* scrollbar*/
 
-
 ::-webkit-scrollbar {
-  width: 8px;
+	width: 8px;
 }
 
 ::-webkit-scrollbar-track {
-  background: transparent;
+	background: transparent;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 4px;
+	background: #888;
+	border-radius: 4px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+	background: #555;
 }
 
 * {
-  scrollbar-width: thin;
-  scrollbar-color: #888 transparent;
+	scrollbar-width: thin;
+	scrollbar-color: #888 transparent;
 }
+

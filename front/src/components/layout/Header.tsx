@@ -18,8 +18,8 @@ const Nav: NavItem[] = [
 	{ href: "/#menu", label: "LE BDC" },
 	{ href: "/#private", label: "PRIVATISATION" },
 	{ href: "/#events", label: "EVENEMENTS" },
+	{ href: "/#contact", label: "CONTACT" },
 	{ href: "/discovery#gallery", label: "DECOUVREZ-NOUS" },
-	{ href: "/discovery#contact", label: "CONTACT" },
 ];
 
 export default function Header() {

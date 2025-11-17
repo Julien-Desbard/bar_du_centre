@@ -1,13 +1,16 @@
 import { Suspense } from "react";
 import { ApiResponse } from "@/@types";
-import dynamicImport from "next/dynamic"; // Renommer l'import pour éviter le conflit
-
-// Importations statiques pour les composants légers ou critiques (comme Hero)
-import Hero from "../components/sections/Hero";
-import Menu from "../components/sections/Menu";
+import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
-// Importations dynamiques pour le lazy loading et le Suspense
+// Importations statiques
+import Hero from "../components/sections/Hero";
+import Menu from "../components/sections/Menu";
+import AnimatedSection from "../components/Animations/AnimatedSections";
+import Contact from "@/components/sections/Contact";
+import Footer from "@/components/layout/Footer";
+
+// Importations dynamiques
 const Privatize = dynamicImport(
 	() => import("../components/sections/Privatize"),
 	{
@@ -28,7 +31,6 @@ const Events = dynamicImport(() => import("../components/sections/Events"), {
 	ssr: true,
 });
 
-// Configuration de la page - plus de conflit de nom maintenant
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
@@ -42,8 +44,8 @@ const getMenuData = async (): Promise<ApiResponse | null> => {
 			return null;
 		}
 
-		const data: ApiResponse = await res.json(); // <-- await + ()
-		console.log("API returned", data); // <-- log serveur
+		const data: ApiResponse = await res.json();
+		console.log("API returned", data);
 		return data;
 	} catch (e) {
 		console.error("Fetch crash", e);
@@ -56,10 +58,9 @@ export default async function Home() {
 
 	return (
 		<>
-			{/* Section Héro */}
-			<section className="min-h-screen snap-start w-full relative overflow-hidden">
+			<section className="w-full relative">
 				<Image
-					src="/images/beer.webp"
+					src="/images/hero/hero.webp"
 					alt="Le Bar du Centre, Arrière-plan"
 					fill
 					priority
@@ -67,21 +68,28 @@ export default async function Home() {
 					sizes="100vw"
 					className="object-cover"
 				/>
-				<div className="absolute inset-0 z-0 bg-black/20" />
+				<div className="absolute inset-0 z-0 bg-black/50" />
 				<div className="max-w-[1280px] mx-auto h-full relative z-10">
 					<Hero />
 				</div>
 			</section>
 
-			{/* Section Menu */}
-			<section className="min-h-screen snap-start w-full">
+			<AnimatedSection
+				animation="fade-up"
+				threshold={0.5}
+				className="snap-start w-full"
+			>
 				<div className="max-w-[1280px] mx-auto">
 					<Menu menuData={menuData} />
 				</div>
-			</section>
+			</AnimatedSection>
 
-			{/* Section Privatize */}
-			<section className="min-h-screen snap-start w-full">
+			<AnimatedSection
+				animation="fade-up"
+				delay={100}
+				threshold={0.6}
+				className="snap-start w-full"
+			>
 				<div className="max-w-[1280px] mx-auto">
 					<Suspense
 						fallback={<div>Chargement de la section Privatisation...</div>}
@@ -89,16 +97,33 @@ export default async function Home() {
 						<Privatize />
 					</Suspense>
 				</div>
-			</section>
+			</AnimatedSection>
 
-			{/* Section Events */}
-			<section className="min-h-screen snap-start w-full">
+			<AnimatedSection
+				animation="fade-up"
+				delay={200}
+				threshold={0.6}
+				className="snap-start w-full"
+			>
 				<div className="max-w-[1280px] mx-auto">
 					<Suspense fallback={<div>Chargement des événements...</div>}>
 						<Events />
 					</Suspense>
 				</div>
-			</section>
+			</AnimatedSection>
+			<AnimatedSection
+				animation="fade-up"
+				delay={100}
+				threshold={0.6}
+				className="snap-start w-full"
+			>
+				<div className="max-w-[1280px] mx-auto">
+					<Contact />
+				</div>
+			</AnimatedSection>
+			<div className="max-w-[1280px] mx-auto">
+				<Footer />
+			</div>
 		</>
 	);
 }

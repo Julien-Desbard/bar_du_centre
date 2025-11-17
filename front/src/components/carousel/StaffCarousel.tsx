@@ -134,7 +134,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
 				</div>
 			</div>
 
-			<div className="flex items-center justify-center px-4">
+			<div className="flex items-center justify-center px-4 mt-2">
 				<div className="flex gap-2">
 					<PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
 					<NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />

@@ -19,12 +19,12 @@ export default function Staff() {
 	return (
 		<section
 			id="gallery"
-			className="snap-start relative text-white overflow-hidden min-h-screen max-sm:pt-9"
+			className="snap-start relative text-white overflow-hidden"
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start">
-					<h2 className="font-body max-sm:text-2xl text-3xl m-6 text-left">
+					<h2 className="font-body text-2xl m-6 text-left">
 						Une équipe <span className="text-secondary">soudée</span> et de{" "}
 						<span className="text-secondary">passionnés</span>
 					</h2>
@@ -32,7 +32,9 @@ export default function Staff() {
 				<div className="w-full px-6 sm:py-6 lg:pb-3">
 					<Carousel />
 				</div>
+				<div className="mb-12">
 				<ReservationTrigger />
+				</div>
 			</div>
 		</section>
 	);

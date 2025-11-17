@@ -5,7 +5,8 @@ import ReservationModal from "../modals/reservationModal";
 import MenuModal from "../modals/menuModal";
 import { useState } from "react";
 import CategoryCarte from "../lists/categoryCarte";
-import { ApiResponse} from "@/@types";
+import { ApiResponse } from "@/@types";
+import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 
 type MenuProps = {
 	menuData: ApiResponse | null; // Correction : c'est un tableau, et peut être null
@@ -16,53 +17,53 @@ export default function Menu({ menuData }: MenuProps) {
 	const [openMenu, setOpenMenu] = useState(false);
 	const [nature, setNature] = useState("");
 
-	console.log("menuData reçu dans Menu :", menuData); // <-- log navigateur
-
 	const carteItems = Array.isArray(menuData?.allCarteItems)
 		? menuData.allCarteItems
 		: [];
-
-	// ---- DEBUG ----
-	console.log("carteItems après normalisation :", carteItems);
-	// ---------------
 
 	const entrees = carteItems.filter((i) => i.categorie === "Entrées");
 	const plats = carteItems.filter((i) => i.categorie === "Plats");
 	const desserts = carteItems.filter((i) => i.categorie === "Desserts");
 
-	// ---- DEBUG ----
-	console.log({ entrees, plats, desserts });
-	// ---------------
-
+	const sectionTitle: SectionTitleProps = {
+		part1: "Le Bar",
+		part2: "Du Centre",
+	};
 	return (
 		<section
 			id="menu"
-			className="snap-start relative text-white overflow-hidden min-h-screen  max-sm:pt-7"
+			className="snap-start relative text-white overflow-hidden pt-18"
 		>
+			<SectionTitle sectionTitle={sectionTitle} />
+
 			<div
-				className="w-full h-full mx-auto p-4 flex flex-row flex-wrap justify-around gap-x-3
+				className="w-full h-full mx-auto flex flex-row flex-wrap justify-around gap-x-3
 				lg:flex-1 
 			xl:gap-x-12 "
 			>
 				{/* --------------------- Menu --------------------- */}
 				<div
-					className="flex flex-col items-center justify-center mt-12 
-				max-lg:px-6 lg:w-fit lg:mt-24"
+					className="flex flex-col items-center justify-center mt-12 max-lg:px-6 lg:w-fit lg:mt-24"
 				>
 					<div
-						className="flex flex-col items-center
-		max-sm:gap-y-6
-		sm:grid sm:grid-cols-2 sm:grid-rows-2"
+						className="flex flex-col items-center max-sm:gap-y-6 sm:grid sm:grid-cols-2 sm:grid-rows-2"
 					>
-						<h2
+						{/* <h2
 							onClick={() => (setOpenMenu(true), setNature("plats"))}
 							className="font-subtitle text-5xl/10 text-h2 font-semibold text-center max-sm:text-left sm:col-start-1 sm:row-start-1 sm:self-center"
 						>
 							menu de <br />
 							<span className="text-white">la cantine</span>
+						</h2> */}
+						<h2
+							onClick={() => (setOpenMenu(true), setNature("plats"))}
+							className="font-subtitle text-4xl text-center text-white max-sm:text-left sm:col-start-1 sm:row-start-1 sm:self-center cursor-pointer"
+						>
+							Menu de <br />
+							<span className="text-secondary">la cantine</span>
 						</h2>
 						<Image
-							className="max-sm:hidden sm:col-start-2 sm:row-start-1 sm:justify-self-center"
+							className="max-sm:hidden sm:col-start-2 sm:row-start-1 sm:justify-self-center cursor-pointer"
 							src="/images/burger_icon.png"
 							alt="icone burger pour accéder au menu des plats"
 							width={250}
@@ -70,19 +71,26 @@ export default function Menu({ menuData }: MenuProps) {
 							onClick={() => (setOpenMenu(true), setNature("plats"))}
 						/>
 						<Image
-							className="max-sm:hidden sm:col-start-1 sm:row-start-2 sm:justify-self-center"
+							className="max-sm:hidden sm:col-start-1 sm:row-start-2 sm:justify-self-center cursor-pointer"
 							src="/images/beer_icon.png"
 							alt="icone bière pour accéder au menu des boissons"
 							width={250}
 							height={250}
 							onClick={() => (setOpenMenu(true), setNature("boissons"))}
 						/>
-						<h2
+						{/* <h2
 							onClick={() => (setOpenMenu(true), setNature("boissons"))}
 							className="font-subtitle text-5xl/10 text-h2 font-semibold text-center max-sm:text-left sm:col-start-2 sm:row-start-2 sm:self-center"
 						>
 							carte des <br />
 							<span className="text-white">boissons</span>
+						</h2> */}
+						<h2
+							onClick={() => (setOpenMenu(true), setNature("boissons"))}
+							className="font-subtitle text-4xl text-center text-whitemax-sm:text-left sm:col-start-2 sm:row-start-2 sm:self-center cursor-pointer"
+						>
+							Carte des <br />
+							<span className="text-secondary">boissons</span>
 						</h2>
 					</div>
 
@@ -114,7 +122,7 @@ export default function Menu({ menuData }: MenuProps) {
 				</div>
 
 				{/* Button desktop */}
-				<div className="w-full flex justify-center max-lg:hidden lg:mt-6 lg:mb-24 xl:mb-12">
+				<div className="w-full flex justify-center max-lg:hidden m-6 mb-12">
 					<Button onClick={() => setIsOpen(true)} className="max-w-45">
 						Réserver une table
 					</Button>
