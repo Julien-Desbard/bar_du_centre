@@ -7,6 +7,8 @@ import "dayjs/locale/fr";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { Loader } from "lucide-react";
+import Portal from "../Portal/portal";
+
 
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -33,6 +35,18 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [messageSuccess, setMessageSuccess] = useState("");
 
+
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+		return () => {
+			document.body.style.overflow = "unset";
+		};
+	}, [isOpen]);
+
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			setMessageSuccess("");
@@ -58,7 +72,6 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			setDate(now.format("YYYY-MM-DD"));
 
 			setReservationTime(now.format("HH:mm"));
-			// ------------------------------------
 		}
 	}, [isOpen]);
 
@@ -213,220 +226,221 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 	if (!isOpen) return null;
 
 	return (
-		<div
-			className="fixed inset-0 bg-black/50 backdrop-blur z-50 flex flex-col items-center justify-center"
-			onClick={() => {
-				onClose();
-				setErrors("");
-				resetFormState();
-			}}
-		>
+		<Portal>
 			<div
-				className="bg-[url('/images/background.jpg')] bg-cover bg-center p-2 w-full max-w-xl shadow-lg text-white font-body flex flex-col"
-				onClick={(e) => {
-					e.stopPropagation();
+				className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
+
+				onClick={() => {
+					onClose();
+					setErrors("");
+					resetFormState();
 				}}
 			>
-				<div className="self-end">
-					<button
-						type="button"
-						aria-label="Fermer le menu"
-						className=" hover:text-secondary transition-colors duration-300 ease-in-out"
-					>
-						<XIcon
+				<div
+					className="bg-gradient-dark p-2 w-full max-w-xl shadow-lg text-white font-body flex flex-col"
+					onClick={(e) => {
+						e.stopPropagation();
+					}}
+				>
+				<div className="flex justify-end">
+						<button
+							type="button"
+							aria-label="Fermer le menu"
+							className="hover:text-secondary transition-colors duration-300 ease-in-out"
 							onClick={() => {
 								resetFormState();
 								setErrors("");
 								onClose();
 							}}
-							className="w-6 h-6"
-						/>
-					</button>
-				</div>
-				<h3 className="text-3xl mb-8 font-subtitle font-bold self-center">
-					Reservation
-				</h3>
+						>
+							<XIcon className="w-6 h-6 mt-6 mr-3" />
+						</button>
+					</div>
+					<h3 className="text-3xl mb-8 font-subtitle font-bold self-center">
+						Reservation
+					</h3>
 
-				<div
-					className="font-body mb-4 px-12
+					<div
+						className="font-body mb-4 px-12
                 max-sm:px-4"
-				>
-					<form className="grid grid-cols-2 grid-row-8 gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
-						<input
-							type="hidden"
-							name="time"
-							value="Mar 10 2025 08:46"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						/>
-						<label htmlFor="name" className="sr-only">
-							Votre nom
-						</label>
-						<input
-							type="text"
-							ref={nameRef}
-							name="name"
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-							required
-							placeholder="Votre nom"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						/>
-						<label htmlFor="email" className="sr-only">
-							Votre email
-						</label>
-						<input
-							type="email"
-							name="email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							inputMode="email"
-							required
-							placeholder="Votre email"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						/>
-						<label htmlFor="phone" className="sr-only">
-							Votre numéro de téléphone
-						</label>
-						<input
-							type="tel"
-							inputMode="tel"
-							name="phone"
-							value={phone}
-							onChange={(e) => setPhone(e.target.value)}
-							pattern="^(?:(?:\+|00)33|0)[1-9](?:[0-9]{8})$"
-							required
-							placeholder="Votre numéro de téléphone"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						/>
-						<label htmlFor="date" className="sr-only">
-							Date de votre visite
-						</label>
-						<input
-							type="date"
-							inputMode="numeric"
-							name="date"
-							value={date}
-							onChange={(e) => setDate(e.target.value)}
-							required
-							className={`border border-secondary p-1 pl-2 max-sm:col-span-2 ${
-								date ? "text-white" : "text-gray-500"
-							}`}
-						/>
-						<label htmlFor="reservation_time" className="sr-only">
-							Heure de votre visite
-						</label>
-						<input
-							type="time"
-							inputMode="numeric"
-							name="reservation_time"
-							value={reservationTime}
-							onChange={(e) => {
-								const value = e.target.value;
-								setReservationTime(value);
-								if (!value) return;
-							}}
-							required
-							className={`border border-secondary p-1 pl-2 max-sm:col-span-2 ${
-								reservationTime ? "text-white" : "text-gray-500"
-							}`}
-						/>
-						<label htmlFor="number" className="sr-only">
-							Nombre de convives
-						</label>
-						<select
-							name="number"
-							inputMode="numeric"
-							value={number}
-							onChange={(e) => setNumber(e.target.value)}
-							required
-							id="number"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						>
-							<option value="" hidden>
-								# de personnes (10 max)
-							</option>
-							<option value="1">1</option>
-							<option value="2">2</option>
-							<option value="3">3</option>
-							<option value="4">4</option>
-							<option value="5">5</option>
-							<option value="6">6</option>
-							<option value="7">7</option>
-							<option value="8">8</option>
-							<option value="9">9</option>
-							<option value="10">10</option>
-						</select>
-						<label htmlFor="location" className="sr-only">
-							Extérieur ou intérieur ?
-						</label>
-						<select
-							name="location"
-							onChange={(e) => setLocation(e.target.value)}
-							id="location"
-							value={location}
-							required
-							className="border border-secondary p-1 pl-2 col-span-2"
-						>
-							<option value="" hidden>
-								Intérieur ou extérieur ?
-							</option>
-							<option value="Intérieur">En intérieur</option>
-							<option value="Extérieur">En extérieur</option>
-						</select>
-						<label htmlFor="location" className="sr-only">
-							Pour manger ou boire un verre ?
-						</label>
-						<select
-							name="nature"
-							onChange={(e) => setNature(e.target.value)}
-							required
-							value={nature}
-							id="nature"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						>
-							<option value="" hidden>
-								Manger ou boire un verre ?
-							</option>
-							<option value="Pour manger">Pour manger</option>
-							<option value="Pour boire un verre">Pour boire un verre</option>
-						</select>
-						<textarea
-							name="message"
-							inputMode="text"
-							onChange={(e) => setMessage(e.target.value)}
-							rows={5}
-							cols={50}
-							value={message}
-							placeholder="Votre message"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						></textarea>
-					</form>
-					{messageSuccess && messageSuccess !== "" && (
-						<p className="text-secondary py-2">{messageSuccess}</p>
-					)}
-					{errors && errors !== "" && (
-						<p className="font-body font-light italic text-red-500 py-2">
-							{" "}
-							{errors}
-						</p>
-					)}
+					>
+						<form className="grid grid-cols-2 grid-row-8 gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
+							<input
+								type="hidden"
+								name="time"
+								value="Mar 10 2025 08:46"
+								className="border border-secondary p-1 pl-2 col-span-2"
+							/>
+							<label htmlFor="name" className="sr-only">
+								Votre nom
+							</label>
+							<input
+								type="text"
+								ref={nameRef}
+								name="name"
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								required
+								placeholder="Votre nom"
+								className="border border-secondary p-1 pl-2 col-span-2"
+							/>
+							<label htmlFor="email" className="sr-only">
+								Votre email
+							</label>
+							<input
+								type="email"
+								name="email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								inputMode="email"
+								required
+								placeholder="Votre email"
+								className="border border-secondary p-1 pl-2 col-span-2"
+							/>
+							<label htmlFor="phone" className="sr-only">
+								Votre numéro de téléphone
+							</label>
+							<input
+								type="tel"
+								inputMode="tel"
+								name="phone"
+								value={phone}
+								onChange={(e) => setPhone(e.target.value)}
+								pattern="^(?:(?:\+|00)33|0)[1-9](?:[0-9]{8})$"
+								required
+								placeholder="Votre numéro de téléphone"
+								className="border border-secondary p-1 pl-2 col-span-2"
+							/>
+							<label htmlFor="date" className="sr-only">
+								Date de votre visite
+							</label>
+							<input
+								type="date"
+								inputMode="numeric"
+								name="date"
+								value={date}
+								onChange={(e) => setDate(e.target.value)}
+								required
+								className={`border border-secondary p-1 pl-2 max-sm:col-span-2 ${
+									date ? "text-white" : "text-gray-500"
+								}`}
+							/>
+							<label htmlFor="reservation_time" className="sr-only">
+								Heure de votre visite
+							</label>
+							<input
+								type="time"
+								inputMode="numeric"
+								name="reservation_time"
+								value={reservationTime}
+								onChange={(e) => {
+									const value = e.target.value;
+									setReservationTime(value);
+									if (!value) return;
+								}}
+								required
+								className={`border border-secondary p-1 pl-2 max-sm:col-span-2 ${
+									reservationTime ? "text-white" : "text-gray-500"
+								}`}
+							/>
+							<label htmlFor="number" className="sr-only">
+								Nombre de convives
+							</label>
+							<select
+								name="number"
+								inputMode="numeric"
+								value={number}
+								onChange={(e) => setNumber(e.target.value)}
+								required
+								id="number"
+								className="border border-secondary p-1 pl-2 col-span-2"
+							>
+								<option value="" hidden>
+									# de personnes (10 max)
+								</option>
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+							</select>
+							<label htmlFor="location" className="sr-only">
+								Extérieur ou intérieur ?
+							</label>
+							<select
+								name="location"
+								onChange={(e) => setLocation(e.target.value)}
+								id="location"
+								value={location}
+								required
+								className="border border-secondary p-1 pl-2 col-span-2"
+							>
+								<option value="" hidden>
+									Intérieur ou extérieur ?
+								</option>
+								<option value="Intérieur">En intérieur</option>
+								<option value="Extérieur">En extérieur</option>
+							</select>
+							<label htmlFor="location" className="sr-only">
+								Pour manger ou boire un verre ?
+							</label>
+							<select
+								name="nature"
+								onChange={(e) => setNature(e.target.value)}
+								required
+								value={nature}
+								id="nature"
+								className="border border-secondary p-1 pl-2 col-span-2"
+							>
+								<option value="" hidden>
+									Manger ou boire un verre ?
+								</option>
+								<option value="Pour manger">Pour manger</option>
+								<option value="Pour boire un verre">Pour boire un verre</option>
+							</select>
+							<textarea
+								name="message"
+								inputMode="text"
+								onChange={(e) => setMessage(e.target.value)}
+								rows={5}
+								cols={50}
+								value={message}
+								placeholder="Votre message"
+								className="border border-secondary p-1 pl-2 col-span-2"
+							></textarea>
+						</form>
+						{messageSuccess && messageSuccess !== "" && (
+							<p className="text-secondary py-2">{messageSuccess}</p>
+						)}
+						{errors && errors !== "" && (
+							<p className="font-body font-light italic text-red-500 py-2">
+								{" "}
+								{errors}
+							</p>
+						)}
+					</div>
+					<Button
+						type="submit"
+						disabled={isSubmitting}
+						className="m-6 self-center"
+						onClick={(e) => handleSubmit(e)}
+					>
+						{isSubmitting ? (
+							<>
+								<Loader className="animate-spin mr-2" />
+								Réservation en cours
+							</>
+						) : (
+							"Réservez votre table"
+						)}
+					</Button>
 				</div>
-				<Button
-					type="submit"
-					disabled={isSubmitting}
-					className="m-6 self-center"
-					onClick={(e) => handleSubmit(e)}
-				>
-					{isSubmitting ? (
-						<>
-							<Loader className="animate-spin mr-2" />
-							Réservation en cours
-						</>
-					) : (
-						"Réservez votre table"
-					)}
-				</Button>
 			</div>
-		</div>
+		</Portal>
 	);
 }

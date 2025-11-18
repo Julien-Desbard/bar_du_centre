@@ -32,7 +32,7 @@ export default function Menu({ menuData }: MenuProps) {
 	return (
 		<section
 			id="menu"
-			className="snap-start relative text-white overflow-hidden pt-18"
+			className="snap-start relative text-white overflow-hidden max-sm:pt-6 pt-18"
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 
@@ -43,7 +43,7 @@ export default function Menu({ menuData }: MenuProps) {
 			>
 				{/* --------------------- Menu --------------------- */}
 				<div
-					className="flex flex-col items-center justify-center mt-12 max-lg:px-6 lg:w-fit lg:mt-24"
+					className="flex flex-col items-center justify-center mt-12 max-lg:px-6 lg:w-fit"
 				>
 					<div
 						className="flex flex-col items-center max-sm:gap-y-6 sm:grid sm:grid-cols-2 sm:grid-rows-2"
@@ -105,7 +105,7 @@ export default function Menu({ menuData }: MenuProps) {
 				{/* --------------------- Carte du jour --------------------- */}
 				<div
 					className="flex flex-col items-center gap-2 max-w-full w-fit justify-self-center
-				lg:mt-42"
+				lg:mt-28 px-3"
 				>
 					<h2 className="font-subtitle text-4xl text-center ">Carte du jour</h2>
 
@@ -200,5 +200,6 @@ lg:row-span-1 lg:self-start"
 			<span className="text-secondary"> 12h-15h || 19h-22h30</span>
 		</li>
 	</ul>
-</div> */
+</div> 
+*/
 }

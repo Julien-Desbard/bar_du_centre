@@ -4,18 +4,17 @@ import Link from "next/link";
 import Image from "next/image";
 
 export default function BdcHistory() {
-
 	const sectionTitle: SectionTitleProps = {
 		part1: "notre",
 		part2: "histoire",
 	};
 
 	return (
-		<section id="history" 
-				className="snap-start relative text-white overflow-hidden pt-6"
+		<section
+			id="history"
+			className="snap-start relative text-white overflow-hidden pt-6"
 		>
-			<div className="w-full h-full flex flex-col justify-between items-center mx-auto"
-			>
+			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start m-6">
 					<h2 className="font-body text-2xl  text-left">
@@ -23,8 +22,8 @@ export default function BdcHistory() {
 						<span className="text-secondary"> l&apos;histoire riche</span>
 					</h2>
 				</div>
-				<div className="flex justify-between pb-6">
-					<section className="text-white flex flex-col lg:max-w-5/10 p-6 lg:pl-6 lg:pr-3 gap-6 text-justify">
+				<div className="flex justify-between px-6 pb-6">
+					<section className="text-white flex flex-col lg:max-w-6/11 gap-6 text-justify">
 						<p>
 							On me surnomme couramment le BDC. Mais savez-vous que les Angevins
 							m&apos;ont jadis appelé Maison du Roi David ou maison Vogelweith ?
@@ -87,25 +86,16 @@ export default function BdcHistory() {
 						>
 							Pour plus d&apos;infos, cliquer ici{" "}
 						</Link>
-						{/* <div className="lg:hidden self-center mt-6">
-							<ReservationTrigger />
-						</div> */}
 					</section>
-					<div className="pr-6 pl-3 flex max-lg:hidden lg:flex-col lg:items-center lg:justify-center gap-18">
+					<div className="flex max-lg:hidden flex-col items-center justify-start gap-18">
 						<Image
 							src="/images/bdchistory/histoire.webp"
 							alt="Photos du bar du centre au fil des anénes"
 							width={500}
 							height={500}
 						/>
-						{/* <div className="xl:hidden">
-							<ReservationTrigger />
-						</div> */}
 					</div>
 				</div>
-				{/* <div className="max-xl:hidden self-center mb-12">
-					<ReservationTrigger />
-				</div> */}
 			</div>
 		</section>
 	);

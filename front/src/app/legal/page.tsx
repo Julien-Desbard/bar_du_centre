@@ -8,10 +8,10 @@ export default function InfosLegalesPage() {
 				<div className="max-w-[1280px] mx-auto h-full flex flex-col items-center justify-center px-4 pt-12">
 					<InfosLegales />
 				</div>
-			</section>
 			<div className="max-w-[1280px] mx-auto">
 				<Footer />
 			</div>
+			</section>
 		</div>
 	);
 }

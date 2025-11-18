@@ -16,6 +16,7 @@ export default function Discovery() {
 			</section>
 			<AnimatedSection
 				animation="fade-up"
+				threshold={0.1}
 				delay={600}
 				className="snap-start w-full"
 			>
@@ -25,7 +26,7 @@ export default function Discovery() {
 			</AnimatedSection>
 			<AnimatedSection
 				animation="fade-up"
-				threshold={0.5}
+				threshold={0.1}
 				className="snap-start w-full"
 			>
 				<div className="max-w-[1280px] mx-auto">
@@ -35,7 +36,7 @@ export default function Discovery() {
 			<AnimatedSection
 				animation="fade-up"
 				delay={100}
-				threshold={0.6}
+				threshold={0.1}
 				className="snap-start w-full"
 			>
 				<div className="max-w-[1280px] mx-auto">

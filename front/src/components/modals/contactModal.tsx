@@ -2,6 +2,7 @@ import { Loader } from "lucide-react";
 import { Button } from "../ui/button";
 import { XIcon } from "../ui/XIcon";
 import { useState, useRef, useEffect } from "react";
+import Portal from "../Portal/portal";
 
 interface Modalprops {
 	isOpen: boolean;
@@ -17,6 +18,18 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [messageSuccess, setMessageSuccess] = useState("");
 
+	// Bloquer le scroll quand la modale est ouverte
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "unset";
+		}
+		return () => {
+			document.body.style.overflow = "unset";
+		};
+	}, [isOpen]);
+
 	useEffect(() => {
 		const timer = setTimeout(() => {
 			setMessageSuccess("");
@@ -31,7 +44,6 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		return () => clearTimeout(timer);
 	}, [errors]);
 
-	// Focusing on the first input field of the form
 	const nameRef = useRef<HTMLInputElement>(null);
 	useEffect(() => {
 		if (isOpen && nameRef.current) {
@@ -45,7 +57,6 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 		setMessage("");
 		setTopic("");
 		setErrors("");
-		setMessage("");
 	};
 
 	const checkAllFieldsAreFilled = () => {
@@ -60,8 +71,6 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			msg: "",
 		};
 	};
-
-	// Apply reservation rules
 
 	async function handleSubmit(e: React.FormEvent) {
 		e.preventDefault();
@@ -96,123 +105,129 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 			resetFormState();
 		}
 	}
+
 	if (!isOpen) return null;
 
 	return (
-		<div
-			className="fixed inset-0 bg-black/50 backdrop-blur z-50 flex flex-col items-center justify-center"
-			onClick={() => {
-				onClose();
-				setErrors("");
-				resetFormState();
-			}}
-		>
+		<Portal>
 			<div
-				className="bg-[url('/images/background.jpg')] bg-cover bg-center p-2 w-full max-w-xl shadow-lg text-white font-body"
-				onClick={(e) => {
-					e.stopPropagation();
+				className="fixed inset-0 bg-black/50 backdrop-blur-sm z-[9999] flex items-center justify-center p-4"
+				onClick={() => {
+					onClose();
+					setErrors("");
+					resetFormState();
 				}}
 			>
-				<div className="justify-self-end">
-					<button
-						type="button"
-						aria-label="Fermer le menu"
-						className=" hover:text-secondary transition-colors duration-300 ease-in-out"
-					>
-						<XIcon
+				<div
+					className="bg-gradient-dark p-2 w-full max-w-xl shadow-lg text-white font-body my-8"
+					onClick={(e) => {
+						e.stopPropagation();
+					}}
+				>
+					<div className="flex justify-end">
+						<button
+							type="button"
+							aria-label="Fermer le menu"
+							className="hover:text-secondary transition-colors duration-300 ease-in-out"
 							onClick={() => {
 								resetFormState();
 								setErrors("");
 								onClose();
 							}}
-							className="w-6 h-6"
-						/>
-					</button>
-				</div>
-				<h3 className="text-3xl mb-8 text-white font-subtitle font-light justify-self-center">
-					Nous contacter
-				</h3>
+						>
+								<XIcon className="w-6 h-6 m-3" />
 
-				<div
-					className="font-body text-base mb-4 px-12
-				max-sm:px-4"
-				>
-					<form className="grid grid-cols-2 grid-row-8 gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark]">
-						<label htmlFor="name" className="sr-only">
-							Votre nom
-						</label>
-						<input
-							type="text"
-							ref={nameRef}
-							name="name"
-							value={name}
-							onChange={(e) => setName(e.target.value)}
-							required
-							placeholder="Votre nom"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						/>
-						<label htmlFor="email" className="sr-only">
-							Votre email
-						</label>
-						<input
-							type="email"
-							name="email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							inputMode="email"
-							required
-							placeholder="Votre email"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						/>
-						<label htmlFor="name" className="sr-only">
-							Objet de votre demande
-						</label>
-						<input
-							type="text"
-							name="topic"
-							value={topic}
-							onChange={(e) => setTopic(e.target.value)}
-							required
-							placeholder="Objet de votre demande"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						/>
-						<textarea
-							name="message"
-							inputMode="text"
-							value={message}
-							onChange={(e) => setMessage(e.target.value)}
-							rows={5}
-							cols={50}
-							placeholder="Votre message"
-							className="border border-secondary p-1 pl-2 col-span-2"
-						></textarea>
-					</form>
-					{errors && errors !== "" && (
-						<p className="font-body font-light italic text-red-500 py-2">
-							{" "}
-							{errors}
-						</p>
-					)}
-					{messageSuccess && messageSuccess !== "" && (
-					<p className="text-secondary py-2">{messageSuccess}</p>
-				)}
+						</button>
+					</div>
+					<h3 className="text-3xl mb-8 text-white font-subtitle font-light text-center">
+						Nous contacter
+					</h3>
+
+					<div className="font-body text-base mb-4 px-12 max-sm:px-4">
+						<div className="grid grid-cols-2 gap-2">
+							<label htmlFor="name" className="sr-only">
+								Votre nom
+							</label>
+							<input
+								type="text"
+								id="name"
+								ref={nameRef}
+								name="name"
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								required
+								placeholder="Votre nom"
+								className="border border-secondary p-1 pl-2 col-span-2 text-white placeholder:text-white bg-transparent"
+							/>
+							<label htmlFor="email" className="sr-only">
+								Votre email
+							</label>
+							<input
+								type="email"
+								id="email"
+								name="email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								inputMode="email"
+								required
+								placeholder="Votre email"
+								className="border border-secondary p-1 pl-2 col-span-2 text-white placeholder:text-white bg-transparent"
+							/>
+							<label htmlFor="topic" className="sr-only">
+								Objet de votre demande
+							</label>
+							<input
+								type="text"
+								id="topic"
+								name="topic"
+								value={topic}
+								onChange={(e) => setTopic(e.target.value)}
+								required
+								placeholder="Objet de votre demande"
+								className="border border-secondary p-1 pl-2 col-span-2 text-white placeholder:text-white bg-transparent"
+							/>
+							<label htmlFor="message" className="sr-only">
+								Votre message
+							</label>
+							<textarea
+								id="message"
+								name="message"
+								inputMode="text"
+								value={message}
+								onChange={(e) => setMessage(e.target.value)}
+								rows={5}
+								placeholder="Votre message"
+								className="border border-secondary p-1 pl-2 col-span-2 text-white placeholder:text-white bg-transparent"
+							></textarea>
+						</div>
+						{errors && errors !== "" && (
+							<p className="font-body font-light italic text-red-500 py-2">
+								{errors}
+							</p>
+						)}
+						{messageSuccess && messageSuccess !== "" && (
+							<p className="text-secondary py-2">{messageSuccess}</p>
+						)}
+					</div>
+					<div className="flex justify-center">
+						<Button
+							type="submit"
+							className="m-6"
+							disabled={isSubmitting}
+							onClick={(e) => handleSubmit(e)}
+						>
+							{isSubmitting ? (
+								<>
+									<Loader className="animate-spin mr-2" />
+									Envoi en cours...
+								</>
+							) : (
+								"Envoyer le message"
+							)}
+						</Button>
+					</div>
 				</div>
-				<Button
-					type="submit"
-					className="m-6 flex justify-self-center"
-					disabled={isSubmitting}
-					onClick={(e) => handleSubmit(e)}
-				>
-					{isSubmitting ? (
-						<>
-							<Loader className="animate-spin mr-2" />
-							Envoi en cours...
-						</>
-					) : (
-						"Envoyer le message"
-					)}
-				</Button>
 			</div>
-		</div>
+		</Portal>
 	);
 }
