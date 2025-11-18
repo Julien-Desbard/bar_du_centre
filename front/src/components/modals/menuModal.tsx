@@ -1,19 +1,23 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Button } from "../ui/button";
 import { XIcon } from "../ui/XIcon";
 import { MenuItem } from "@/@types";
 import Portal from "../Portal/portal";
 
-interface Modalprops {
+interface ModalProps {
 	openMenu: boolean;
 	nature: string;
+	menuItems: MenuItem[];
 	onClose: () => void;
 }
 
-export default function Modal({ openMenu, nature, onClose }: Modalprops) {
-	const [menuItems, setMenuItems] = useState<MenuItem[]>([]);
-
+export default function MenuModal({
+	openMenu,
+	nature,
+	menuItems,
+	onClose,
+}: ModalProps) {
 	// Bloquer le scroll quand la modale est ouverte
 	useEffect(() => {
 		if (openMenu) {
@@ -25,28 +29,6 @@ export default function Modal({ openMenu, nature, onClose }: Modalprops) {
 			document.body.style.overflow = "unset";
 		};
 	}, [openMenu]);
-
-	const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
-
-	useEffect(() => {
-		if (!openMenu) return;
-
-		async function getMenuItems() {
-			try {
-				const httpResponse = await fetch(`${BASE_URL}menu/cat/${nature}`);
-				const data = await httpResponse.json();
-				console.log(data);
-				if (httpResponse.ok) {
-					setMenuItems(data.menuItemsPerCat1);
-				} else {
-					throw new Error("L'appel à l'API a échoué, veuillez réessayer...");
-				}
-			} catch (error) {
-				console.log(error);
-			}
-		}
-		getMenuItems();
-	}, [openMenu, nature, BASE_URL]);
 
 	if (!openMenu) return null;
 

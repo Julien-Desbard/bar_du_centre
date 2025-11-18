@@ -20,7 +20,7 @@ export default function HeroSection() {
 			</div>
 			<div className="absolute bottom-8 left-1/2 -translate-x-1/2 max-lg:hidden flex flex-col items-center animate-bounce text-white/50 text-center text-md">
 				<Mouse className="mb-2" />
-				<p>Scroll pour la suite</p>
+				<p>Découvrez notre carte</p>
 			</div>
 		</section>
 	);
