@@ -12,21 +12,21 @@ export default function ContactForm() {
 	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [messageSuccess, setMessageSuccess] = useState("");
 
-useEffect (() => {
-    if(messageSuccess) {
-        const timer = setTimeout(()=> {
-            setMessageSuccess("");
-        },5000);
-        return () => clearTimeout(timer)
-    }
-},[messageSuccess])
+	useEffect(() => {
+		if (messageSuccess) {
+			const timer = setTimeout(() => {
+				setMessageSuccess("");
+			}, 5000);
+			return () => clearTimeout(timer);
+		}
+	}, [messageSuccess]);
 
-useEffect (() => {
-    const timer = setTimeout(() => {
-        setError("")
-    }, 5000);
-    return () => clearTimeout(timer)
-    }, [error])
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			setError("");
+		}, 5000);
+		return () => clearTimeout(timer);
+	}, [error]);
 
 	const resetFormState = () => {
 		setName("");
@@ -84,64 +84,62 @@ useEffect (() => {
 	return (
 		<>
 			<div className="flex-1 lg:flex-2 max-md:hidden">
-				<div className="font-body ">
-					<form className="flex flex-col gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark] text-base">
-						<div className="flex flex-col xl:flex-row gap-2">
-							<div className="flex flex-col xl:flex-1">
-								<label htmlFor="name" className="sr-only">
-									Votre nom
-								</label>
-								<input
-									type="text"
-									name="name"
-									value={name}
-									onChange={(e) => setName(e.target.value)}
-									required
-									placeholder="Votre nom"
-									className="border border-secondary p-1 pl-2"
-								/>
-							</div>
-							<div className="flex flex-col xl:flex-1">
-								<label htmlFor="email" className="sr-only">
-									Votre email
-								</label>
-								<input
-									type="email"
-									name="email"
-									value={email}
-									onChange={(e) => setEmail(e.target.value)}
-									inputMode="email"
-									required
-									placeholder="Votre email"
-									className="border border-secondary p-1 pl-2"
-								/>
-							</div>
+				<form className="flex flex-col gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark] text-base">
+					<div className="flex flex-col xl:flex-row gap-2">
+						<div className="flex flex-col xl:flex-1">
+							<label htmlFor="name" className="sr-only">
+								Votre nom
+							</label>
+							<input
+								type="text"
+								name="name"
+								value={name}
+								onChange={(e) => setName(e.target.value)}
+								required
+								placeholder="Votre nom"
+								className="border border-secondary p-1 pl-2"
+							/>
 						</div>
+						<div className="flex flex-col xl:flex-1">
+							<label htmlFor="email" className="sr-only">
+								Votre email
+							</label>
+							<input
+								type="email"
+								name="email"
+								value={email}
+								onChange={(e) => setEmail(e.target.value)}
+								inputMode="email"
+								required
+								placeholder="Votre email"
+								className="border border-secondary p-1 pl-2"
+							/>
+						</div>
+					</div>
 
-						<label htmlFor="topic" className="sr-only">
-							Objet de votre demande
-						</label>
-						<input
-							type="text"
-							name="topic"
-							value={topic}
-							onChange={(e) => setTopic(e.target.value)}
-							required
-							placeholder="Objet de votre demande"
-							className="border border-secondary p-1 pl-2"
-						/>
-						<textarea
-							name="message"
-							inputMode="text"
-							value={message}
-							onChange={(e) => setMessage(e.target.value)}
-							rows={2}
-							cols={50}
-							placeholder="Votre message"
-							className="border border-secondary p-1 pl-2"
-						></textarea>
-					</form>
-				</div>
+					<label htmlFor="topic" className="sr-only">
+						Objet de votre demande
+					</label>
+					<input
+						type="text"
+						name="topic"
+						value={topic}
+						onChange={(e) => setTopic(e.target.value)}
+						required
+						placeholder="Objet de votre demande"
+						className="border border-secondary p-1 pl-2"
+					/>
+					<textarea
+						name="message"
+						inputMode="text"
+						value={message}
+						onChange={(e) => setMessage(e.target.value)}
+						rows={2}
+						cols={50}
+						placeholder="Votre message"
+						className="border border-secondary p-1 pl-2"
+					></textarea>
+				</form>
 				{error && error !== "" && (
 					<p className="font-body font-light italic text-red-500"> {error}</p>
 				)}
