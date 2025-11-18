@@ -67,7 +67,7 @@ const MailIcon = forwardRef<MailIconHandle, MailIconProps>(
 					bodyControls.start("animate");
 				} else onMouseEnter?.(e); // **CORRECTION : Retrait de `as any`**
 			},
-			[containerControls, flapControls, bodyControls, reduced, onMouseEnter]
+			[containerControls, flapControls, bodyControls, reduced, onMouseEnter, isAnimated]
 		);
 
 		const handleLeave = useCallback(

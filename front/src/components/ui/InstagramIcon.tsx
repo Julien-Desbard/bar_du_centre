@@ -50,7 +50,7 @@ const InstagramIcon = forwardRef<InstagramIconHandle, InstagramIconProps>(
 				// Passer l'événement sans `as any`
 				else onMouseEnter?.(e);
 			},
-			[controls, reduced, onMouseEnter]
+			[controls, reduced, onMouseEnter, isAnimated]
 		);
 
 		// Correction : Retirer `as any` et utiliser le type d'événement correct
