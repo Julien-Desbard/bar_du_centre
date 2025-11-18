@@ -105,7 +105,7 @@ export default function Menu({ menuData }: MenuProps) {
 				{/* --------------------- Carte du jour --------------------- */}
 				<div
 					className="flex flex-col items-center gap-2 max-w-full w-fit justify-self-center
-				lg:mt-42"
+				lg:mt-42 px-3"
 				>
 					<h2 className="font-subtitle text-4xl text-center ">Carte du jour</h2>
 
