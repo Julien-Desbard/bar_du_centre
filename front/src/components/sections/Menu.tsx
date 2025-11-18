@@ -5,30 +5,34 @@ import ReservationModal from "../modals/reservationModal";
 import MenuModal from "../modals/menuModal";
 import { useState } from "react";
 import CategoryCarte from "../lists/categoryCarte";
-import { ApiResponse } from "@/@types";
+import { CarteItems, MenuItem } from "@/@types";
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 
 type MenuProps = {
-	menuData: ApiResponse | null; // Correction : c'est un tableau, et peut être null
+	carteData: CarteItems[];
+	platsMenu: MenuItem[];
+	boissonsMenu: MenuItem[];
 };
 
-export default function Menu({ menuData }: MenuProps) {
+export default function Menu({ carteData, platsMenu, boissonsMenu }: MenuProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openMenu, setOpenMenu] = useState(false);
-	const [nature, setNature] = useState("");
+	const [nature, setNature] = useState<"plats" | "boissons">("plats");
 
-	const carteItems = Array.isArray(menuData?.allCarteItems)
-		? menuData.allCarteItems
-		: [];
 
-	const entrees = carteItems.filter((i) => i.categorie === "Entrées");
-	const plats = carteItems.filter((i) => i.categorie === "Plats");
-	const desserts = carteItems.filter((i) => i.categorie === "Desserts");
+
+	const entrees = carteData.filter((i) => i.categorie === "Entrées");
+	const plats = carteData.filter((i) => i.categorie === "Plats");
+	const desserts = carteData.filter((i) => i.categorie === "Desserts");
 
 	const sectionTitle: SectionTitleProps = {
 		part1: "Le Bar",
 		part2: "Du Centre",
 	};
+
+	// Sélectionner les bonnes données selon la nature
+	const currentMenuItems = nature === "plats" ? platsMenu : boissonsMenu;
+
 	return (
 		<section
 			id="menu"
@@ -36,25 +40,10 @@ export default function Menu({ menuData }: MenuProps) {
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 
-			<div
-				className="w-full h-full mx-auto flex flex-row flex-wrap justify-around gap-x-3
-				lg:flex-1 
-			xl:gap-x-12 "
-			>
+			<div className="w-full h-full mx-auto flex flex-row flex-wrap justify-around gap-x-3 lg:flex-1 xl:gap-x-12">
 				{/* --------------------- Menu --------------------- */}
-				<div
-					className="flex flex-col items-center justify-center mt-12 max-lg:px-6 lg:w-fit"
-				>
-					<div
-						className="flex flex-col items-center max-sm:gap-y-6 sm:grid sm:grid-cols-2 sm:grid-rows-2"
-					>
-						{/* <h2
-							onClick={() => (setOpenMenu(true), setNature("plats"))}
-							className="font-subtitle text-5xl/10 text-h2 font-semibold text-center max-sm:text-left sm:col-start-1 sm:row-start-1 sm:self-center"
-						>
-							menu de <br />
-							<span className="text-white">la cantine</span>
-						</h2> */}
+				<div className="flex flex-col items-center justify-center mt-12 max-lg:px-6 lg:w-fit">
+					<div className="flex flex-col items-center max-sm:gap-y-6 sm:grid sm:grid-cols-2 sm:grid-rows-2">
 						<h2
 							onClick={() => (setOpenMenu(true), setNature("plats"))}
 							className="font-subtitle text-4xl text-center text-white max-sm:text-left sm:col-start-1 sm:row-start-1 sm:self-center cursor-pointer"
@@ -78,16 +67,9 @@ export default function Menu({ menuData }: MenuProps) {
 							height={250}
 							onClick={() => (setOpenMenu(true), setNature("boissons"))}
 						/>
-						{/* <h2
-							onClick={() => (setOpenMenu(true), setNature("boissons"))}
-							className="font-subtitle text-5xl/10 text-h2 font-semibold text-center max-sm:text-left sm:col-start-2 sm:row-start-2 sm:self-center"
-						>
-							carte des <br />
-							<span className="text-white">boissons</span>
-						</h2> */}
 						<h2
 							onClick={() => (setOpenMenu(true), setNature("boissons"))}
-							className="font-subtitle text-4xl text-center text-whitemax-sm:text-left sm:col-start-2 sm:row-start-2 sm:self-center cursor-pointer"
+							className="font-subtitle text-4xl text-center text-white max-sm:text-left sm:col-start-2 sm:row-start-2 sm:self-center cursor-pointer"
 						>
 							Carte des <br />
 							<span className="text-secondary">boissons</span>
@@ -103,11 +85,8 @@ export default function Menu({ menuData }: MenuProps) {
 				</div>
 
 				{/* --------------------- Carte du jour --------------------- */}
-				<div
-					className="flex flex-col items-center gap-2 max-w-full w-fit justify-self-center
-				lg:mt-28 px-3"
-				>
-					<h2 className="font-subtitle text-4xl text-center ">Carte du jour</h2>
+				<div className="flex flex-col items-center gap-2 max-w-full w-fit justify-self-center lg:mt-28 px-3">
+					<h2 className="font-subtitle text-4xl text-center">Carte du jour</h2>
 
 					<CategoryCarte items={entrees} />
 					<CategoryCarte items={plats} />
@@ -127,79 +106,14 @@ export default function Menu({ menuData }: MenuProps) {
 						Réserver une table
 					</Button>
 				</div>
-
-				{/* emplacment des horaires */}
 			</div>
 			<ReservationModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
 			<MenuModal
 				openMenu={openMenu}
 				nature={nature}
+				menuItems={currentMenuItems}
 				onClose={() => setOpenMenu(false)}
 			/>
 		</section>
 	);
-}
-
-{
-	/* --------------------- Horaires ---------------------
-<div
-	className="grid gap-2 gap-x-4 text-center
-	max-sm:grid-cols-1
-	sm:grid-cols-2 sm:grid-rows-[auto_repeat(3,auto)] sm:grid-flow-col sm:text-left
-	lg:grid-cols-3 lg:grid-rows-[auto_repeat(2,auto)] lg:grid-flow-row lg:px-6 lg:place-self-center lg:justify-items-center
-	"
->
-	<h2
-		className="text-2xl font-body justify-self-center pb-4
-	sm:col-span-2 sm:row-start-1
-	lg:col-span-3
-	"
-	>
-		Les horaires
-	</h2>
-	<ul className="contents text-base">
-		<li
-			className="block justify-self-center self-start
-		sm:justify-self-start sm:self-center
-		lg:self-start"
-		>
-			Lundi | Mardi | Mercredi:
-			<br />
-			<span className="text-secondary">12h-14h15 19h-22h30</span>
-		</li>
-		<li
-			className="block justify-self-center self-start
-		sm:justify-self-start sm:self-center lg:self-start
-		"
-		>
-			Jeudi:{" "}
-			<span className="text-secondary">12h-14h15 || 19h-23h</span>
-		</li>
-		<li
-			className="block justify-self-center self-start
-sm:justify-self-start sm:self-center
-lg:self-start
-"
-		>
-			Vendredi:{" "}
-			<span className="text-secondary">12h-14h30 || 19h-23h</span>
-		</li>
-		<li
-			className="block justify-self-center self-center
-sm:justify-self-start sm:self-center lg:self-start"
-		>
-			Samedi:{" "}
-			<span className="text-secondary">12h-15h30 || 19h-23h</span>
-		</li>
-		<li
-			className="block justify-self-center self-start
-sm:justify-self-start sm:row-span-2 sm:self-center
-lg:row-span-1 lg:self-start"
-		>
-			Dimanche:
-			<span className="text-secondary"> 12h-15h || 19h-22h30</span>
-		</li>
-	</ul>
-</div> 
-*/
 }
