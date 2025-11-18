@@ -1,5 +1,5 @@
 import { Suspense } from "react";
-import { MenuItem, CarteItems } from "@/@types";
+import { MenuItem, CarteItems, EventItem } from "@/@types";
 import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
@@ -10,46 +10,44 @@ import AnimatedSection from "../components/Animations/AnimatedSections";
 import Contact from "@/components/sections/Contact";
 import Footer from "@/components/layout/Footer";
 import Privatize from "@/components/sections/Privatize";
-
-// Importations dynamiques
-const Events = dynamicImport(() => import("../components/sections/Events"), {
-	loading: () => (
-		<div className="min-h-screen flex items-center justify-center p-8 bg-gray-50/50">
-			Chargement des événements...
-		</div>
-	),
-	ssr: true,
-});
-
-export const revalidate = 86400;
+import Events from "@/components/sections/Events";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
 
-// Fetch toutes les données en parallèle
-async function getAllMenuData() {
+async function getAllData() {
 	try {
-		const [carteResponse, platsResponse, boissonsResponse] = await Promise.all([
-			fetch(`${BASE_URL}carte`, {
-				next: { revalidate: 86400 },
-			}),
-			fetch(`${BASE_URL}menu/cat/plats`, {
-				next: { revalidate: 86400 },
-			}),
-			fetch(`${BASE_URL}menu/cat/boissons`, {
-				next: { revalidate: 86400 },
-			}),
-		]);
+		const [carteResponse, platsResponse, boissonsResponse, eventResponse] =
+			await Promise.all([
+				fetch(`${BASE_URL}carte`, {
+					next: { revalidate: 300 },
+				}),
+				fetch(`${BASE_URL}menu/cat/plats`, {
+					next: { revalidate: 86400 },
+				}),
+				fetch(`${BASE_URL}menu/cat/boissons`, {
+					next: { revalidate: 86400 },
+				}),
+				fetch(
+					"https://light-cheese-efa53451a5.strapiapp.com/api/evenements?populate=*&sort=createdAt:asc",
+					{
+						next: { revalidate: 86400 },
+					}
+				),
+			]);
 
-		const [carteData, platsData, boissonsData] = await Promise.all([
+		const [carteData, platsData, boissonsData, eventsData] = await Promise.all([
 			carteResponse.ok ? carteResponse.json() : null,
 			platsResponse.ok ? platsResponse.json() : null,
 			boissonsResponse.ok ? boissonsResponse.json() : null,
+			eventResponse.ok ? eventResponse.json() : null,
 		]);
+		console.log(eventResponse.json())
 
 		return {
-			carteData: (carteData?.allCarteItems||[]) as CarteItems[],
+			carteData: (carteData?.allCarteItems || []) as CarteItems[],
 			platsMenu: (platsData?.menuItemsPerCat1 || []) as MenuItem[],
 			boissonsMenu: (boissonsData?.menuItemsPerCat1 || []) as MenuItem[],
+			eventData: eventsData?.data || ([] as EventItem[]),
 		};
 	} catch (error) {
 		console.error("Erreur lors du fetch des données:", error);
@@ -57,13 +55,15 @@ async function getAllMenuData() {
 			carteData: [],
 			platsMenu: [],
 			boissonsMenu: [],
+			eventData: [],
 		};
 	}
 }
 
 export default async function Home() {
-	const { carteData, platsMenu, boissonsMenu } = await getAllMenuData();
+	const { carteData, platsMenu, boissonsMenu, eventData } = await getAllData();
 
+	console.log('eventdata : ',eventData.data)
 	return (
 		<>
 			<section className="w-full relative">
@@ -114,9 +114,7 @@ export default async function Home() {
 				className="snap-start w-full"
 			>
 				<div className="max-w-[1280px] mx-auto">
-					<Suspense fallback={<div>Chargement des événements...</div>}>
-						<Events />
-					</Suspense>
+					<Events eventData={eventData} />
 				</div>
 			</AnimatedSection>
 			<AnimatedSection
