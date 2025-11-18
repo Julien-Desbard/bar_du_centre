@@ -50,7 +50,7 @@ const FacebookIcon = forwardRef<FacebookIconHandle, FacebookIconProps>(
 				if (!isControlled.current) controls.start("animate");
 				else onMouseEnter?.(e); // *** PAS DE `as any` ***
 			},
-			[controls, reduced, onMouseEnter]
+			[controls, reduced, onMouseEnter,isAnimated]
 		);
 
 		const handleLeave = useCallback(

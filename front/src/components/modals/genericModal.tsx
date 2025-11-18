@@ -41,9 +41,6 @@ export default function GenericModal({
 	messageSuccess,
 	message = undefined,
 }: ModalProps) {
-	// setTimeout(() => onClose(), 5000);
-	if (!isOpen) return null;
-
 	// Bloquer le scroll quand la modale est ouverte
 	useEffect(() => {
 		if (isOpen) {
@@ -55,6 +52,9 @@ export default function GenericModal({
 			document.body.style.overflow = "unset";
 		};
 	}, [isOpen]);
+
+	// setTimeout(() => onClose(), 5000);
+	if (!isOpen) return null;
 
 	return (
 		<Portal>
