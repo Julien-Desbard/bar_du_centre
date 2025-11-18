@@ -1,6 +1,4 @@
-import { Suspense } from "react";
 import { MenuItem, CarteItems, EventItem } from "@/@types";
-import dynamicImport from "next/dynamic";
 import Image from "next/image";
 
 // Importations statiques
