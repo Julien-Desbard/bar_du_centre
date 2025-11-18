@@ -26,7 +26,7 @@ export default function Contact() {
 						referrerPolicy="no-referrer-when-downgrade"
 					></iframe>
 				</div>
-				<div className="md:self-start w-full px-8 pb-6">
+				<div className="md:self-start w-full px-6 pb-6">
 					<article className="font-body text-base/8 flex flex-col justify-start max-md:justify-self-center md:flex-row md:w-full ">
 						<div className="flex-1 ">
 							<div className="text-wrap">

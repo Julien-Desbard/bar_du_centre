@@ -18,10 +18,10 @@ const FooterLink = ({ href, children }: { href: string; children: React.ReactNod
 
 export default function Footer() {
 	return (
-		<div className="font-body bg-transparent text-white text-base p-6 border-t-2 border-secondary">
+		<div className="font-body bg-transparent text-white text-base py-6 mx-6 border-t-2 border-secondary">
 			<div className="max-w-6xl mx-auto">
 				{/* Container flex responsive */}
-				<div className="flex flex-col md:flex-row md:justify-center md:items-start gap-8 md:gap-12 lg:gap-16">
+				<div className="flex flex-col max-sm:text-center md:flex-row md:justify-center md:items-start gap-8 md:gap-12 lg:gap-16">
 					
 					{/* Bloc Navigation */}
 					<div className="flex flex-col items-center md:items-start">
@@ -37,7 +37,7 @@ export default function Footer() {
 					{/* Bloc Réseaux sociaux */}
 					<div className="flex flex-col items-center md:items-start">
 						<h3 className="font-semibold text-lg mb-3 text-secondary">Nos réseaux</h3>
-						<ul className="space-y-3">
+						<ul className="space-y-3 flex flex-col max-sm:items-center">
 							<li>
 								<a 
 									href="https://www.facebook.com/barducentreangers/" 
