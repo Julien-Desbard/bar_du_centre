@@ -76,7 +76,8 @@ export default async function Home() {
 
 			<AnimatedSection
 				animation="fade-up"
-				threshold={0.5}
+				threshold={0.1}
+				delay={300}
 				className="snap-start w-full"
 			>
 				<div className="max-w-[1280px] mx-auto">
@@ -86,8 +87,8 @@ export default async function Home() {
 
 			<AnimatedSection
 				animation="fade-up"
-				delay={100}
-				threshold={0.6}
+				delay={300}
+				threshold={0.1}
 				className="snap-start w-full"
 			>
 				<div className="max-w-[1280px] mx-auto">
@@ -101,8 +102,8 @@ export default async function Home() {
 
 			<AnimatedSection
 				animation="fade-up"
-				delay={200}
-				threshold={0.6}
+				delay={300}
+				threshold={0.1}
 				className="snap-start w-full"
 			>
 				<div className="max-w-[1280px] mx-auto">
@@ -113,8 +114,8 @@ export default async function Home() {
 			</AnimatedSection>
 			<AnimatedSection
 				animation="fade-up"
-				delay={100}
-				threshold={0.6}
+				delay={300}
+				threshold={0.1}
 				className="snap-start w-full"
 			>
 				<div className="max-w-[1280px] mx-auto">
