@@ -32,7 +32,7 @@ export default function Menu({ menuData }: MenuProps) {
 	return (
 		<section
 			id="menu"
-			className="snap-start relative text-white overflow-hidden pt-18"
+			className="snap-start relative text-white overflow-hidden max-sm:pt-6 pt-18"
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 
