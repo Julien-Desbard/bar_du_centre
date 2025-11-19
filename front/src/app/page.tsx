@@ -1,7 +1,6 @@
 import { MenuItem, CarteItems, EventItem } from "@/@types";
 import Image from "next/image";
 
-// Importations statiques
 import Hero from "../components/sections/Hero";
 import Menu from "../components/sections/Menu";
 import AnimatedSection from "../components/Animations/AnimatedSections";
@@ -11,41 +10,29 @@ import Privatize from "@/components/sections/Privatize";
 import Events from "@/components/sections/Events";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
 
 async function getAllData() {
 	try {
-		const [carteResponse, platsResponse, boissonsResponse, eventResponse] =
-			await Promise.all([
-				fetch(`${BASE_URL}carte`, {
-					next: { revalidate: 300 },
-				}),
-				fetch(`${BASE_URL}menu/cat/plats`, {
-					next: { revalidate: 86400 },
-				}),
-				fetch(`${BASE_URL}menu/cat/boissons`, {
-					next: { revalidate: 86400 },
-				}),
-				fetch(
-					"https://light-cheese-efa53451a5.strapiapp.com/api/evenements?populate=*&sort=createdAt:asc",
-					{
-						next: { revalidate: 86400 },
-					}
-				),
-			]);
-
-		const [carteData, platsData, boissonsData, eventsData] = await Promise.all([
-			carteResponse.ok ? carteResponse.json() : null,
-			platsResponse.ok ? platsResponse.json() : null,
-			boissonsResponse.ok ? boissonsResponse.json() : null,
-			eventResponse.ok ? eventResponse.json() : null,
+		const [carteRes, platsRes, boissonsRes, eventRes] = await Promise.all([
+			fetch(`${BASE_URL}carte`, { next: { revalidate: 300 } }),
+			fetch(`${BASE_URL}menu/cat/plats`, { next: { revalidate: 86400 } }),
+			fetch(`${BASE_URL}menu/cat/boissons`, { next: { revalidate: 86400 } }),
+			fetch(`${STRAPI_URL}evenements?populate=*&sort=createdAt:asc`, {
+				next: { revalidate: 86400 },
+			}),
 		]);
-		console.log(eventResponse.json())
+
+		const carteData = carteRes.ok ? await carteRes.json() : null;
+		const platsData = platsRes.ok ? await platsRes.json() : null;
+		const boissonsData = boissonsRes.ok ? await boissonsRes.json() : null;
+		const eventsData = eventRes.ok ? await eventRes.json() : null;
 
 		return {
 			carteData: (carteData?.allCarteItems || []) as CarteItems[],
 			platsMenu: (platsData?.menuItemsPerCat1 || []) as MenuItem[],
 			boissonsMenu: (boissonsData?.menuItemsPerCat1 || []) as MenuItem[],
-			eventData: eventsData?.data || ([] as EventItem[]),
+			eventData: (eventsData?.data || []) as EventItem[],
 		};
 	} catch (error) {
 		console.error("Erreur lors du fetch des données:", error);
@@ -61,7 +48,6 @@ async function getAllData() {
 export default async function Home() {
 	const { carteData, platsMenu, boissonsMenu, eventData } = await getAllData();
 
-	console.log('eventdata : ',eventData.data)
 	return (
 		<>
 			<section className="w-full relative">

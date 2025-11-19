@@ -2,18 +2,14 @@
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 import ReservationTrigger from "../modals/reservationTrigger";
 import Carousel from "../carousel/GalleryCarousel";
-// import { EmblaOptionsType } from "embla-carousel";
 import React from "react";
-// import "@/styles/embla.css";
+import { GalleryItems } from "@/@types";
 
-export type BrasserieContent = {
-	id: number;
-	name: string;
-};
+type GalleryProps = {
+	galleryData : GalleryItems[]
+}
 
-export default function Gallery() {
-	// const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
-
+export default function Gallery({galleryData}:GalleryProps) {
 
 	const sectionTitle: SectionTitleProps = {
 		part1: "notre",
@@ -33,7 +29,7 @@ export default function Gallery() {
 					</h2>
 				</div>
 				<div className="w-full mx-6 sm:py-6 lg:pb-3">
-					<Carousel />
+					<Carousel galleryData={galleryData}/>
 				</div>
 				<div className="mb-12">
 					<ReservationTrigger />

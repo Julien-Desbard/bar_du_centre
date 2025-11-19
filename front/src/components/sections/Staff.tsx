@@ -1,16 +1,13 @@
 import SectionTitle, { SectionTitleProps } from "../layout/SectionTitle";
 import ReservationTrigger from "../modals/reservationTrigger";
 import Carousel from "../carousel/StaffCarousel";
-// import { EmblaOptionsType } from "embla-carousel";
-// import "@/styles/embla.css";
+import { StaffItems } from "@/@types";
 
-export type StaffContent = {
-	id: number;
-	name: string;
-};
+type StaffProps = {
+	staffData : StaffItems[]
+}
 
-export default function Staff() {
-	// const OPTIONS: EmblaOptionsType = { align: "start", loop: true };
+export default function Staff({staffData}:StaffProps) {
 
 	const sectionTitle: SectionTitleProps = {
 		part1: "notre",
@@ -30,7 +27,7 @@ export default function Staff() {
 					</h2>
 				</div>
 				<div className="w-full px-6 sm:py-6 lg:pb-3">
-					<Carousel />
+					<Carousel staffData={staffData}/>
 				</div>
 				<div className="mb-12">
 				<ReservationTrigger />

@@ -5,13 +5,46 @@ import Suppliers from "@/components/sections/Suppliers";
 
 import AnimatedSection from "@/components/Animations/AnimatedSections";
 import Footer from "@/components/layout/Footer";
+import { GalleryItems, StaffItems } from "@/@types";
 
-export default function Discovery() {
+const STRAPI_URL = process.env.NEXT_PUBLIC_STRAPI_URL;
+
+async function getAllDiscoveryData() {
+	try {
+		const [galleryResponse, staffResponse] = await Promise.all([
+			fetch(`${STRAPI_URL}galeries?populate=*&sort=createdAt:asc`, {
+				next: { revalidate: 86400 },
+			}),
+			fetch(`${STRAPI_URL}equipes?populate=*&sort=createdAt:asc`, {
+				next: { revalidate: 86400 },
+			}),
+		]);
+
+		const galleriesData = galleryResponse.ok
+			? await galleryResponse.json()
+			: null;
+		const staffsData = staffResponse.ok ? await staffResponse.json() : null;
+
+		return {
+			galleryData: (galleriesData?.data || []) as GalleryItems[],
+			staffData: (staffsData?.data || []) as StaffItems[],
+		};
+	} catch (error) {
+		console.error("Erreur lors du fetch des données:", error);
+		return {
+			galleryData: [],
+			staffData: [],
+		};
+	}
+}
+
+export default async function Discovery() {
+	const { galleryData, staffData } = await getAllDiscoveryData();
 	return (
 		<>
 			<section className="snap-start w-full">
 				<div className="max-w-[1280px] mx-auto">
-					<Gallery />
+					<Gallery galleryData={galleryData} />
 				</div>
 			</section>
 			<AnimatedSection
@@ -21,7 +54,7 @@ export default function Discovery() {
 				className="snap-start w-full"
 			>
 				<div className="max-w-[1280px] mx-auto">
-					<Staff />
+					<Staff staffData={staffData} />
 				</div>
 			</AnimatedSection>
 			<AnimatedSection
