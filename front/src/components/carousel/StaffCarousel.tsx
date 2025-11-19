@@ -6,36 +6,17 @@ import {
 	NextButton,
 	usePrevNextButtons,
 } from "./EmblaCarouselArrowButtons";
+import { StaffItems } from "@/@types";
 
 import useEmblaCarousel from "embla-carousel-react";
 import Image from "next/image";
 
 type PropType = {
 	options?: EmblaOptionsType;
+	staffData: StaffItems[];
 };
 
-type StaffData = {
-	id: number;
-	documentId: string;
-	titre: string;
-	sous_titre: string | null;
-
-	photo: Array<{
-		id: number;
-		url: string;
-		alternativeText: string | null;
-		formats: {
-			medium?: {
-				url: string;
-			};
-			small?: {
-				url: string;
-			};
-		};
-	}>;
-};
-
-const EmblaCarousel: React.FC<PropType> = ({ options }) => {
+const EmblaCarousel: React.FC<PropType> = ({ options, staffData }) => {
 	const defaultOptions: EmblaOptionsType = {
 		loop: true,
 		align: "start",
@@ -44,8 +25,6 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
 	};
 
 	const [emblaRef, emblaApi] = useEmblaCarousel(defaultOptions);
-	const [staff, setStaff] = useState<StaffData[]>([]);
-	const [loading, setLoading] = useState(true);
 
 	const {
 		prevBtnDisabled,
@@ -54,34 +33,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
 		onNextButtonClick,
 	} = usePrevNextButtons(emblaApi);
 
-	useEffect(() => {
-		const fetchStaff = async () => {
-			try {
-				const response = await fetch(
-					"https://light-cheese-efa53451a5.strapiapp.com/api/equipes?populate=*&sort=createdAt:asc"
-				);
-				const data = await response.json();
-
-				setStaff(data.data);
-			} catch (error) {
-				console.error("Erreur lors du chargement du staff:", error);
-			} finally {
-				setLoading(false);
-			}
-		};
-
-		fetchStaff();
-	}, []);
-
-	if (loading) {
-		return (
-			<div className="w-full text-center py-10">
-				<p className="font-body text-xl">Chargement du staff...</p>
-			</div>
-		);
-	}
-
-	if (staff.length === 0) {
+	if (!staffData || staffData.length === 0) {
 		return (
 			<div className="w-full text-center py-10">
 				<p className="font-body text-xl">Aucun membre du staff trouvé.</p>
@@ -93,7 +45,7 @@ const EmblaCarousel: React.FC<PropType> = ({ options }) => {
 		<div className="w-full">
 			<div className="overflow-hidden" ref={emblaRef}>
 				<div className="flex">
-					{staff.map((item) => (
+					{staffData.map((item) => (
 						<div
 							key={item.id}
 							className="flex-[0_0_100%] md:flex-[0_0_50%] lg:flex-[0_0_33.333%] px-2 flex-shrink-0"

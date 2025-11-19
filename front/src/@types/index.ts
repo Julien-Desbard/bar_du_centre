@@ -5,7 +5,6 @@
 // 	ok: boolean;
 // }
 
-
 // Elements du menu
 export type MenuItem = {
 	id: number;
@@ -29,25 +28,46 @@ export type CarteItems = {
 };
 
 // Eléments des événements
-
-export type APIStrapiResponse = {
-	eventData: EventItem[]; 
-};
-
 export type EventItem = {
 	id: number;
 	documentId: string;
 	titre: string;
 	sous_titre: string | null;
-	jour:string;
-	date:string;
+	jour: string;
+	date: string;
 	createdAt: string;
 	updatedAt: string;
 	publishedAt: string;
-	photo: Asset[]; 
+	photo: Asset[];
 };
 
-// Contenu des images
+// Images
+export type Asset = {
+	id: number;
+	documentId: string;
+	name: string;
+	alternativeText: string | null;
+	caption: string | null;
+	width: number;
+	height: number;
+	formats: {
+		small: AssetFormat;
+		thumbnail: AssetFormat;
+	};
+	hash: string;
+	ext: string;
+	mime: string;
+	size: number;
+	url: string;
+	previewUrl: string | null;
+	provider: string;
+	provider_metadata: unknown | null;
+	createdAt: string;
+	updatedAt: string;
+	publishedAt: string;
+};
+
+// Autres formats
 export type AssetFormat = {
 	ext: string;
 	url: string;
@@ -61,32 +81,42 @@ export type AssetFormat = {
 	sizeInBytes: number;
 };
 
-// Images réduites
-export type Asset = {
+export type GalleryItems = {
 	id: number;
-	documentId: string;
-	name: string;
-	alternativeText: string | null;
-	caption: string | null;
-	width: number;
-	height: number;
-	formats: {
-		small: AssetFormat;
-		thumbnail: AssetFormat;
-
-	};
-	hash: string;
-	ext: string;
-	mime: string;
-	size: number;
-	url: string;
-	previewUrl: string | null;
-	provider: string;
-	provider_metadata: unknown | null; 
-	createdAt: string;
-	updatedAt: string;
-	publishedAt: string;
+	titre: string;
+	description: string | null;
+	photo: Array<{
+		id: number;
+		url: string;
+		alternativeText: string | null;
+		formats: {
+			medium?: {
+				url: string;
+			};
+			small?: {
+				url: string;
+			};
+		};
+	}>;
 };
 
+export type StaffItems = {
+	id: number;
+	documentId: string;
+	titre: string;
+	sous_titre: string | null;
 
-
+	photo: Array<{
+		id: number;
+		url: string;
+		alternativeText: string | null;
+		formats: {
+			medium?: {
+				url: string;
+			};
+			small?: {
+				url: string;
+			};
+		};
+	}>;
+};

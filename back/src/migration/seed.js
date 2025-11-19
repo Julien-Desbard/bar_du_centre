@@ -3665,7 +3665,7 @@ async function seed() {
 				prix: 15,
 			},
 			{
-				name: "Retour de p^che et ses légumes grillés",
+				name: "Retour de pêche et ses légumes grillés",
 				categorie: "Plats",
 				prix: 17,
 			},
