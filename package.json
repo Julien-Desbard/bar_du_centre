@@ -1,5 +1,6 @@
 {
 	"dependencies": {
+		"@sentry/nextjs": "^10.25.0",
 		"embla-carousel-autoplay": "^8.6.0",
 		"next": "^16.0.3"
 	}

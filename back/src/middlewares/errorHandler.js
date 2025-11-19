@@ -14,7 +14,6 @@ export default function errorHandler(err, req, res, next) {
             message,
             timestamp: new Date().toISOString(),
             path: req.path,
- 
             details: details, 
         },
     });
