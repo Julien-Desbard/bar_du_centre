@@ -27,8 +27,8 @@ export default function Privatize() {
 						<Image
 							src="/images/privatize.webp"
 							alt="Privatisation"
-							width={800}
-							height={600}
+							width={364}
+							height={308}
 							quality={75}
 							sizes="(max-width: 768px) 100vw, 364px"
 							className="w-full max-w-[364px] h-auto"

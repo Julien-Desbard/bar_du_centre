@@ -1,16 +1,31 @@
+// back/src/migration/seed.js
 import {
 	Menu,
-	Events,
+	Event,
 	Gallery,
 	Staff,
 	Suppliers,
 	sequelize,
 	CarteDuJour,
 } from "../models/index.js";
+import config from "../config/config.js";
 
 async function seed() {
 	try {
-		await sequelize.sync({ force: true });
+		const env = process.env.NODE_ENV || "development";
+
+		if (env === "production") {
+			console.error("❌ ERREUR: Le seed est INTERDIT en production !");
+			process.exit(1);
+		}
+
+		if (!config.seed) {
+			console.log("ℹ️  Le seed est désactivé pour cet environnement");
+			return;
+		}
+
+		console.log(`🌱 Début du seed (${env})...`);
+
 		await Menu.bulkCreate(
 			rawItems().map((it) => ({
 				...it,
@@ -3682,7 +3697,7 @@ async function seed() {
 		]);
 
 		// Events (3 lignes)
-		await Events.bulkCreate([
+		await Event.bulkCreate([
 			{
 				title: "Soirée Beaujolais Nouveau",
 				subtitle: "Dégustation",
@@ -3770,5 +3785,20 @@ async function seed() {
 	}
 }
 
+const isMainModule = import.meta.url === `file://${process.argv[1]}`;
+
+if (isMainModule) {
+	console.log("🚀 Exécution directe du script de seed...");
+
+	seed()
+		.then(() => {
+			console.log("✅ Script de seed terminé");
+			process.exit(0);
+		})
+		.catch((error) => {
+			console.error("❌ Échec du script de seed:", error);
+			process.exit(1);
+		});
+}
+
 export default seed;
-// seed();
