@@ -29,16 +29,6 @@ export default function RootLayout({
 	return (
 		<html lang="fr" suppressHydrationWarning>
 			<head>
-				<link
-					rel="preload"
-					href="/_next/static/css/cabad625600d9686.css"
-					as="style"
-				/>
-				<link
-					rel="preload"
-					href="/_next/static/css/46eceafa7619e3d7.css"
-					as="style"
-				/>
 				<link rel="preconnect" href="https://fonts.gstatic.com" />
 			</head>
 			<body
