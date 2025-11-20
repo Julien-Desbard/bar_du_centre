@@ -19,17 +19,21 @@ export default function Contact() {
 				<div className="self-center w-full px-6 my-6 max-w-[96%]">
 					<iframe
 						className="w-full h-40 sm:h-80 2xl:h-96"
-						src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2696.893936127629!2d-0.5551338867689501!3d47.47249627105744!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480878e9fe7832a9%3A0xb8396a77167da707!2sBDC%20-%20Bar%20Du%20Centre!5e0!3m2!1sfr!2sfr!4v1761558821871!5m2!1sfr!2sfr"
-						allowFullScreen
+						aria-label="carte google"
 						loading="lazy"
-						referrerPolicy="no-referrer-when-downgrade"
-					></iframe>
+						sandbox="allow-scripts allow-same-origin allow-popups"
+						src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5393.787900075542!2d-0.552554!3d47.472496!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480878e9fe7832a9%3A0xb8396a77167da707!2sH%C3%B4tel%20du%20Centre!5e0!3m2!1sen!2sfr!4v1763571024254!5m2!1sen!2sfr"
+						allowFullScreen
+						title="Google Maps - Bar du Centre"
+					/>
 				</div>
 				<div className="md:self-start w-full px-6 pb-6 pt-3 ">
 					<article className="font-body text-base/8 flex flex-col justify-start max-md:justify-self-center md:flex-row md:w-full ">
 						<div className="flex-1 ">
 							<div className="text-wrap">
-								<h3 className="text-secondary text-2xl pb-3">Nos informations</h3>
+								<h3 className="text-secondary text-2xl pb-3">
+									Nos informations
+								</h3>
 								<ul className="space-y-2">
 									<li className="flex items-center gap-2">
 										{" "}

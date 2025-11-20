@@ -1,9 +1,9 @@
 import { sequelize } from "./sequelize.js";
 import { Model, DataTypes } from "sequelize";
 
-export class Events extends Model{}
+export class Event extends Model{}
 
-Events.init(
+Event.init(
       {
         id: { type: DataTypes.INTEGER, autoIncrement: true, primaryKey: true },
         title: { type: DataTypes.STRING(100), allowNull: false }, // obligatoire

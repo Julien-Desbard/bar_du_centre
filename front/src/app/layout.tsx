@@ -27,10 +27,22 @@ export default function RootLayout({
 	children: React.ReactNode;
 }>) {
 	return (
-		<html lang="fr" className={`${playfair.variable} ${poppins.variable} scroll-smooth`}>
+		<html lang="fr" suppressHydrationWarning>
+			<head>
+				<link
+					rel="preload"
+					href="/_next/static/css/cabad625600d9686.css"
+					as="style"
+				/>
+				<link
+					rel="preload"
+					href="/_next/static/css/46eceafa7619e3d7.css"
+					as="style"
+				/>
+				<link rel="preconnect" href="https://fonts.gstatic.com" />
+			</head>
 			<body
-				className="bg-bgbody overflow-x-hidden"
-				suppressHydrationWarning={true}
+				className={`${playfair.variable} ${poppins.variable} bg-bgbody overflow-x-hidden`}
 			>
 				<SessionProvider>
 					<AuthProvider>
@@ -40,9 +52,7 @@ export default function RootLayout({
 							</div>
 						</header>
 
-						<main className="w-full">
-							{children}
-						</main>
+						<main className="w-full">{children}</main>
 					</AuthProvider>
 				</SessionProvider>
 			</body>

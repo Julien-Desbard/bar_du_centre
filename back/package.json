@@ -1,18 +1,25 @@
 {
   "name": "back",
   "version": "1.0.0",
-  "description": "",
+  "description": "Backend API pour Bar du Centre",
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "dev": "node --watch index.js",
-    "db:create": "node ./src/migration/sync.js",
+    "start": "NODE_ENV=production node index.js",
+    "dev": "NODE_ENV=development node --watch index.js",
+    "test": "NODE_ENV=test node index.js",
+    "db:sync": "node ./src/migration/sync.js",
     "db:seed": "node ./src/migration/seed.js",
-    "db:reset": "npm run db:create && npm run db:seed"
+    "db:reset": "npm run db:sync && npm run db:seed",
+    "db:reset:prod": "echo '❌ INTERDIT: Ne jamais reset la BDD en production !' && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "restaurant",
+    "bar",
+    "api",
+    "express"
+  ],
+  "author": "Bar du Centre",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^6.0.0",
@@ -20,8 +27,14 @@
     "cors": "^2.8.5",
     "dotenv": "^17.2.3",
     "express": "^5.1.0",
+    "express-rate-limit": "^8.2.1",
+    "helmet": "^8.1.0",
     "pg": "^8.16.3",
     "sequelize": "^6.37.7",
     "zod": "^4.1.12"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
   }
 }
