@@ -2,10 +2,10 @@ import { withSentryConfig } from "@sentry/nextjs";
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-	output: "standalone", 
+	output: "standalone",
 	experimental: {
-		optimizeCss: true, 
-		cssChunking: false, 
+		optimizeCss: true,
+		cssChunking: false,
 	},
 
 	modularizeImports: {
@@ -18,6 +18,14 @@ const nextConfig: NextConfig = {
 				hostname: "light-cheese-efa53451a5.media.strapiapp.com",
 			},
 		],
+	},
+	webpack: (config, { isServer }) => {
+		if (!isServer) {
+			config.resolve ??= {};
+			config.resolve.fallback ??= {};
+			config.resolve.fallback.critters = false;
+		}
+		return config;
 	},
 };
 
