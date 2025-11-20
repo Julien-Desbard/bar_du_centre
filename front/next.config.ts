@@ -3,10 +3,10 @@ import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
 	output: "standalone",
-	experimental: {
-		optimizeCss: true,
-		cssChunking: false,
-	},
+	// experimental: {
+	// 	optimizeCss: true,
+	// 	cssChunking: false,
+	// },
 
 	modularizeImports: {
 		lodash: { transform: "lodash/{{member}}" },
@@ -19,14 +19,7 @@ const nextConfig: NextConfig = {
 			},
 		],
 	},
-	webpack: (config, { isServer }) => {
-		if (!isServer) {
-			config.resolve ??= {};
-			config.resolve.fallback ??= {};
-			config.resolve.fallback.critters = false;
-		}
-		return config;
-	},
+
 };
 
 export default withSentryConfig(nextConfig, {
