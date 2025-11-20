@@ -21,7 +21,7 @@ export default function CategoryCarte({ items }: CategoryList) {
 	// Afficher chaque catégorie avec tous ses éléments
 	return Object.entries(groupedByCategory).map(([categorie, categoryItems]) => (
 		<div key={categorie}>
-			<h3 className="text-2xl pb-1 font-light text-center text-secondary">
+			<h3 className="text-2xl pb-1 font-light font-title text-center text-secondary">
 				{categorie}
 			</h3>
 			<ul className="w-full">
