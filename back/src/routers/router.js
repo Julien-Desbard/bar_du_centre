@@ -5,7 +5,7 @@ import { criticalLimiter } from "../middlewares/security.js";
 
 const router = express.Router()
 
-router.use('/menu',  menuRoute)
-router.use('/carte',carteRoute)
+router.use('/menu', menuRoute)
+router.use('/carte', carteRoute)
 
 export default router
