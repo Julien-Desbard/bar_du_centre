@@ -54,6 +54,12 @@ const EmblaCarousel: React.FC<PropType> = ({ options, supplierContent }) => {
 										fill
 										sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, (max-width: 1280px) 33vw, 25vw"
 										className="object-cover"
+										onError={(e) => {
+											console.error(`❌ Image failed for ${item.slug}:`, e);
+										}}
+										onLoad={() => {
+											console.log(`✅ Image loaded: ${item.slug}`);
+										}}
 									/>
 								</div>
 							</Link>
