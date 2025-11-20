@@ -9,11 +9,18 @@ const playfair = Playfair_Display({
 	weight: ["400", "500", "600", "700"],
 	subsets: ["latin"],
 	variable: "--font-title",
+	display: "swap", 
+	preload: true,
+	fallback: ["serif"], 
 });
+
 const poppins = Poppins({
 	weight: ["300", "400", "500", "600"],
 	subsets: ["latin"],
 	variable: "--font-body",
+	display: "swap", 
+	preload: true,
+	fallback: ["sans-serif"], 
 });
 
 export const metadata: Metadata = {
@@ -28,11 +35,8 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang="fr" suppressHydrationWarning>
-			<head>
-				<link rel="preconnect" href="https://fonts.gstatic.com" />
-			</head>
 			<body
-				className={`${playfair.variable} ${poppins.variable} bg-bgbody overflow-x-hidden`}
+				className={`${playfair.variable} ${poppins.variable} bg-bgbody overflow-x-hidden antialiased`}
 			>
 				<SessionProvider>
 					<AuthProvider>
