@@ -14,11 +14,11 @@ export default function Contact() {
 			id="contact"
 			className="snap-start relative text-white overflow-hidden pt-6"
 		>
-			<div className="w-full h-full flex flex-col items-start mx-auto">
+			<div className="w-full h-full flex flex-col items-start mx-auto ">
 				<SectionTitle sectionTitle={sectionTitle} />
-				<div className="self-center w-full px-6 my-6 max-w-[96%]">
+				<div className="self-center w-full px-6 my-6 max-w-[96%] 2xl:my-12">
 					<iframe
-						className="w-full h-40 sm:h-80 2xl:h-96"
+						className="w-full h-40 sm:h-80"
 						aria-label="carte google"
 						loading="lazy"
 						sandbox="allow-scripts allow-same-origin allow-popups"
@@ -27,7 +27,7 @@ export default function Contact() {
 						title="Google Maps - Bar du Centre"
 					/>
 				</div>
-				<div className="md:self-start w-full px-6 pb-6 pt-3 ">
+				<div className="md:self-start w-full px-6 pb-6 pt-3 2xl:pb-12 ">
 					<article className="font-body text-base/8 flex flex-col justify-start max-md:justify-self-center md:flex-row md:w-full ">
 						<div className="flex-1 ">
 							<div className="text-wrap">

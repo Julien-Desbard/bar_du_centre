@@ -16,7 +16,7 @@ export default function Privatize() {
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 			<div className="w-full h-full flex flex-col justify-between self-start mx-auto">
-				<div className="px-6 mt-6">
+				<div className="px-6 mt-6 2xl:mt-12">
 					<h2 className="text-2xl font-body text-left ">
 						Reservez notre{" "}
 						<span className="text-secondary ">seconde salle</span>
@@ -27,15 +27,15 @@ export default function Privatize() {
 						<Image
 							src="/images/privatize.webp"
 							alt="Privatisation"
-							width={364}
-							height={308}
+							width={500}
+							height={400}
 							quality={75}
-							sizes="(max-width: 768px) 100vw, 364px"
-							className="w-full max-w-[364px] h-auto"
+							sizes="(max-width: 768px) 100vw, 500px"
+							className="w-full max-xl:max-w-[500px] xl:max-w-[500px] h-auto"
 						/>
 					</div>
 					{/* Texte descriptif */}
-					<div className="px-6 mt-6 flex-1 flex flex-col justify-between max-sm:text-xl/10 text-2xl/10 font-light">
+					<div className="px-6 mt-6 flex-1 flex flex-col justify-center gap-3 max-sm:text-xl/8 text-2xl/10 font-light">
 						<p>Pour vos : </p>
 						<ul>
 							<li className="flex items-center gap-2">
@@ -55,11 +55,11 @@ export default function Privatize() {
 							Réservez notre seconde salle d&apos;une capacité de{" "}
 							<span className="text-secondary">40 personnes</span>
 						</p>
-						<div className="m-6 mb-12">
-							<ContacTrigger />
-						</div>
 					</div>
 				</div>
+						<div className="mt-6 mb-12 2xl:m-12">
+							<ContacTrigger />
+						</div>
 			</div>
 		</section>
 	);

@@ -127,7 +127,7 @@ export default function Menu({
 				</div>
 
 				{/* Button desktop */}
-				<div className="w-full flex justify-center max-lg:hidden my-12 xl:mt-18">
+				<div className="w-full flex justify-center max-lg:hidden my-12 2xl:mt-18">
 					<Button onClick={() => setIsOpen(true)} className="max-w-45">
 						Réserver une table
 					</Button>
