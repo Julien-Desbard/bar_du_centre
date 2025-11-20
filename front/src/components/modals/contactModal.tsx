@@ -151,6 +151,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							<input
 								type="text"
 								id="name"
+								autoComplete="family-name"
 								ref={nameRef}
 								name="name"
 								value={name}
@@ -166,6 +167,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 								type="email"
 								id="email"
 								name="email"
+								autoComplete="email"
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								inputMode="email"

@@ -278,6 +278,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 								type="text"
 								ref={nameRef}
 								name="name"
+								autoComplete="family-name"
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 								required
@@ -290,6 +291,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 							<input
 								type="email"
 								name="email"
+								autoComplete="email"
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								inputMode="email"
@@ -304,6 +306,7 @@ export default function Modal({ isOpen, onClose }: Modalprops) {
 								type="tel"
 								inputMode="tel"
 								name="phone"
+								autoComplete="tel"
 								value={phone}
 								onChange={(e) => setPhone(e.target.value)}
 								pattern="^(?:(?:\+|00)33|0)[1-9](?:[0-9]{8})$"

@@ -81,18 +81,24 @@ export default function ContactForm() {
 		setIsSubmitting(false);
 		setMessageSuccess("Message envoyé avec succès");
 	}
+	
 	return (
 		<>
 			<div className="flex-1 lg:flex-2 max-md:hidden">
-				<form className="flex flex-col gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark] text-base">
+				<form 
+					onSubmit={handleSubmit}
+					className="flex flex-col gap-2 [&>input]:text-white [&>textarea]:text-white [&>select]:text-white [&_*::placeholder]:text-white [color-scheme:dark] text-base"
+				>
 					<div className="flex flex-col xl:flex-row gap-2">
 						<div className="flex flex-col xl:flex-1">
 							<label htmlFor="name" className="sr-only">
 								Votre nom
 							</label>
 							<input
+								id="name"
 								type="text"
 								name="name"
+								autoComplete="family-name"
 								value={name}
 								onChange={(e) => setName(e.target.value)}
 								required
@@ -105,8 +111,10 @@ export default function ContactForm() {
 								Votre email
 							</label>
 							<input
+								id="email"
 								type="email"
 								name="email"
+								autoComplete="email"
 								value={email}
 								onChange={(e) => setEmail(e.target.value)}
 								inputMode="email"
@@ -121,6 +129,7 @@ export default function ContactForm() {
 						Objet de votre demande
 					</label>
 					<input
+						id="topic"
 						type="text"
 						name="topic"
 						value={topic}
@@ -129,42 +138,47 @@ export default function ContactForm() {
 						placeholder="Objet de votre demande"
 						className="border border-secondary p-1 pl-2"
 					/>
+					
+					<label htmlFor="message" className="sr-only">
+						Votre message
+					</label>
 					<textarea
+						id="message"
 						name="message"
 						inputMode="text"
 						value={message}
 						onChange={(e) => setMessage(e.target.value)}
 						rows={2}
-						cols={50}
+						required
 						placeholder="Votre message"
 						className="border border-secondary p-1 pl-2"
-					></textarea>
+					/>
+					
+					<Button
+						type="submit"
+						className="m-6 flex justify-self-center max-md:hidden"
+						aria-label="envoyer le message"
+						disabled={isSubmitting}
+					>
+						{isSubmitting ? (
+							<>
+								<Loader className="animate-spin mr-2" />
+								Envoi en cours...
+							</>
+						) : (
+							"Envoyer le message"
+						)}
+					</Button>
 				</form>
+				
 				{error && error !== "" && (
-					<p className="font-body font-light italic text-red-500"> {error}</p>
+					<p className="font-body font-light italic text-red-500">{error}</p>
 				)}
 				{messageSuccess && messageSuccess !== "" && (
 					<p className="font-body font-light italic text-secondary">
-						{" "}
 						{messageSuccess}
 					</p>
 				)}
-				<Button
-					type="submit"
-					className="m-6 flex justify-self-center max-md:hidden"
-					onClick={(e) => handleSubmit(e)}
-					aria-label="envoyer le message"
-					disabled={isSubmitting}
-				>
-					{isSubmitting ? (
-						<>
-							<Loader className="animate-spin mr-2" />
-							Envoi en cours...
-						</>
-					) : (
-						"Envoyer le message"
-					)}
-				</Button>
 			</div>
 		</>
 	);
