@@ -46,10 +46,10 @@ export default function Menu({ carteData, platsMenu, boissonsMenu }: MenuProps) 
 					<div className="flex flex-col items-center max-sm:gap-y-6 sm:grid sm:grid-cols-2 sm:grid-rows-2">
 						<h2
 							onClick={() => (setOpenMenu(true), setNature("plats"))}
-							className="font-subtitle text-4xl text-center text-white max-sm:text-left sm:col-start-1 sm:row-start-1 sm:self-center cursor-pointer"
+							className="font-subtitle text-4xl text-left text-white max-sm:text-left sm:col-start-1 sm:row-start-1 sm:self-center cursor-pointer"
 						>
 							Menu de <br />
-							<span className="text-secondary">la cantine</span>
+							<span className="text-secondary font-subtitle text-5xl border-b-4 border-secondary font-bold">la cantine</span>
 						</h2>
 						<Image
 							className="max-sm:hidden sm:col-start-2 sm:row-start-1 sm:justify-self-center cursor-pointer"
@@ -69,10 +69,10 @@ export default function Menu({ carteData, platsMenu, boissonsMenu }: MenuProps) 
 						/>
 						<h2
 							onClick={() => (setOpenMenu(true), setNature("boissons"))}
-							className="font-subtitle text-4xl text-center text-white max-sm:text-left sm:col-start-2 sm:row-start-2 sm:self-center cursor-pointer"
+							className="font-subtitle text-4xl text-left text-white max-sm:text-left sm:col-start-2 sm:row-start-2 sm:self-center cursor-pointer"
 						>
 							Carte des <br />
-							<span className="text-secondary">boissons</span>
+							<span className="text-secondary font-subtitle text-5xl border-b-4 border-secondary font-bold">boissons</span>
 						</h2>
 					</div>
 
