@@ -22,7 +22,7 @@ export default function Gallery({galleryData}:GalleryProps) {
 		>
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
-				<div className="self-start m-6">
+				<div className="self-start m-6 2xl:mt-12">
 					<h2 className="font-body text-2xl text-left">
 						Le <span className="text-secondary">Bar Du Centre</span> sous toutes
 						ses coutures
@@ -31,7 +31,7 @@ export default function Gallery({galleryData}:GalleryProps) {
 				<div className="w-full mx-6 sm:py-6 lg:pb-3">
 					<Carousel galleryData={galleryData}/>
 				</div>
-				<div className="mb-12">
+				<div className="mb-12 2xl:m-12">
 					<ReservationTrigger />
 				</div>
 			</div>

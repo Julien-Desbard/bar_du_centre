@@ -21,7 +21,7 @@ export default function Staff({staffData}:StaffProps) {
 			<div className="w-full h-full flex flex-col justify-between items-center mx-auto">
 				<SectionTitle sectionTitle={sectionTitle} />
 				<div className="self-start">
-					<h2 className="font-body text-2xl m-6 text-left">
+					<h2 className="font-body text-2xl m-6 text-left 2xl:mt-12">
 						Une équipe <span className="text-secondary">soudée</span> et de{" "}
 						<span className="text-secondary">passionnés</span>
 					</h2>
@@ -29,7 +29,7 @@ export default function Staff({staffData}:StaffProps) {
 				<div className="w-full px-6 sm:py-6 lg:pb-3">
 					<Carousel staffData={staffData}/>
 				</div>
-				<div className="mb-12">
+				<div className="mb-12 2xl:m-12">
 				<ReservationTrigger />
 				</div>
 			</div>

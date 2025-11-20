@@ -14,12 +14,14 @@ type MenuProps = {
 	boissonsMenu: MenuItem[];
 };
 
-export default function Menu({ carteData, platsMenu, boissonsMenu }: MenuProps) {
+export default function Menu({
+	carteData,
+	platsMenu,
+	boissonsMenu,
+}: MenuProps) {
 	const [isOpen, setIsOpen] = useState(false);
 	const [openMenu, setOpenMenu] = useState(false);
 	const [nature, setNature] = useState<"plats" | "boissons">("plats");
-
-
 
 	const entrees = carteData.filter((i) => i.categorie === "Entrées");
 	const plats = carteData.filter((i) => i.categorie === "Plats");
@@ -40,31 +42,54 @@ export default function Menu({ carteData, platsMenu, boissonsMenu }: MenuProps) 
 		>
 			<SectionTitle sectionTitle={sectionTitle} />
 
-			<div className="w-full h-full mx-auto flex flex-row flex-wrap justify-around gap-x-3 lg:flex-1 xl:gap-x-12">
+			<div className="w-full h-full mx-auto flex flex-row flex-wrap justify-around gap-x-3 lg:flex-1 xl:gap-x-12 xl:mt-12">
 				{/* --------------------- Menu --------------------- */}
-				<div className="flex flex-col items-center justify-center mt-12 max-lg:px-6 lg:w-fit">
-					<div className="flex flex-col items-center max-sm:gap-y-6 sm:grid sm:grid-cols-2 sm:grid-rows-2">
+					{/* < className=" mt-12 max-lg:px-6 lg:w-fit flex flex-col items-center max-sm:gap-y-6 sm:grid sm:grid-cols-2 sm:grid-rows-2"> */}
+				<div className="mt-12 flex flex-col gap-6 ">
+					<div className="flex gap-6 items-center">
+						<Image
+							className="font-bold"
+							src="/images/arrow_forward.png"
+							alt="fleche vers la droite pour mettre en évidence le lien cliquable du menu"
+							width={60}
+							height={60}
+						/>
 						<h2
 							onClick={() => (setOpenMenu(true), setNature("plats"))}
 							className="font-subtitle text-4xl text-left text-white max-sm:text-left sm:col-start-1 sm:row-start-1 sm:self-center cursor-pointer"
 						>
 							Menu de <br />
-							<span className="text-secondary font-subtitle text-5xl border-b-4 border-secondary font-bold">la cantine</span>
+							<span className="text-secondary font-subtitle text-6xl border-b-4 border-secondary font-bold">
+								la Cantine
+							</span>
 						</h2>
 						<Image
-							className="max-sm:hidden sm:col-start-2 sm:row-start-1 sm:justify-self-center cursor-pointer"
+							className="max-sm:hidden cursor-pointer pb-2"
 							src="/images/burger_icon.png"
 							alt="icone burger pour accéder au menu des plats"
-							width={250}
-							height={250}
+							width={170
+							}
+							height={170
+							}
 							onClick={() => (setOpenMenu(true), setNature("plats"))}
 						/>
+					</div>
+					<div className="flex gap-6 items-center">
 						<Image
-							className="max-sm:hidden sm:col-start-1 sm:row-start-2 sm:justify-self-center cursor-pointer"
+							className="font-bold"
+							src="/images/arrow_forward.png"
+							alt="fleche vers la droite pour mettre en évidence le lien cliquable du menu"
+							width={60}
+							height={60}
+						/>
+						<Image
+							className="max-sm:hidden cursor-pointer pb-2"
 							src="/images/beer_icon.png"
 							alt="icone bière pour accéder au menu des boissons"
-							width={250}
-							height={250}
+							width={170
+							}
+							height={170
+							}
 							onClick={() => (setOpenMenu(true), setNature("boissons"))}
 						/>
 						<h2
@@ -72,20 +97,21 @@ export default function Menu({ carteData, platsMenu, boissonsMenu }: MenuProps) 
 							className="font-subtitle text-4xl text-left text-white max-sm:text-left sm:col-start-2 sm:row-start-2 sm:self-center cursor-pointer"
 						>
 							Carte des <br />
-							<span className="text-secondary font-subtitle text-5xl border-b-4 border-secondary font-bold">boissons</span>
+							<span className="text-secondary font-subtitle text-6xl border-b-4 border-secondary font-bold">
+								Boissons
+							</span>
 						</h2>
 					</div>
-
 					<Button
 						onClick={() => setIsOpen(true)}
-						className="max-w-45 mt-10 mb-12 lg:hidden"
+						className="max-w-45 mb-12 self-center lg:hidden"
 					>
 						Réserver une table
 					</Button>
 				</div>
 
 				{/* --------------------- Carte du jour --------------------- */}
-				<div className="flex flex-col items-center gap-2 max-w-full w-fit justify-self-center lg:mt-28 px-3">
+				<div className="flex flex-col items-center gap-2 max-w-full w-fit justify-self-center lg:mt-16 px-3">
 					<h2 className="font-subtitle text-4xl text-center">Carte du jour</h2>
 
 					<CategoryCarte items={entrees} />
@@ -94,14 +120,14 @@ export default function Menu({ carteData, platsMenu, boissonsMenu }: MenuProps) 
 
 					<Button
 						onClick={() => setIsOpen(true)}
-						className="max-w-45 mt-6 mb-12 lg:hidden"
+						className="max-w-45 mt-6 mb-12 lg:hidden "
 					>
 						Réserver une table
 					</Button>
 				</div>
 
 				{/* Button desktop */}
-				<div className="w-full flex justify-center max-lg:hidden m-6 mb-12">
+				<div className="w-full flex justify-center max-lg:hidden my-12 2xl:mt-18">
 					<Button onClick={() => setIsOpen(true)} className="max-w-45">
 						Réserver une table
 					</Button>
