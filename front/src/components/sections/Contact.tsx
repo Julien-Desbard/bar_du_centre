@@ -22,7 +22,7 @@ export default function Contact() {
 						aria-label="carte google"
 						loading="lazy"
 						sandbox="allow-scripts allow-same-origin allow-popups"
-						src="https://www.google.com/maps/embed?pb=..."
+						src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d5393.787900075542!2d-0.552554!3d47.472496!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x480878e9fe7832a9%3A0xb8396a77167da707!2sH%C3%B4tel%20du%20Centre!5e0!3m2!1sen!2sfr!4v1763571024254!5m2!1sen!2sfr"
 						allowFullScreen
 						title="Google Maps - Bar du Centre"
 					/>

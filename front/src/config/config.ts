@@ -18,7 +18,7 @@ const getConfig = (): Config => {
 	const isProduction = env === "production";
 
 	return {
-		apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3000/api/",
+		apiUrl: process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001/api/",
 		strapiUrl:
 			process.env.NEXT_PUBLIC_STRAPI_URL || "http://localhost:1337/api/",
 		environment: env,
@@ -34,7 +34,7 @@ const getConfig = (): Config => {
 export const config = getConfig();
 
 // Helper pour les logs conditionnels
-export const debugLog = (...args: any[]) => {
+export const debugLog = (...args: unknown[]) => {
 	if (config.features.enableDebug) {
 		console.log("[DEBUG]", ...args);
 	}
